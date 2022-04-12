@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        // Preparing the layout from repository
+        // Preparing the layout
         setupLayout()
     }
 
