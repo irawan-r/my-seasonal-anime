@@ -1,7 +1,7 @@
 package com.amora.myseasonalanime.data
 
 import com.amora.myseasonalanime.data.source.RemoteDataSource
-import com.amora.myseasonalanime.data.source.remote.response.detail.DataItem
+import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
 
 /** Retrieve the Api into Repository which had features caching and all viewModel get the source
  * data Api from here!
@@ -17,10 +17,10 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getSeasonNow(): List<DataItem> {
-        lateinit var seasonNow: List<DataItem>
+    override suspend fun getSeasonNow(): List<DetailItem> {
+        lateinit var seasonNow: List<DetailItem>
         remoteDataSource.getSeasonNow(object : RemoteDataSource.GetAnimeCallback {
-            override fun onAnimeReceived(animeList: List<DataItem>) {
+            override fun onAnimeReceived(animeList: List<DetailItem>) {
                 seasonNow = animeList
             }
         })

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="animeData"
-            type="com.amora.myseasonalanime.data.source.remote.response.detail.DataItem" />
+            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem" />
     </data>
 
     <ScrollView
+        android:id="@+id/detail_anime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
@@ -53,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                 android:text="@{animeData.titleJapanese}"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,8 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
+                android:text="@{animeData.aired.string}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_japanese"
@@ -97,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{animeData.score.toString()}"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_baseline_star_24"
@@ -122,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{animeData.popularity.toString()}"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_baseline_bar_chart_24"
@@ -146,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{animeData.members.toString()}"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_baseline_groups_24"
@@ -166,8 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/synopsys_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/synopsis_title"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/popularity" />
@@ -178,6 +179,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:text="@{animeData.synopsis}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -189,23 +192,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/synopsys_description"
                 tools:text="Genres" />
 
-            <TextView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/genres_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_item"
-                android:paddingHorizontal="8dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genres"
+                tools:listitem="@layout/genres_item"
                 tools:text="Action" />
 
             <TextView
@@ -214,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/characters_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genres_item" />
@@ -238,11 +242,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/characters_item"
-                tools:text="Trailer" />
+                android:text="@string/trailer" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/trailer_videos"

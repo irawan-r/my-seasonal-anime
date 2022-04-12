@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.data.source.remote.response.trailer
+package com.amora.myseasonalanime.data.source.remote.response.detail
 
 import com.amora.myseasonalanime.data.source.remote.response.images.Images
 import com.squareup.moshi.Json

@@ -7,7 +7,7 @@
 
         <variable
             name="animeData"
-            type="com.amora.myseasonalanime.data.source.remote.response.detail.DataItem" />
+            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -1,10 +1,9 @@
 package com.amora.myseasonalanime.data.source.remote.response.detail
 
 import com.amora.myseasonalanime.data.source.remote.response.images.Images
-import com.amora.myseasonalanime.data.source.remote.response.trailer.Trailer
 import com.squareup.moshi.Json
 
-data class DataItem(
+data class DetailItem(
 
     @Json(name = "title_japanese")
     val titleJapanese: String? = null,

@@ -8,6 +8,7 @@
     <string name="backdrop_image">Backdrop Image</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eaque earum error minima qui quidem sunt, tempore veritatis vero vitae? Delectus, eveniet facere facilis laborum modi natus necessitatibus nihil odit provident repellendus repudiandae sequi temporibus?</string>
     <string name="characters_title">Characters</string>
-    <string name="synopsys_title">Synopsys</string>
+    <string name="synopsis_title">Synopsis</string>
     <string name="play">Play</string>
+    <string name="trailer">Trailer</string>
 </resources>

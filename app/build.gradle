@@ -58,8 +58,9 @@ dependencies {
     // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
 
-    // Coil
+    // Glide
     implementation "com.github.bumptech.glide:glide:4.13.1"
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
 
     //Okhttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'

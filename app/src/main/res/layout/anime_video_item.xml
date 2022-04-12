@@ -7,7 +7,7 @@
 
         <variable
             name="animeData"
-            type="com.amora.myseasonalanime.data.source.remote.response.detail.DataItem" />
+            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -26,7 +26,7 @@
             android:layout_height="120dp"
             android:contentDescription="@string/poster"
             android:scaleType="centerCrop"
-            app:imageUrl="@{animeData.trailer.embedUrl}"
+            app:imageUrl="@{animeData.trailer.images.imageUrl}"
             tools:src="@color/purple_500" />
 
         <ImageView

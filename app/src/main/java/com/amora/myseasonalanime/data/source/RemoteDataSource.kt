@@ -1,7 +1,7 @@
 package com.amora.myseasonalanime.data.source
 
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
-import com.amora.myseasonalanime.data.source.remote.response.detail.DataItem
+import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -26,8 +26,21 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    // Callback to get List<DataItem>
+    suspend fun getAnimeId(id: Int, callback: GetAnimeIdCallback) {
+        withContext(Dispatchers.IO) {
+            val animeId = apiConfig.apiServices.getAnimeId(id)
+            callback.onAnimeReceived(animeId)
+        }
+    }
+
+
+    /* Callback to get from the ApiServices
+    * */
     interface GetAnimeCallback {
-        fun onAnimeReceived(animeList: List<DataItem>)
+        fun onAnimeReceived(animeList: List<DetailItem>)
+    }
+
+    interface GetAnimeIdCallback {
+        fun onAnimeReceived(animeList: DetailItem)
     }
 }
