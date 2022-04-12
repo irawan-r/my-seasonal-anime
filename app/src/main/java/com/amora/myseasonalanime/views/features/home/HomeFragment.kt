@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.amora.myseasonalanime.databinding.HomeFragmentBinding
+import com.amora.myseasonalanime.databinding.FragmentHomeBinding
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
@@ -14,14 +14,14 @@ import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
-    private lateinit var binding: HomeFragmentBinding
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = HomeFragmentBinding.inflate(inflater)
+        binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
 
