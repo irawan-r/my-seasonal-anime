@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MySeasonalAnime</string>
+    <string name="anime_title">Anime Title</string>
+    <string name="poster">Poster</string>
+    <string name="score">Score</string>
+    <string name="this_season">This Season</string>
+    <string name="more">More</string>
+    <string name="backdrop_image">Backdrop Image</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eaque earum error minima qui quidem sunt, tempore veritatis vero vitae? Delectus, eveniet facere facilis laborum modi natus necessitatibus nihil odit provident repellendus repudiandae sequi temporibus?</string>
+    <string name="characters_title">Characters</string>
+    <string name="synopsys_title">Synopsys</string>
+</resources>
