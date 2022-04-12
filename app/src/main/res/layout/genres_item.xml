@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="genresItem"
+            name="animeGenres"
             type="com.amora.myseasonalanime.data.source.remote.response.detail.GenresItem" />
     </data>
 
@@ -25,7 +25,7 @@
             android:background="@drawable/bg_item"
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
-            android:text="@{genresItem.name}"
+            android:text="@{animeGenres.name}"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"

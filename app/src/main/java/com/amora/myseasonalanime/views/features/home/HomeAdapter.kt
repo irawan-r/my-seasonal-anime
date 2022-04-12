@@ -11,16 +11,8 @@ import com.amora.myseasonalanime.databinding.AnimeListItemBinding
 class HomeAdapter :
     ListAdapter<DetailItem, HomeAdapter.CurrentSeasonViewHolder>(DiffCallback) {
 
-    private var listData = ArrayList<DetailItem>()
-
-    fun setData(newData: List<DetailItem>?) {
-        if (newData == null) return
-        listData.clear()
-        listData.addAll(newData)
-    }
-
     class CurrentSeasonViewHolder(
-        private var binding: AnimeListItemBinding,
+        private var binding: AnimeListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(dataItem: DetailItem) {
             binding.animeData = dataItem
