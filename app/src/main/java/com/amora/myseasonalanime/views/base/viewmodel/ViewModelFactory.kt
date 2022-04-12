@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.di.Injection
+import com.amora.myseasonalanime.views.features.detail.DetailViewModel
 import com.amora.myseasonalanime.views.features.home.HomeViewModel
 
 class ViewModelFactory(
@@ -25,6 +26,10 @@ class ViewModelFactory(
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(repository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

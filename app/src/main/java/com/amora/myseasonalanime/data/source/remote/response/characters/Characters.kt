@@ -5,5 +5,5 @@ import com.squareup.moshi.Json
 data class Characters(
 
     @Json(name = "data")
-    val data: List<CharaItem?>? = null,
+    val data: List<CharaItem>,
 )

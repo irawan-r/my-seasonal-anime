@@ -36,7 +36,7 @@ data class DetailItem(
     val type: String? = null,
 
     @Json(name = "trailer")
-    val trailer: Trailer? = null,
+    val trailer: Trailer,
 
     @Json(name = "duration")
     val duration: String? = null,
