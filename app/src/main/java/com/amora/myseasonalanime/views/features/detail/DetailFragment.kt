@@ -50,4 +50,14 @@ class DetailFragment : Fragment() {
             appToast("Ups, slowly!")
         }
     }
+
+    private fun showTrailer(url: String?) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+        try {
+            startActivity(intent)
+        } catch (t: Throwable) {
+            appToast("Ups, slowly!")
+        }
+    }
 }
