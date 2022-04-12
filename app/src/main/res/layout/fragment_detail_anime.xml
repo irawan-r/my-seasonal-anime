@@ -161,10 +161,9 @@
                 android:id="@+id/genres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
+                android:layout_margin="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/synopsys_description"
                 tools:text="Genres" />
@@ -184,21 +183,53 @@
 
             <TextView
                 android:id="@+id/characters_title"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
                 android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:text="@string/characters_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genres_item" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/characters_item"
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/characters_title"
-                android:layout_height="wrap_content"/>
+                tools:listitem="@layout/anime_characters_item" />
+
+            <TextView
+                android:id="@+id/trailer_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/characters_item"
+                tools:text="Trailer" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trailer_videos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/anime_video_item"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/trailer_title" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
