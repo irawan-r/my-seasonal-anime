@@ -49,7 +49,8 @@
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 app:spanCount="2"
-                android:padding="4dp"
+                android:paddingTop="8dp"
+                android:paddingHorizontal="15dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,12 +61,10 @@
                 android:id="@+id/loading_this_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <include
-                    layout="@layout/rv_loading_placeholder" />
+                <include layout="@layout/rv_loading_placeholder" />
             </com.facebook.shimmer.ShimmerFrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
