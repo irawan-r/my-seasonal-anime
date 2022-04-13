@@ -23,3 +23,9 @@ All data is taken from [Jikan API](https://jikan.moe), for documentation can be 
 - [Glide](https://github.com/bumptech/glide) - loading images.
 - [Material-Components](https://github.com/material-components/material-components-android)  - Material design components.
 - [Shimmer](https://facebook.github.io/shimmer-android/) - create a shimmer effect on the application.
+
+## Download
+Go to the [Releases](https://github.com/irawan-r/my-seasonal-anime/releases) to download the latest APK.
+
+## Contribute
+If you want to contribute to this repository, you're always welcome!
