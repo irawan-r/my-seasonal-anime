@@ -3,6 +3,8 @@
 MySeasonalAnime is an application to view the anime list that aired during the season. 
 Implemented with MVVM Architecure, and repository pattern
 
+<img src="/preview/20220413_195751.gif" align="right"/>
+
 ## Features
 All data is taken from [Jikan API](https://jikan.moe), for documentation can be seen [here](https://docs.api.jikan.moe/).
 
