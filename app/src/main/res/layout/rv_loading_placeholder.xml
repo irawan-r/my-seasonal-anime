@@ -15,17 +15,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/more_airing"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:background="#DDDDDD"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="@+id/top_airing_text"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!--    <TextView
+            android:id="@+id/more_airing"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="#DDDDDD"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="@+id/top_airing_text"
+            app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <HorizontalScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
@@ -82,7 +82,121 @@
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </ScrollView>-->
+
+    <ScrollView
+        android:id="@+id/scroll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_airing_text">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/item_list_placeholder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="50dp" />
+
+            <include
+                layout="@layout/item_list_placeholder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scroll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/item_list_placeholder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="50dp" />
+
+            <include
+                layout="@layout/item_list_placeholder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scroll3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/item_list_placeholder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="50dp" />
+
+            <include
+                layout="@layout/item_list_placeholder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_airing_text"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_list_placeholder">
+
+    </androidx.recyclerview.widget.RecyclerView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

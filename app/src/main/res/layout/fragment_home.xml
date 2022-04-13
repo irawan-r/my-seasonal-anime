@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@id/this_season_title"
                 tools:listitem="@layout/anime_list_item" />
 
-            <!--<com.facebook.shimmer.ShimmerFrameLayout
+            <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/loading_this_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
 
                 <include
                     layout="@layout/rv_loading_placeholder" />
-            </com.facebook.shimmer.ShimmerFrameLayout>-->
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
