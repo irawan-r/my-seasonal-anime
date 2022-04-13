@@ -43,14 +43,14 @@ class HomeFragment : Fragment() {
     private fun setupLayout() {
         binding.apply {
             moreThisSeason.gone()
-            loadingThisSeason.visible()
+//            loadingThisSeason.visible()
             thisSeasonTitle.gone()
         }
 
         viewModel.apply {
             thisSeason.observe(viewLifecycleOwner) { anime ->
                 if (anime.isNotEmpty()) {
-                    binding.loadingThisSeason.gone()
+//                    binding.loadingThisSeason.gone()
                     binding.thisSeasonTitle.visible()
                     binding.moreThisSeason.visible()
                 }
