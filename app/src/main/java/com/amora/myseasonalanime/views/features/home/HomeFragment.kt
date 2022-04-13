@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.visible
@@ -56,4 +57,11 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun showDetail(id: Int) {
+        this.findNavController()
+            .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
+    }
 }
+
+

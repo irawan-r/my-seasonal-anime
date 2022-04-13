@@ -8,6 +8,10 @@
         <variable
             name="animeData"
             type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem" />
+
+        <variable
+            name="homeFragment"
+            type="com.amora.myseasonalanime.views.features.home.HomeFragment"/>
     </data>
 
     <com.google.android.material.card.MaterialCardView

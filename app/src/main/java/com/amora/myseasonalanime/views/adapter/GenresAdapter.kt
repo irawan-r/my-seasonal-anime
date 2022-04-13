@@ -11,15 +11,15 @@ import com.amora.myseasonalanime.databinding.GenresItemBinding
 class GenresAdapter :
     ListAdapter<GenresItem, GenresAdapter.GenresViewHolder>(GenresDiffCallback) {
     class GenresViewHolder(
-        private var binding: GenresItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private var binding: GenresItemBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(genresItem: GenresItem) {
             binding.animeGenres = genresItem
             binding.executePendingBindings()
         }
     }
 
-    object GenresDiffCallback: DiffUtil.ItemCallback<GenresItem>() {
+    object GenresDiffCallback : DiffUtil.ItemCallback<GenresItem>() {
         override fun areItemsTheSame(oldItem: GenresItem, newItem: GenresItem): Boolean {
             return oldItem.malId == newItem.malId
         }

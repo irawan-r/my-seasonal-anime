@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.GenresItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
