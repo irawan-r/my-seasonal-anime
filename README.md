@@ -1,4 +1,4 @@
-# MySeasonalANime
+# MySeasonalAnime
 
 MySeasonalAnime is an application to view the anime list that aired during the season. 
 Implemented with MVVM Architecure, and repository pattern
