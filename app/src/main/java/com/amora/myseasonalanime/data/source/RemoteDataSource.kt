@@ -23,28 +23,28 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
 
     suspend fun getSeasonNow(callback: GetAnimeCallback) {
         withContext(Dispatchers.IO) {
-            val anime = apiConfig.apiServices.getSeasonNow().data
+            val anime = apiConfig.api.getSeasonNow().data
             callback.onAnimeReceived(anime)
         }
     }
 
     suspend fun getAnimeId(id: Int, callback: GetAnimeIdCallback) {
         withContext(Dispatchers.IO) {
-            val animeId = apiConfig.apiServices.getAnimeId(id)
+            val animeId = apiConfig.api.getAnimeId(id)
             callback.onAnimeReceived(animeId)
         }
     }
 
     suspend fun getAnimeChara(id: Int, callback: GetAnimeCharaCallback) {
         withContext(Dispatchers.IO) {
-            val animeChara = apiConfig.apiServices.getAnimeCharacters(id).data
+            val animeChara = apiConfig.api.getAnimeCharacters(id).data
             callback.onAnimeReceived(animeChara)
         }
     }
 
     suspend fun getAnimeTrailer(id: Int, callback: GetAnimeTrailerCallback) {
         withContext(Dispatchers.IO) {
-            val animeTrailer = apiConfig.apiServices.getAnimeId(id).trailer
+            val animeTrailer = apiConfig.api.getAnimeId(id).trailer
             callback.onAnimeReceived(animeTrailer)
         }
     }
