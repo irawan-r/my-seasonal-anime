@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
 
     private fun setupLayout() {
         binding.apply {
-            moreThisSeason.gone()
+//            moreThisSeason.gone()
 //            loadingThisSeason.visible()
             thisSeasonTitle.gone()
         }
@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
                 if (anime.isNotEmpty()) {
 //                    binding.loadingThisSeason.gone()
                     binding.thisSeasonTitle.visible()
-                    binding.moreThisSeason.visible()
+//                    binding.moreThisSeason.visible()
                 }
             }
         }
