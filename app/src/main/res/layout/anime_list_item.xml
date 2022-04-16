@@ -6,12 +6,13 @@
     <data>
 
         <variable
-            name="animeData"
+            name="anime"
             type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem" />
 
         <variable
-            name="homeFragment"
-            type="com.amora.myseasonalanime.views.features.home.HomeFragment"/>
+            name="clickListener"
+            type="com.amora.myseasonalanime.views.features.home.HomeAdapter.AnimeListener" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -42,7 +43,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{animeData.images.webp.largeImageUrl}"
+                    app:imageUrl="@{anime.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -54,9 +55,9 @@
                 android:ellipsize="marquee"
                 android:padding="4dp"
                 android:singleLine="true"
-                android:text="@{animeData.title}"
+                android:text="@{anime.title}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                tools:text="@string/anime_title"/>
+                tools:text="@string/anime_title" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -81,7 +82,7 @@
                     android:layout_marginStart="4dp"
                     android:background="@drawable/bg_item"
                     android:paddingHorizontal="6dp"
-                    android:text="@{animeData.score.toString()}"
+                    android:text="@{anime.score.toString()}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"

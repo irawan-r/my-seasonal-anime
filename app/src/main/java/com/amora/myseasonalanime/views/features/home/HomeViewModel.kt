@@ -10,16 +10,23 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _thisSeason = MutableLiveData<List<DetailItem>>()
-    val thisSeason: LiveData<List<DetailItem>> = _thisSeason
+    private val _animeSeasonsNow = MutableLiveData<List<DetailItem>>()
+    val animeSeasonsNow: LiveData<List<DetailItem>> = _animeSeasonsNow
+
+    private val _animeSeasonNow = MutableLiveData<Int>()
+    val animeSeasonNow: LiveData<Int> = _animeSeasonNow
 
     init {
         viewModelScope.launch {
             try {
-                _thisSeason.value = repository.getSeasonNow()
+                _animeSeasonsNow.value = repository.getSeasonsNow()
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
         }
+    }
+
+    fun onAnimeClicked(animeId: Int) {
+        _animeSeasonNow.value = animeId
     }
 }

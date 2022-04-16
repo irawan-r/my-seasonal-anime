@@ -19,5 +19,5 @@
             app:theme="@style/Widget.Material3.Toolbar"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/contain_main"/>
+    <include layout="@layout/content_main"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

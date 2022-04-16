@@ -42,8 +42,8 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/anime_view_item"
-                listDataHome="@{viewModel.thisSeason}"
+                android:id="@+id/anime_season_now_rv"
+                listDataHome="@{viewModel.animeSeasonsNow}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"

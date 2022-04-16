@@ -23,6 +23,9 @@
         android:name="com.amora.myseasonalanime.views.features.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail_anime">
+        <argument
+            android:name="id"
+            app:argType="integer" />
         <action
             android:id="@+id/action_detailFragment_to_homeFragment"
             app:destination="@id/homeFragment"

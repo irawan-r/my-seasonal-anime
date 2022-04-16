@@ -42,7 +42,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="290dp"
                 android:gravity="center"
-                android:text="@{animeData.title}"
+                android:text="@{viewModel.detailAnime.title}"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:text="@{animeData.titleJapanese}"
+                android:text="@{viewModel.detailAnime.titleJapanese}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:text="@{animeData.aired.string}"
+                android:text="@{viewModel.detailAnime.aired.string}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +101,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{animeData.score.toString()}"
+                        android:text="@{viewModel.detailAnime.score.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -111,7 +111,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{animeData.scoredBy.toString()}"
+                        android:text="@{viewModel.detailAnime.scoredBy.toString()}"
                         tools:text="10000" />
 
                 </LinearLayout>
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{animeData.popularity.toString()}"
+                        android:text="@{viewModel.detailAnime.popularity.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -150,7 +150,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{animeData.members.toString()}"
+                        android:text="@{viewModel.detailAnime.members.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -183,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@{animeData.synopsis}"
+                android:text="@{viewModel.detailAnime.synopsis}"
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -204,7 +204,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/genres_item"
-                listGenreAnime="@{viewModel.genreAnime}"
+                listGenreAnime="@{}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -230,7 +230,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/characters_item"
-                listDataChara="@{viewModel.charaAnime}"
+                listDataChara="@{}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -305,7 +305,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{animeData.images.webp.largeImageUrl}"
+                    app:imageUrl="@{viewModel.detailAnime.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>

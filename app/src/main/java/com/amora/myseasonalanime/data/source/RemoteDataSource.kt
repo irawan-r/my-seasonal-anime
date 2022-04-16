@@ -21,7 +21,7 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
             }
     }
 
-    suspend fun getSeasonNow(callback: GetAnimeCallback) {
+    suspend fun getSeasonsNow(callback: GetAnimeCallback) {
         withContext(Dispatchers.IO) {
             val anime = apiConfig.api.getSeasonNow().data
             callback.onAnimeReceived(anime)

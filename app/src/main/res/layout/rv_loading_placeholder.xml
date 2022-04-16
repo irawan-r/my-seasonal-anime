@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--<TextView
+    <TextView
         android:id="@+id/top_airing_text"
         android:layout_width="122dp"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:background="#DDDDDD"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="@+id/top_airing_text"
-            app:layout_constraintEnd_toEndOf="parent" />-->
+            app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
         android:layout_marginTop="45dp"

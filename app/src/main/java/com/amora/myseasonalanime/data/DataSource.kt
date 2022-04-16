@@ -8,7 +8,7 @@ import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
  *  The function is simply to get object from data object (JSON)
  */
 interface DataSource {
-    suspend fun getSeasonNow(): List<DetailItem>
+    suspend fun getSeasonsNow(): List<DetailItem>
 
     suspend fun getAnimeId(id: Int): DetailItem
 

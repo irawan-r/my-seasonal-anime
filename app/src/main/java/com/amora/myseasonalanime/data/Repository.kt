@@ -18,9 +18,9 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getSeasonNow(): List<DetailItem> {
+    override suspend fun getSeasonsNow(): List<DetailItem> {
         lateinit var seasonNow: List<DetailItem>
-        remoteDataSource.getSeasonNow(object : RemoteDataSource.GetAnimeCallback {
+        remoteDataSource.getSeasonsNow(object : RemoteDataSource.GetAnimeCallback {
             override fun onAnimeReceived(animeList: List<DetailItem>) {
                 seasonNow = animeList
             }
