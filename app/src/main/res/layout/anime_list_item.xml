@@ -9,9 +9,6 @@
             name="anime"
             type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem" />
 
-        <variable
-            name="clickListener"
-            type="com.amora.myseasonalanime.views.features.home.HomeAdapter.AnimeListener" />
 
     </data>
 

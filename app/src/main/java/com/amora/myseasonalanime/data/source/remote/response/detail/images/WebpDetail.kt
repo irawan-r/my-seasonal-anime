@@ -1,8 +1,8 @@
-package com.amora.myseasonalanime.data.source.remote.response.images
+package com.amora.myseasonalanime.data.source.remote.response.detail.images
 
 import com.squareup.moshi.Json
 
-data class Webp(
+data class WebpDetail(
 
     @Json(name="large_image_url")
     val largeImageUrl: String? = null,

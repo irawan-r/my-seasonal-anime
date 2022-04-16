@@ -30,15 +30,18 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupLayout()
+    }
+    private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(this,
-            viewModelFactory)[DetailViewModel::class.java].apply { setDetailAnime(id) }
-        binding.lifecycleOwner = viewLifecycleOwner
-        setupLayout()
-    }
+            viewModelFactory)[DetailViewModel::class.java].apply {
+            setDetailAnime(id)
+            binding.lifecycleOwner = viewLifecycleOwner
+            detailAnime.observe(viewLifecycleOwner) { anime -> binding.anime = anime }
+        }
 
-    private fun setupLayout() {
         binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }
     }
 

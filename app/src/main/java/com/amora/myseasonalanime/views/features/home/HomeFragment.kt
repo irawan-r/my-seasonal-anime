@@ -29,14 +29,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        // Set the lifecycleOwner so DataBinding can observe LiveData
-        binding.animeSeasonNowRv.adapter = HomeAdapter(HomeAdapter.AnimeListener { id ->
-            viewModel.onAnimeClicked(id)
-            findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
-        })
 
         // Preparing the layout
         setupLayout()
@@ -44,6 +38,13 @@ class HomeFragment : Fragment() {
 
 
     private fun setupLayout() {
+        // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
+        binding.animeSeasonNowRv.adapter = HomeAdapter(HomeAdapter.AnimeListener { id ->
+            viewModel.onAnimeClicked(id)
+            findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
+        })
+
         binding.apply {
             loadingThisSeason.visible()
             thisSeasonTitle.gone()

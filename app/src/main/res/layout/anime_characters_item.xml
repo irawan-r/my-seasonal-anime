@@ -31,7 +31,7 @@
                 android:layout_height="150dp"
                 android:contentDescription="@string/poster"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{animeChara.character.images.largeImageUrl}"
+                app:imageUrl="@{animeChara.character.images.webp.largeImageUrl}"
                 tools:src="@color/purple_500" />
 
             <TextView

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation
 
-/* Home Adapter
+/* HomeFragment Adapter RecyclerView
 * */
 @BindingAdapter("listDataHome")
 fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<DetailItem>?) {
@@ -19,7 +19,7 @@ fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<DetailItem>?) {
     homeAdapter.submitList(data)
 }
 
-/* Characters Adapter
+/* Characters Adapter in DetailFragment that has recyclerview
 * */
 @BindingAdapter("listDataChara")
 fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>) {
@@ -27,7 +27,7 @@ fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>) {
     charaAdapter.submitList(data)
 }
 
-/* Genre Adapter
+/* Genre Adapter in DetailFragment that has recyclerview
 * */
 @BindingAdapter("listGenreAnime")
 fun genresBindRecyclerView(recyclerView: RecyclerView, data: List<GenresItem>) {
