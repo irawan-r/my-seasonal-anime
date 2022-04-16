@@ -9,6 +9,10 @@
             name="viewModel"
             type="com.amora.myseasonalanime.views.features.detail.DetailViewModel" />
 
+        <variable
+            name="anime"
+            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse" />
+
     </data>
 
     <ScrollView
@@ -39,7 +43,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="290dp"
                 android:gravity="center"
-                android:text="@{viewModel.detailAnime.title}"
+                android:text="@{anime.title}"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:text="@{viewModel.detailAnime.titleJapanese}"
+                android:text="@{anime.titleJapanese}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:text="@{viewModel.detailAnime.aired.string}"
+                android:text="@{anime.aired.string}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +102,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.detailAnime.score.toString()}"
+                        android:text="@{anime.score.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -108,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.detailAnime.scoredBy.toString()}"
+                        android:text="@{anime.scoredBy.toString()}"
                         tools:text="10000" />
 
                 </LinearLayout>
@@ -123,7 +127,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.detailAnime.popularity.toString()}"
+                        android:text="@{anime.popularity.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -147,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.detailAnime.members.toString()}"
+                        android:text="@{anime.members.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -180,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@{viewModel.detailAnime.synopsis}"
+                android:text="@{anime.synopsis}"
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -200,8 +204,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/synopsys_description" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/genres_item"
-                listGenreAnime="@{}"
+                android:id="@+id/genres_item_rv"
+                listGenreAnime="@{viewModel.genreAnime}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -209,6 +213,7 @@
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/white"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genres"
                 tools:listitem="@layout/genres_item"
@@ -223,11 +228,11 @@
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genres_item" />
+                app:layout_constraintTop_toBottomOf="@id/genres_item_rv" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/characters_item"
-                listDataChara="@{}"
+                android:id="@+id/characters_item_rv"
+                listDataChara="@{viewModel.charaAnime}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -249,7 +254,7 @@
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/characters_item" />
+                app:layout_constraintTop_toBottomOf="@id/characters_item_rv" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
@@ -271,7 +276,7 @@
                     android:layout_height="120dp"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{viewModel.detailAnime.trailer.images.webp.largeImageUrl}"
+                    app:imageUrl="@{anime.trailer.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
                 <ImageView
@@ -302,7 +307,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{viewModel.detailAnime.images.webp.largeImageUrl}"
+                    app:imageUrl="@{anime.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>

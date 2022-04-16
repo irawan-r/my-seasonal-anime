@@ -15,13 +15,13 @@ class CharactersAdapter :
     class CharactersViewHolder(
         private var binding: AnimeCharactersItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(charaItem: CharaItem) {
+        fun bind(charaItem: CharaItem?) {
             binding.animeChara = charaItem
             binding.executePendingBindings()
         }
     }
 
-    object CharDiffCallback : DiffUtil.ItemCallback<CharaItem>() {
+    object CharDiffCallback : DiffUtil.ItemCallback<CharaItem?>() {
         override fun areItemsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
             return oldItem.character?.malId == newItem.character?.malId
         }

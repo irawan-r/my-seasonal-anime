@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 data class Character(
 
     @Json(name = "images")
-    val images: ImagesChar,
+    val images: ImagesChar? = null,
 
     @Json(name = "name")
     val name: String? = null,

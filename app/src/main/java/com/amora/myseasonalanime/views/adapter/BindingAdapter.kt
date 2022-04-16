@@ -14,15 +14,15 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 /* HomeFragment Adapter RecyclerView
 * */
 @BindingAdapter("listDataHome")
-fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListResponse>?) {
+fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListResponse?>?) {
     val homeAdapter = recyclerView.adapter as HomeAdapter
     homeAdapter.submitList(data)
 }
 
-/* Characters Adapter in DetailFragment that has recyclerview
+/* CharactersResponse Adapter in DetailFragment that has recyclerview
 * */
 @BindingAdapter("listDataChara")
-fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>?) {
+fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
     val charaAdapter = recyclerView.adapter as CharactersAdapter
     charaAdapter.submitList(data)
 }
@@ -30,7 +30,7 @@ fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>?) {
 /* Genre Adapter in DetailFragment that has recyclerview
 * */
 @BindingAdapter("listGenreAnime")
-fun genresBindRecyclerView(recyclerView: RecyclerView, data: List<GenresItem>?) {
+fun genresBindRecyclerView(recyclerView: RecyclerView, data: List<GenresItem?>?) {
     val genresAdapter = recyclerView.adapter as GenresAdapter
     genresAdapter.submitList(data)
 }
