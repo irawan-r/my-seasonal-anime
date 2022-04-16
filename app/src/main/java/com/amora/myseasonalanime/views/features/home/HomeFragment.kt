@@ -40,7 +40,6 @@ class HomeFragment : Fragment() {
     private fun setupLayout() {
         // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
         binding.animeSeasonNowRv.adapter = HomeAdapter(HomeAdapter.AnimeListener { id ->
-            viewModel.onAnimeClicked(id)
             findNavController()
                 .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
         })

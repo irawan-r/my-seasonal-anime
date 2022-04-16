@@ -13,9 +13,6 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     private val _animeSeasonsNow = MutableLiveData<List<AnimeListResponse>>()
     val animeSeasonsNow: LiveData<List<AnimeListResponse>> = _animeSeasonsNow
 
-    private val _animeSeasonNow = MutableLiveData<Int>()
-    val animeSeasonNow: LiveData<Int> = _animeSeasonNow
-
     init {
         viewModelScope.launch {
             try {
@@ -24,9 +21,5 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
                 e.printStackTrace()
             }
         }
-    }
-
-    fun onAnimeClicked(animeId: Int) {
-        _animeSeasonNow.value = animeId
     }
 }

@@ -30,6 +30,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
         setupLayout()
     }
     private fun setupLayout() {
@@ -38,8 +39,7 @@ class DetailFragment : Fragment() {
         viewModel = ViewModelProvider(this,
             viewModelFactory)[DetailViewModel::class.java].apply {
             setDetailAnime(id)
-            binding.lifecycleOwner = viewLifecycleOwner
-            detailAnime.observe(viewLifecycleOwner) { anime -> binding.anime = anime }
+            detailAnime.observe(viewLifecycleOwner) { binding.viewModel = viewModel }
         }
 
         binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }

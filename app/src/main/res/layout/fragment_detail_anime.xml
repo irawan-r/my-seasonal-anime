@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="anime"
-            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse" />
+            name="viewModel"
+            type="com.amora.myseasonalanime.views.features.detail.DetailViewModel" />
 
     </data>
 
@@ -39,7 +39,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="290dp"
                 android:gravity="center"
-                android:text="@{anime.title}"
+                android:text="@{viewModel.detailAnime.title}"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:text="@{anime.titleJapanese}"
+                android:text="@{viewModel.detailAnime.titleJapanese}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center"
-                android:text="@{anime.aired.string}"
+                android:text="@{viewModel.detailAnime.aired.string}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{anime.score.toString()}"
+                        android:text="@{viewModel.detailAnime.score.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -108,7 +108,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{anime.scoredBy.toString()}"
+                        android:text="@{viewModel.detailAnime.scoredBy.toString()}"
                         tools:text="10000" />
 
                 </LinearLayout>
@@ -123,7 +123,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{anime.popularity.toString()}"
+                        android:text="@{viewModel.detailAnime.popularity.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -147,7 +147,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{anime.members.toString()}"
+                        android:text="@{viewModel.detailAnime.members.toString()}"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/purple_200"
                         android:textStyle="bold"
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@{anime.synopsis}"
+                android:text="@{viewModel.detailAnime.synopsis}"
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -271,7 +271,7 @@
                     android:layout_height="120dp"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{anime.trailer.images.webp.largeImageUrl}"
+                    app:imageUrl="@{viewModel.detailAnime.trailer.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
                 <ImageView
@@ -302,7 +302,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{anime.images.webp.largeImageUrl}"
+                    app:imageUrl="@{viewModel.detailAnime.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>
