@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amora.myseasonalanime.data.Repository
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
+import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _animeSeasonsNow = MutableLiveData<List<DetailItem>>()
-    val animeSeasonsNow: LiveData<List<DetailItem>> = _animeSeasonsNow
+    private val _animeSeasonsNow = MutableLiveData<List<AnimeListResponse>>()
+    val animeSeasonsNow: LiveData<List<AnimeListResponse>> = _animeSeasonsNow
 
     private val _animeSeasonNow = MutableLiveData<Int>()
     val animeSeasonNow: LiveData<Int> = _animeSeasonNow

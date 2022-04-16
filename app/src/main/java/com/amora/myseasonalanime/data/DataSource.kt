@@ -2,7 +2,7 @@ package com.amora.myseasonalanime.data
 
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
+import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 
 /**
@@ -11,7 +11,7 @@ import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 interface DataSource {
     suspend fun getSeasonsNow(): List<AnimeListResponse>
 
-    suspend fun getAnimeId(id: Int): DetailItem
+    suspend fun getAnimeId(id: Int): DetailAnimeResponse
 
     suspend fun getAnimeChara(id: Int): List<CharaItem>
 

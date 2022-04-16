@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.data.source.remote.response.detail.images
+package com.amora.myseasonalanime.data.source.remote.response.animenow.images
 
 import com.squareup.moshi.Json
 

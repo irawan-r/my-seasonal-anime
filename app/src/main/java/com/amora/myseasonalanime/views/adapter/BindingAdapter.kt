@@ -3,8 +3,8 @@ package com.amora.myseasonalanime.views.adapter
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.GenresItem
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
 import com.bumptech.glide.Glide
@@ -14,7 +14,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 /* HomeFragment Adapter RecyclerView
 * */
 @BindingAdapter("listDataHome")
-fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<DetailItem>?) {
+fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListResponse>?) {
     val homeAdapter = recyclerView.adapter as HomeAdapter
     homeAdapter.submitList(data)
 }
@@ -22,7 +22,7 @@ fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<DetailItem>?) {
 /* Characters Adapter in DetailFragment that has recyclerview
 * */
 @BindingAdapter("listDataChara")
-fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>) {
+fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>?) {
     val charaAdapter = recyclerView.adapter as CharactersAdapter
     charaAdapter.submitList(data)
 }
@@ -30,7 +30,7 @@ fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem>) {
 /* Genre Adapter in DetailFragment that has recyclerview
 * */
 @BindingAdapter("listGenreAnime")
-fun genresBindRecyclerView(recyclerView: RecyclerView, data: List<GenresItem>) {
+fun genresBindRecyclerView(recyclerView: RecyclerView, data: List<GenresItem>?) {
     val genresAdapter = recyclerView.adapter as GenresAdapter
     genresAdapter.submitList(data)
 }

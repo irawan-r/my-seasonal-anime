@@ -5,18 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
+import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.databinding.AnimeListItemBinding
 
 class HomeAdapter(private val clickListener: AnimeListener) :
-    ListAdapter<DetailItem, HomeAdapter.CurrentSeasonViewHolder>(DiffCallback) {
+    ListAdapter<AnimeListResponse, HomeAdapter.CurrentSeasonViewHolder>(DiffCallback) {
 
     class CurrentSeasonViewHolder(private var binding: AnimeListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: AnimeListener, dataItem: DetailItem) {
-            binding.anime = dataItem
+        fun bind(clickListener: AnimeListener, data: AnimeListResponse) {
+            binding.anime = data
             binding.root.setOnClickListener {
-                dataItem.malId?.apply {
+                data.malId?.apply {
                     clickListener.onClick(this)
                 }
             }
@@ -28,12 +28,12 @@ class HomeAdapter(private val clickListener: AnimeListener) :
         fun onClick(animeId: Int) = clickListener(animeId)
     }
 
-    object DiffCallback : DiffUtil.ItemCallback<DetailItem>() {
-        override fun areItemsTheSame(oldItem: DetailItem, newItem: DetailItem): Boolean {
+    object DiffCallback : DiffUtil.ItemCallback<AnimeListResponse>() {
+        override fun areItemsTheSame(oldItem: AnimeListResponse, newItem: AnimeListResponse): Boolean {
             return oldItem.malId == newItem.malId
         }
 
-        override fun areContentsTheSame(oldItem: DetailItem, newItem: DetailItem): Boolean {
+        override fun areContentsTheSame(oldItem: AnimeListResponse, newItem: AnimeListResponse): Boolean {
             return oldItem.images == newItem.images
         }
     }

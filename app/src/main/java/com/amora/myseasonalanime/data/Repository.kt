@@ -1,8 +1,9 @@
 package com.amora.myseasonalanime.data
 
 import com.amora.myseasonalanime.data.source.RemoteDataSource
+import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
+import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 
 /** Get the RemoteDataSource and passing into DataSource
@@ -18,20 +19,20 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getSeasonsNow(): List<AnimeResponse> {
-        lateinit var seasonNow: List<AnimeResponse>
+    override suspend fun getSeasonsNow(): List<AnimeListResponse> {
+        lateinit var seasonNow: List<AnimeListResponse>
         remoteDataSource.getSeasonsNow(object : RemoteDataSource.GetAnimeCallback {
-            override fun onAnimeReceived(animeList: List<AnimeResponse>) {
+            override fun onAnimeReceived(animeList: List<AnimeListResponse>) {
                 seasonNow = animeList
             }
         })
         return seasonNow
     }
 
-    override suspend fun getAnimeId(id: Int): DetailItem {
-        lateinit var animeDetailId: DetailItem
+    override suspend fun getAnimeId(id: Int): DetailAnimeResponse {
+        lateinit var animeDetailId: DetailAnimeResponse
         remoteDataSource.getAnimeId(id, object : RemoteDataSource.GetAnimeIdCallback {
-            override fun onAnimeReceived(animeId: DetailItem) {
+            override fun onAnimeReceived(animeId: DetailAnimeResponse) {
                 animeDetailId = animeId
             }
         })

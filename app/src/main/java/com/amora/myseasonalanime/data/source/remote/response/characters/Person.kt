@@ -1,7 +1,6 @@
 package com.amora.myseasonalanime.data.source.remote.response.characters
 
-import android.provider.MediaStore
-import com.amora.myseasonalanime.data.source.remote.response.detail.images.ImagesChar
+import com.amora.myseasonalanime.data.source.remote.response.characters.imageschar.ImagesChar
 import com.squareup.moshi.Json
 
 data class Person(

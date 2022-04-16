@@ -1,6 +1,6 @@
 package com.amora.myseasonalanime.data.source.remote.response.animenow
 
-import com.amora.myseasonalanime.data.source.remote.response.detail.images.ImagesChar
+import com.amora.myseasonalanime.data.source.remote.response.animenow.images.ImagesNow
 import com.squareup.moshi.Json
 
 data class AnimeListResponse(
@@ -9,8 +9,11 @@ data class AnimeListResponse(
     val title: String? = null,
 
     @Json(name = "images")
-    val images: ImagesChar? = null,
+    val images: ImagesNow? = null,
 
     @Json(name = "mal_id")
     val malId: Int? = null,
+
+    @Json(name = "score")
+    val score: Double? = 0.0,
 )
