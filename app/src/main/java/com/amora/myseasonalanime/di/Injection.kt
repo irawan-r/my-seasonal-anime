@@ -6,7 +6,7 @@ import com.amora.myseasonalanime.data.source.RemoteDataSource
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
 
 object Injection {
-    fun provideRepository(context: Context): Repository {
+    fun provideRepository(): Repository {
         val api = ApiConfig
         val remoteDataSource = RemoteDataSource.getInstance(api)
 

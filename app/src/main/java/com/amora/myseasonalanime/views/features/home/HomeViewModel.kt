@@ -14,6 +14,10 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     val animeSeasonsNow: LiveData<List<AnimeListResponse>> = _animeSeasonsNow
 
     init {
+        loadThisSeason()
+    }
+
+    private fun loadThisSeason() {
         viewModelScope.launch {
             try {
                 _animeSeasonsNow.value = repository.getSeasonsNow()

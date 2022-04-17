@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
 import com.amora.myseasonalanime.utils.appToast
@@ -27,7 +26,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentDetailAnimeBinding.inflate(inflater, container, false)
+        binding = FragmentDetailAnimeBinding.inflate(inflater)
         return binding.root
     }
 
@@ -39,21 +38,16 @@ class DetailFragment : Fragment() {
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this,
-            viewModelFactory)[DetailViewModel::class.java].apply {
-            setDetailAnime(id)
-            detailAnime.observe(viewLifecycleOwner) {
-                binding.anime = it
-            }
-        }
-
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
+        viewModel.setDetailAnime(id)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
-        binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }
+//        binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }
 
         binding.genresItemRv.adapter = GenresAdapter()
         binding.charactersItemRv.adapter = CharactersAdapter()
+
+
     }
 
     private fun showTrailer(url: String?) {

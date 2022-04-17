@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.amora.myseasonalanime.views.features.detail.DetailFragment"
-        android:label="DetailFragment"
+        android:label="Anime Details"
         tools:layout="@layout/fragment_detail_anime">
         <argument
             android:name="id"

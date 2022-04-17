@@ -8,16 +8,14 @@ import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.views.features.detail.DetailViewModel
 import com.amora.myseasonalanime.views.features.home.HomeViewModel
 
-class ViewModelFactory(
-    private val repository: Repository
-) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(context))
+                instance ?: ViewModelFactory(Injection.provideRepository())
             }
     }
 
