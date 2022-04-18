@@ -38,9 +38,13 @@ class DetailFragment : Fragment() {
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
-        viewModel.setDetailAnime(id)
-        binding.lifecycleOwner = viewLifecycleOwner
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {
+            setDetailAnime(id)
+            detailAnime.observe(viewLifecycleOwner) {
+                binding.anime = it
+            }
+        }
+//        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 //        binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }
 

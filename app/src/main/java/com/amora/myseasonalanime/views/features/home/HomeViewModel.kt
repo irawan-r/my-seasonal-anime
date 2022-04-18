@@ -17,7 +17,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         loadThisSeason()
     }
 
-    private fun loadThisSeason() {
+    fun loadThisSeason() {
         viewModelScope.launch {
             try {
                 _animeSeasonsNow.value = repository.getSeasonsNow()

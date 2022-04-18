@@ -15,12 +15,12 @@ class HomeAdapter(private val clickListener: AnimeListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: AnimeListener, data: AnimeListResponse) {
             binding.anime = data
+            binding.executePendingBindings()
             binding.root.setOnClickListener {
                 data.malId?.apply {
                     clickListener.onClick(this)
                 }
             }
-            binding.executePendingBindings()
         }
     }
 

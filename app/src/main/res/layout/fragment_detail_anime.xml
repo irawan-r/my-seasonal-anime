@@ -307,7 +307,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{viewModel.detailAnime.images.webp.largeImageUrl}"
+                    app:imageUrl="@{anime.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>

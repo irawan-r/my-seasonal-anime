@@ -29,6 +29,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+
+        // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
 
 
     private fun setupLayout() {
-        // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
+        // Send id to detail fragment, so the fragment can get Api with the id
         binding.animeSeasonNowRv.adapter = HomeAdapter(HomeAdapter.AnimeListener { id ->
             findNavController()
                 .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
