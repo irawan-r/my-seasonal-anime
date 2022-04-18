@@ -4,7 +4,6 @@ import com.amora.myseasonalanime.data.source.RemoteDataSource
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
-import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 
 /** Get the RemoteDataSource and passing into DataSource
  */
@@ -50,7 +49,7 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return animeCharaItem
     }
 
-    override suspend fun getTrailer(id: Int): Trailer {
+    /*override suspend fun getTrailer(id: Int): Trailer {
         lateinit var animeTrailerList: Trailer
         remoteDataSource.getAnimeTrailer(id, object : RemoteDataSource.GetAnimeTrailerCallback {
             override fun onAnimeReceived(animeTrailer: Trailer) {
@@ -58,6 +57,6 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
         })
         return animeTrailerList
-    }
+    }*/
 
 }

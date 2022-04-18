@@ -1,23 +1,20 @@
 package com.amora.myseasonalanime.views.features.detail
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnime
 import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
-import com.amora.myseasonalanime.utils.appToast
-import com.amora.myseasonalanime.views.adapter.CharactersAdapter
-import com.amora.myseasonalanime.views.adapter.GenresAdapter
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 
 class DetailFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
+    private lateinit var detailAnimeId: DetailAnime
     private lateinit var binding: FragmentDetailAnimeBinding
     private lateinit var trailer: Trailer
 
@@ -33,31 +30,24 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLayout()
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
     }
 
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
-
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {
                 setDetailAnime(id)
-                /*detailAnime.observe(viewLifecycleOwner) {
-                binding.anime = it
-                }*/
-
-            with(binding) {
-                genresItemRv.adapter = GenresAdapter()
-                charactersItemRv.adapter = CharactersAdapter()
+                detailAnime.observe(viewLifecycleOwner) { anime ->
+                    binding.anime = anime
+                }
             }
-        }
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
 //        binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }
-
     }
 
-    private fun showTrailer(url: String?) {
+    /*private fun showTrailer(url: String?) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
 
         try {
@@ -65,5 +55,5 @@ class DetailFragment : Fragment() {
         } catch (t: Throwable) {
             appToast("Ups, slowly!")
         }
-    }
+    }*/
 }

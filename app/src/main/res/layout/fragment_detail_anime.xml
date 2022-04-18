@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.amora.myseasonalanime.views.features.detail.DetailViewModel" />
+            name="anime"
+            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnime" />
 
         <variable
-            name="anime"
-            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse" />
+            name="viewModel"
+            type="com.amora.myseasonalanime.views.features.detail.DetailViewModel" />
 
     </data>
 
@@ -27,6 +27,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                showBlurImage="@{viewModel.detailAnime.images.webp.imageUrl}"
                 android:layout_width="match_parent"
                 android:layout_height="290dp"
                 android:contentDescription="@string/backdrop_image"
@@ -43,7 +44,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="290dp"
                 android:gravity="center"
-                android:text="@{anime.title}"
+                android:text="@{viewModel.detailAnime.title}"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -205,7 +206,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/genres_item_rv"
-                listGenreAnime="@{viewModel.genreAnime}"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -232,7 +233,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/characters_item_rv"
-                listDataChara="@{viewModel.charaAnime}"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -276,7 +277,6 @@
                     android:layout_height="120dp"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{anime.trailer.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
                 <ImageView

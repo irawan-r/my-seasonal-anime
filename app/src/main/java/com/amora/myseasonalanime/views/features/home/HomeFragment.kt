@@ -27,16 +27,13 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModelFactory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+        // Preparing the layout
+        setupAdapter()
+        setupLoading()
 
         // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
-        // Preparing the layout
-        setupAdapter()
-        setupLoading()
     }
 
     private fun setupAdapter() {
@@ -46,6 +43,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupLoading() {
+        val viewModelFactory = ViewModelFactory.getInstance(requireContext())
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         // Setup shimmer
         binding.apply {
             loadingThisSeason.visible()

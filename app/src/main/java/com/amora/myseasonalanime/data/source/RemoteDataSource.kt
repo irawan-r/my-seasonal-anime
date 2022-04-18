@@ -4,7 +4,6 @@ import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
-import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -43,12 +42,12 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    suspend fun getAnimeTrailer(id: Int, callback: GetAnimeTrailerCallback) {
+    /*suspend fun getAnimeTrailer(id: Int, callback: GetAnimeTrailerCallback) {
         withContext(Dispatchers.IO) {
             val animeTrailer = apiConfig.api.getAnimeId(id).trailer
             callback.onAnimeReceived(animeTrailer)
         }
-    }
+    }*/
 
 
     /* Callback to get from the ApiServices
@@ -61,9 +60,9 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         fun onAnimeReceived(animeId: DetailAnimeResponse)
     }
 
-    interface GetAnimeTrailerCallback {
+    /*interface GetAnimeTrailerCallback {
         fun onAnimeReceived(animeTrailer: Trailer)
-    }
+    }*/
 
     interface GetAnimeCharaCallback {
         fun onAnimeReceived(animeChara: List<CharaItem>)

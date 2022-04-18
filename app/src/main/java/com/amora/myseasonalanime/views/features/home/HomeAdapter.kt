@@ -14,7 +14,7 @@ class HomeAdapter(private val clickListener: AnimeListener) :
     class CurrentSeasonViewHolder(private var binding: AnimeListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: AnimeListener, data: AnimeListResponse) {
-            binding.anime = data
+            binding.animeDetail = data
             binding.executePendingBindings()
             binding.root.setOnClickListener {
                 data.malId?.apply {
@@ -29,16 +29,25 @@ class HomeAdapter(private val clickListener: AnimeListener) :
     }
 
     object DiffCallback : DiffUtil.ItemCallback<AnimeListResponse>() {
-        override fun areItemsTheSame(oldItem: AnimeListResponse, newItem: AnimeListResponse): Boolean {
+        override fun areItemsTheSame(
+            oldItem: AnimeListResponse,
+            newItem: AnimeListResponse,
+        ): Boolean {
             return oldItem.malId == newItem.malId
         }
 
-        override fun areContentsTheSame(oldItem: AnimeListResponse, newItem: AnimeListResponse): Boolean {
+        override fun areContentsTheSame(
+            oldItem: AnimeListResponse,
+            newItem: AnimeListResponse,
+        ): Boolean {
             return oldItem.images == newItem.images
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentSeasonViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CurrentSeasonViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         return CurrentSeasonViewHolder(

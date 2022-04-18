@@ -6,9 +6,8 @@
     <data>
 
         <variable
-            name="anime"
+            name="animeDetail"
             type="com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse" />
-
 
     </data>
 
@@ -16,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="15dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginHorizontal="7.5dp"
         android:background="?android:colorBackground"
         android:clickable="true"
         android:focusable="true"
@@ -40,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{anime.images.webp.largeImageUrl}"
+                    app:imageUrl="@{animeDetail.images.webp.largeImageUrl}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -52,7 +51,7 @@
                 android:ellipsize="marquee"
                 android:padding="4dp"
                 android:singleLine="true"
-                android:text="@{anime.title}"
+                android:text="@{animeDetail.title}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 tools:text="@string/anime_title" />
 
@@ -79,7 +78,7 @@
                     android:layout_marginStart="4dp"
                     android:background="@drawable/bg_item"
                     android:paddingHorizontal="6dp"
-                    android:text="@{anime.score.toString()}"
+                    android:text="@{animeDetail.score.toString()}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
