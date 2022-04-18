@@ -35,17 +35,18 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
 
         // Preparing the layout
-        setupLayout()
+        setupAdapter()
+        setupLoading()
     }
 
-
-    private fun setupLayout() {
+    private fun setupAdapter() {
         // Send id to detail fragment, so the fragment can get Api with the id
-        binding.animeSeasonNowRv.adapter = HomeAdapter(HomeAdapter.AnimeListener { id ->
-            findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
-        })
+        binding.animeSeasonNowRv.adapter =
+            HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
+    }
 
+    private fun setupLoading() {
+        // Setup shimmer
         binding.apply {
             loadingThisSeason.visible()
             thisSeasonTitle.gone()
@@ -59,6 +60,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showDetail(id: Int) {
+        this.findNavController()
+            .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
     }
 }
 

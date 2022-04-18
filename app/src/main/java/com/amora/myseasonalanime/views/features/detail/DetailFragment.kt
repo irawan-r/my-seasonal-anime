@@ -38,19 +38,22 @@ class DetailFragment : Fragment() {
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
         val viewModelFactory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {
-            setDetailAnime(id)
-            detailAnime.observe(viewLifecycleOwner) {
+
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {
+                setDetailAnime(id)
+                /*detailAnime.observe(viewLifecycleOwner) {
                 binding.anime = it
+                }*/
+
+            with(binding) {
+                genresItemRv.adapter = GenresAdapter()
+                charactersItemRv.adapter = CharactersAdapter()
             }
         }
-//        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 //        binding.posterTrailer.setOnClickListener { showTrailer(trailer.embedUrl) }
-
-        binding.genresItemRv.adapter = GenresAdapter()
-        binding.charactersItemRv.adapter = CharactersAdapter()
-
 
     }
 
