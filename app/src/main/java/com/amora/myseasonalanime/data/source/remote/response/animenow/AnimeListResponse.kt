@@ -15,5 +15,5 @@ data class AnimeListResponse(
     val malId: Int? = null,
 
     @Json(name = "score")
-    val score: Double? = 0.0,
+    val score: Double? = null,
 )

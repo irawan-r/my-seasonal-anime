@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
     private const val BASE_URL = "https://api.jikan.moe/v4/"
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory())
+        .build()
     val api: ApiServices
 
     init {
@@ -27,6 +28,6 @@ object ApiConfig {
             .client(okHttpClient)
             .build()
 
-         api = retrofit.create(ApiServices::class.java)
+        api = retrofit.create(ApiServices::class.java)
     }
 }

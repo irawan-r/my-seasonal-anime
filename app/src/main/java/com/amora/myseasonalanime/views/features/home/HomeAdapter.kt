@@ -40,7 +40,7 @@ class HomeAdapter(private val clickListener: AnimeListener) :
             oldItem: AnimeListResponse,
             newItem: AnimeListResponse,
         ): Boolean {
-            return oldItem.images == newItem.images
+            return oldItem == newItem
         }
     }
 

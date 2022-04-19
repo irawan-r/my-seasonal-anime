@@ -1,5 +1,7 @@
 package com.amora.myseasonalanime.views.features.home
 
+import android.os.Build.VERSION_CODES.P
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +20,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
 
     private fun loadThisSeason() {
+
         viewModelScope.launch {
             try {
                 _animeSeasonsNow.value = repository.getSeasonsNow()

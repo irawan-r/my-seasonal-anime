@@ -62,7 +62,7 @@
                 android:padding="4dp">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -82,7 +82,7 @@
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintStart_toEndOf="@+id/score"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="8.6" />
             </androidx.constraintlayout.widget.ConstraintLayout>

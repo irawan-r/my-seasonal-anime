@@ -27,14 +27,6 @@ fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
     charaAdapter.submitList(data)
 }
 
-/* Genre Adapter in DetailFragment that has recyclerview
-* */
-@BindingAdapter("listGenreAnime")
-fun genresBindRecyclerView(recyclerView: RecyclerView, data: List<GenresItem?>?) {
-    val genresAdapter = recyclerView.adapter as GenresAdapter
-    genresAdapter.submitList(data)
-}
-
 /* Image Url
 * */
 @BindingAdapter("imageUrl")

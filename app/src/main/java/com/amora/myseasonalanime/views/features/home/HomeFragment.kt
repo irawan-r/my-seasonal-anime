@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.amora.myseasonalanime.databinding.AnimeListItemBinding
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.visible
@@ -16,6 +17,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var animeItem: AnimeListItemBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +45,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupLoading() {
-        val viewModelFactory = ViewModelFactory.getInstance(requireContext())
+        val viewModelFactory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         // Setup shimmer
         binding.apply {

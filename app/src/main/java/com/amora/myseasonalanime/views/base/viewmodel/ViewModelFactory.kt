@@ -13,7 +13,7 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
-        fun getInstance(context: Context): ViewModelFactory =
+        fun getInstance(): ViewModelFactory =
             instance ?: synchronized(this) {
                 instance ?: ViewModelFactory(Injection.provideRepository())
             }

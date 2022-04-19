@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnime
-import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 
 class DetailFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
-    private lateinit var detailAnimeId: DetailAnime
     private lateinit var binding: FragmentDetailAnimeBinding
-    private lateinit var trailer: Trailer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +32,7 @@ class DetailFragment : Fragment() {
 
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
-        val viewModelFactory = ViewModelFactory.getInstance(requireContext())
+        val viewModelFactory = ViewModelFactory.getInstance()
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {
                 setDetailAnime(id)
