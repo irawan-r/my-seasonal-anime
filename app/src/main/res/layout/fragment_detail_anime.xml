@@ -229,17 +229,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/synopsys_description" />
 
             <HorizontalScrollView
-                android:id="@+id/list_genres"
+                android:id="@+id/genres_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:paddingHorizontal="16dp"
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genres_title">
 
                 <LinearLayout
+                    android:id="@+id/list_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -254,10 +256,11 @@
                 android:text="@string/characters_title"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/list_genres" />
+                app:layout_constraintTop_toBottomOf="@id/genres_scrollview" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/characters_item_rv"
+                listDataChara="@{viewModel.charaAnime}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"

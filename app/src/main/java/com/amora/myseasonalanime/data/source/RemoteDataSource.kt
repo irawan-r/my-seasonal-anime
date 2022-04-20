@@ -53,7 +53,7 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
     /* Callback to get from the ApiServices
     * */
     interface GetAnimeCallback {
-        fun onAnimeReceived(animeList: List<AnimeListResponse>)
+        fun onAnimeReceived(animeList: List<AnimeListResponse?>?)
     }
 
     interface GetAnimeIdCallback {
@@ -65,6 +65,6 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
     }*/
 
     interface GetAnimeCharaCallback {
-        fun onAnimeReceived(animeChara: List<CharaItem>)
+        fun onAnimeReceived(animeChara: List<CharaItem?>?)
     }
 }

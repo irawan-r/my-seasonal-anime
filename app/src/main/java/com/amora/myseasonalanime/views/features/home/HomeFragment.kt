@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
 
         viewModel.apply {
             animeSeasonsNow.observe(viewLifecycleOwner) { anime ->
-                if (anime.isNotEmpty()) {
+                if (anime?.isNotEmpty() == true) {
                     binding.loadingThisSeason.gone()
                     binding.thisSeasonTitle.visible()
                 }

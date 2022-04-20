@@ -5,5 +5,5 @@ import com.squareup.moshi.Json
 data class DetailAnimeResponse(
 
     @Json(name="data")
-    val data: DetailAnime? = null
+    val data: DetailAnime
 )

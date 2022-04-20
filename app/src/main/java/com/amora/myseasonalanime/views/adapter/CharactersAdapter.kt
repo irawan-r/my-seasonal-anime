@@ -22,6 +22,7 @@ class CharactersAdapter :
     }
 
     object CharDiffCallback : DiffUtil.ItemCallback<CharaItem?>() {
+
         override fun areItemsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
             return oldItem.character?.malId == newItem.character?.malId
         }
@@ -29,6 +30,7 @@ class CharactersAdapter :
         override fun areContentsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
             return oldItem.character?.images == newItem.character?.images
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {

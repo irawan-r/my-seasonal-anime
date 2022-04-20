@@ -18,11 +18,11 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getSeasonsNow(): List<AnimeListResponse> {
-        lateinit var seasonNow: List<AnimeListResponse>
+    override suspend fun getSeasonsNow(): List<AnimeListResponse?>? {
+        var seasonNow: List<AnimeListResponse?>? = null
         remoteDataSource.getSeasonsNow(object : RemoteDataSource.GetAnimeCallback {
-            override fun onAnimeReceived(animeList: List<AnimeListResponse>) {
-                seasonNow = animeList
+            override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
+                 seasonNow = animeList
             }
         })
         return seasonNow
@@ -39,10 +39,10 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
     }
 
 
-    override suspend fun getAnimeChara(id: Int): List<CharaItem> {
-        lateinit var animeCharaItem: List<CharaItem>
+    override suspend fun getAnimeChara(id: Int): List<CharaItem?>? {
+        var animeCharaItem: List<CharaItem?>? = null
         remoteDataSource.getAnimeChara(id, object : RemoteDataSource.GetAnimeCharaCallback {
-            override fun onAnimeReceived(animeChara: List<CharaItem>) {
+            override fun onAnimeReceived(animeChara: List<CharaItem?>?) {
                 animeCharaItem = animeChara
             }
         })

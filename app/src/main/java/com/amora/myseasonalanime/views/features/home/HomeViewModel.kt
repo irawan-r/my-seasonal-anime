@@ -1,7 +1,5 @@
 package com.amora.myseasonalanime.views.features.home
 
-import android.os.Build.VERSION_CODES.P
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _animeSeasonsNow = MutableLiveData<List<AnimeListResponse>>()
-    val animeSeasonsNow: LiveData<List<AnimeListResponse>> = _animeSeasonsNow
+    private val _animeSeasonsNow = MutableLiveData<List<AnimeListResponse?>?>()
+    val animeSeasonsNow: LiveData<List<AnimeListResponse?>?> = _animeSeasonsNow
 
     init {
         loadThisSeason()

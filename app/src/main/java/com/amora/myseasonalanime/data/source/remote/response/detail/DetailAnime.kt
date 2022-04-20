@@ -45,7 +45,7 @@ data class DetailAnime(
     val score: Double? = 0.0,
 
     @Json(name = "genres")
-    val genres: List<GenresItem?>? = null,
+    val genres: List<GenresItem>,
 
     @Json(name = "popularity")
     val popularity: Int? = null,
