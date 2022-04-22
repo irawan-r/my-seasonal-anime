@@ -7,6 +7,7 @@ import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.views.features.detail.DetailViewModel
 import com.amora.myseasonalanime.views.features.home.HomeViewModel
+import com.amora.myseasonalanime.views.features.more.MoreAnimeViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -28,6 +29,10 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(MoreAnimeViewModel::class.java) -> {
+                MoreAnimeViewModel(repository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

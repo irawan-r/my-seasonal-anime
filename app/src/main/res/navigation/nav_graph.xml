@@ -17,6 +17,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_moreAnimeFragment"
+            app:destination="@id/moreAnimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -31,5 +34,14 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_more_anime"
+        android:id="@+id/moreAnimeFragment"
+        android:name="com.amora.myseasonalanime.views.features.more.MoreAnimeFragment"
+        android:label="More" >
+        <action
+            android:id="@+id/action_moreAnimeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

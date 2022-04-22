@@ -2,11 +2,12 @@ package com.amora.myseasonalanime.views.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.GenresItem
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
+import com.amora.myseasonalanime.views.features.more.MoreAnimeAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation

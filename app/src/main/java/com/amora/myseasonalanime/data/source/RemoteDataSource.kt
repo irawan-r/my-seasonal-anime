@@ -1,15 +1,23 @@
 package com.amora.myseasonalanime.data.source
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 /**
  *  The first Data Source (Remote) that handle the processing retrofit so that will be used in Repository
  */
+
+const val NETWORK_PAGE_SIZE = 25
+
 class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
 
     companion object {
@@ -21,11 +29,19 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
             }
     }
 
-    suspend fun getSeasonsNow(callback: GetAnimeCallback) {
+    suspend fun getAnimeAiring(page: Int, callback: GetAnimeCallback) {
         withContext(Dispatchers.IO) {
-            val anime = apiConfig.api.getSeasonNow().data
+            val anime = apiConfig.api.getAiringAnime(page).data
             callback.onAnimeReceived(anime)
         }
+    }
+
+    fun getMoreAnime(): Flow<PagingData<AnimeListResponse>> {
+        val services = apiConfig.api
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            pagingSourceFactory = { AnimePagingSource(services) }
+        ).flow
     }
 
     suspend fun getAnimeId(id: Int, callback: GetAnimeIdCallback) {
@@ -42,16 +58,6 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    /*suspend fun getAnimeTrailer(id: Int, callback: GetAnimeTrailerCallback) {
-        withContext(Dispatchers.IO) {
-            val animeTrailer = apiConfig.api.getAnimeId(id).trailer
-            callback.onAnimeReceived(animeTrailer)
-        }
-    }*/
-
-
-    /* Callback to get from the ApiServices
-    * */
     interface GetAnimeCallback {
         fun onAnimeReceived(animeList: List<AnimeListResponse?>?)
     }
@@ -59,10 +65,6 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
     interface GetAnimeIdCallback {
         fun onAnimeReceived(animeId: DetailAnimeResponse)
     }
-
-    /*interface GetAnimeTrailerCallback {
-        fun onAnimeReceived(animeTrailer: Trailer)
-    }*/
 
     interface GetAnimeCharaCallback {
         fun onAnimeReceived(animeChara: List<CharaItem?>?)

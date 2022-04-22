@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.amora.myseasonalanime.databinding.AnimeListItemBinding
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.visible
@@ -17,7 +16,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var animeItem: AnimeListItemBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +29,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Preparing the layout
         setupAdapter()
-        setupLoading()
+        setupLayout()
 
         // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
         binding.lifecycleOwner = viewLifecycleOwner
@@ -40,11 +38,15 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         // Send id to detail fragment, so the fragment can get Api with the id
-        binding.animeSeasonNowRv.adapter =
-            HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
+        binding.apply {
+            animeSeasonNowRv.adapter =
+                HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
+
+            moreThisSeason.setOnClickListener { showMore() }
+        }
     }
 
-    private fun setupLoading() {
+    private fun setupLayout() {
         val viewModelFactory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         // Setup shimmer
@@ -66,6 +68,11 @@ class HomeFragment : Fragment() {
     private fun showDetail(id: Int) {
         this.findNavController()
             .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
+    }
+
+    private fun showMore() {
+        this.findNavController()
+            .navigate(HomeFragmentDirections.actionHomeFragmentToMoreAnimeFragment())
     }
 }
 

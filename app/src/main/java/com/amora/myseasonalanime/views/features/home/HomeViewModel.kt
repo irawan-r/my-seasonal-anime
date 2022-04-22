@@ -8,6 +8,8 @@ import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import kotlinx.coroutines.launch
 
+const val DEFAULT_PAGE = 1
+
 class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     private val _animeSeasonsNow = MutableLiveData<List<AnimeListResponse?>?>()
@@ -21,7 +23,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                _animeSeasonsNow.value = repository.getSeasonsNow()
+                _animeSeasonsNow.value = repository.getAnimeAiring(DEFAULT_PAGE)
             } catch (e: Throwable) {
                 e.printStackTrace()
             }

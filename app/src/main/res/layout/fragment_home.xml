@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.amora.myseasonalanime.views.features.home.HomeViewModel" />
+
+        <variable
+            name="moreViewModel"
+            type="com.amora.myseasonalanime.views.features.more.MoreAnimeViewModel" />
     </data>
 
     <ScrollView
