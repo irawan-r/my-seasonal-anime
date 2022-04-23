@@ -1,6 +1,5 @@
 package com.amora.myseasonalanime.views.base.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.data.Repository
@@ -32,7 +31,7 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
 
             modelClass.isAssignableFrom(MoreAnimeViewModel::class.java) -> {
-                MoreAnimeViewModel(repository) as T
+                MoreAnimeViewModel(repository, ) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
