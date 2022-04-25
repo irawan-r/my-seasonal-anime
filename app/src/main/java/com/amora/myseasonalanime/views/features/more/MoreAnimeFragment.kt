@@ -8,12 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.PagingData
-import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
-import kotlinx.coroutines.flow.Flow
+import com.amora.myseasonalanime.views.features.loadstate.ReposLoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -38,20 +35,20 @@ class MoreAnimeFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
     }
 
     private fun setupView() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.loadData().collectLatest {
-                adapter.submitData(it)
-            }
+            this@MoreAnimeFragment.viewModel.loadData().collectLatest(adapter::submitData)
         }
     }
 
     private fun setupAdapter() {
         adapter = MoreAnimeAdapter(MoreAnimeAdapter.AnimeListener { id -> showDetail(id) })
-        binding.moreAnimeRv.adapter = adapter
+        binding.moreAnimeRv.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = ReposLoadStateAdapter { adapter.retry() },
+            footer = ReposLoadStateAdapter { adapter.retry() }
+        )
     }
 
     private fun setupLayout() {

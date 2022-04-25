@@ -9,6 +9,7 @@ import com.amora.myseasonalanime.data.source.remote.response.characters.CharaIte
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
 import com.amora.myseasonalanime.views.features.more.MoreAnimeAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -32,7 +33,10 @@ fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
 * */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
-    Glide.with(imgView.context).load(imgUrl).into(imgView)
+    Glide.with(imgView.context).load(imgUrl)
+        .centerCrop()
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(imgView)
 }
 
 /* Blurring Image

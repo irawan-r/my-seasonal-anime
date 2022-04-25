@@ -7,7 +7,7 @@ import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeR
 import kotlinx.coroutines.flow.Flow
 
 /**
- *  The function is simply to get object from data object (JSON)
+ *  The function is simply to receive object and pass it into data class (model)
  */
 interface DataSource {
     suspend fun getAnimeAiring(page: Int): List<AnimeListResponse?>?
