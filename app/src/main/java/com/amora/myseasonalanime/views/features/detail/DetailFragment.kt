@@ -14,8 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.R
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
 import com.amora.myseasonalanime.utils.appToast
-import com.amora.myseasonalanime.views.adapter.CharactersAdapter
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
+import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
+import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapters
 
 class DetailFragment : Fragment() {
 
@@ -40,7 +41,15 @@ class DetailFragment : Fragment() {
 
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
+        val charactersAdapter = CharactersAdapter()
+        val trailerAdapters  = TrailerAdapters(TrailerAdapters.TrailerListener { url -> showTrailer(url) })
         val viewModelFactory = ViewModelFactory.getInstance()
+
+        with(binding) {
+            charactersItemRv.adapter = charactersAdapter
+            trailerRv.adapter = trailerAdapters
+        }
+
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {
                 setDetailAnime(id)
@@ -63,12 +72,7 @@ class DetailFragment : Fragment() {
                         }
                     }
                 }
-                binding.posterTrailer.setOnClickListener { showTrailer(detailAnime.value?.trailer?.embedUrl) }
             }
-
-        with(binding) {
-            charactersItemRv.adapter = CharactersAdapter()
-        }
 
     }
 

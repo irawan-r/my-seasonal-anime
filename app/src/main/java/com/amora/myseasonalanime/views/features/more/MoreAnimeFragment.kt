@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
-import com.amora.myseasonalanime.views.features.loadstate.ReposLoadStateAdapter
+import com.amora.myseasonalanime.views.features.more.loadstate.ReposLoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

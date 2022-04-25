@@ -1,12 +1,13 @@
 package com.amora.myseasonalanime.data.source.remote.response.characters
 
 import com.amora.myseasonalanime.data.source.remote.response.characters.images.ImagesChar
+import com.amora.myseasonalanime.data.source.remote.response.images.Images
 import com.squareup.moshi.Json
 
 data class Character(
 
     @Json(name = "images")
-    val images: ImagesChar? = null,
+    val images: Images? = null,
 
     @Json(name = "name")
     val name: String? = null,

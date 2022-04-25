@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.views.adapter
+package com.amora.myseasonalanime.views.features.detail.characters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

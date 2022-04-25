@@ -3,11 +3,11 @@ package com.amora.myseasonalanime.data.source
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -58,6 +58,13 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
+    suspend fun getTrailerAnime(id: Int, callback: GetTrailerAnimeCallback) {
+        withContext(Dispatchers.IO) {
+            val animeTrailer = apiConfig.api.getAnimeTrailer(id).data?.promo
+            callback.onAnimeReceived(animeTrailer)
+        }
+    }
+
     interface GetAnimeCallback {
         fun onAnimeReceived(animeList: List<AnimeListResponse?>?)
     }
@@ -68,5 +75,9 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
 
     interface GetAnimeCharaCallback {
         fun onAnimeReceived(animeChara: List<CharaItem?>?)
+    }
+
+    interface GetTrailerAnimeCallback {
+        fun onAnimeReceived(animeTrailer: List<TrailerItem?>?)
     }
 }

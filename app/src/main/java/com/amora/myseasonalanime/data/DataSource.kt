@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -17,4 +18,6 @@ interface DataSource {
     suspend fun getAnimeId(id: Int): DetailAnimeResponse
 
     suspend fun getAnimeChara(id: Int): List<CharaItem?>?
+
+    suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>?
 }

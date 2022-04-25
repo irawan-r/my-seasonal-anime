@@ -1,12 +1,11 @@
-package com.amora.myseasonalanime.data.source.remote.response.detail
+package com.amora.myseasonalanime.data.source.remote.response.trailer
 
-import com.amora.myseasonalanime.data.source.remote.response.detail.images.ImagesDetail
+import com.amora.myseasonalanime.data.source.remote.response.images.Images
 import com.squareup.moshi.Json
 
 data class Trailer(
-
     @Json(name = "images")
-    val images: ImagesDetail,
+    val images: Images? = null,
 
     @Json(name = "embed_url")
     val embedUrl: String? = null,

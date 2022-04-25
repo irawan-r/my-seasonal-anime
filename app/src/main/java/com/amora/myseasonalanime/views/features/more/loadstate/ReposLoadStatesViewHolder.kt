@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.views.features.loadstate
+package com.amora.myseasonalanime.views.features.more.loadstate
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

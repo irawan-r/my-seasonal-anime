@@ -5,6 +5,7 @@ import com.amora.myseasonalanime.data.source.RemoteDataSource
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.flow.Flow
 
 /** Get the RemoteDataSource and passing into DataSource
@@ -24,7 +25,7 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         var animeAiring: List<AnimeListResponse?>? = null
         remoteDataSource.getAnimeAiring(page, object : RemoteDataSource.GetAnimeCallback {
             override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
-                 animeAiring = animeList
+                animeAiring = animeList
             }
         })
         return animeAiring
@@ -52,5 +53,15 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
         })
         return animeCharaItem
+    }
+
+    override suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>? {
+        var animeTrailerItem: List<TrailerItem?>? = null
+        remoteDataSource.getTrailerAnime(id, object : RemoteDataSource.GetTrailerAnimeCallback {
+            override fun onAnimeReceived(animeTrailer: List<TrailerItem?>?) {
+                animeTrailerItem = animeTrailer
+            }
+        })
+        return animeTrailerItem
     }
 }

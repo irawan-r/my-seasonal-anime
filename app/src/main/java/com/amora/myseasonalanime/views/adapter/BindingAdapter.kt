@@ -2,12 +2,14 @@ package com.amora.myseasonalanime.views.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
+import com.amora.myseasonalanime.data.source.remote.response.trailer.Trailer
+import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
+import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapters
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
-import com.amora.myseasonalanime.views.features.more.MoreAnimeAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -26,6 +28,12 @@ fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListRespons
 @BindingAdapter("listDataChara")
 fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
     val charaAdapter = recyclerView.adapter as CharactersAdapter
+    charaAdapter.submitList(data)
+}
+
+@BindingAdapter("listTrailerAnime")
+fun trailerBindRecyclerView(recyclerView: RecyclerView, data: List<TrailerItem?>?) {
+    val charaAdapter = recyclerView.adapter as TrailerAdapters
     charaAdapter.submitList(data)
 }
 
