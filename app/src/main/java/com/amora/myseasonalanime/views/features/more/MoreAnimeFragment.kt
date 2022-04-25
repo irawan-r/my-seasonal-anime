@@ -38,7 +38,7 @@ class MoreAnimeFragment : Fragment() {
     }
 
     private fun setupView() {
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch {
             this@MoreAnimeFragment.viewModel.loadData().collectLatest(adapter::submitData)
         }
     }
