@@ -6,14 +6,16 @@ import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 /**
- *  The first Data Source (Remote) that handle the processing retrofit so that will be used in Repository
+ *  The first DetailCharaItem Source (Remote) that handle the processing retrofit so that will be used in Repository
  */
 
 const val NETWORK_PAGE_SIZE = 25
@@ -58,6 +60,13 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
+    suspend fun getDetailChara(id: Int, callback: GetAnimeDetailCharaCallback) {
+        withContext(Dispatchers.IO) {
+            val detailChara = apiConfig.api.getDetailAnimeCharacters(id)
+            callback.onAnimeReceived(detailChara)
+        }
+    }
+
     suspend fun getTrailerAnime(id: Int, callback: GetTrailerAnimeCallback) {
         withContext(Dispatchers.IO) {
             val animeTrailer = apiConfig.api.getAnimeTrailer(id).data?.promo
@@ -70,11 +79,15 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
     }
 
     interface GetAnimeIdCallback {
-        fun onAnimeReceived(animeId: DetailAnimeResponse)
+        fun onAnimeReceived(animeId: DetailAnimeResponse?)
     }
 
     interface GetAnimeCharaCallback {
         fun onAnimeReceived(animeChara: List<CharaItem?>?)
+    }
+
+    interface GetAnimeDetailCharaCallback {
+        fun onAnimeReceived(animeDetailChara: DetailAnimeCharaResponse?)
     }
 
     interface GetTrailerAnimeCallback {

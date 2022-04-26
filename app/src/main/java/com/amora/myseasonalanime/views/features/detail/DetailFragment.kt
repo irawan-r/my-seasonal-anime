@@ -9,14 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.R
+import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
+import com.amora.myseasonalanime.databinding.CharactersDialogBinding
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
 import com.amora.myseasonalanime.utils.appToast
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
-import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapters
+import com.amora.myseasonalanime.views.features.detail.characters.detail.VoiceActorAdapter
+import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
 
 class DetailFragment : Fragment() {
 
@@ -41,8 +45,12 @@ class DetailFragment : Fragment() {
 
     private fun setupLayout() {
         val id = DetailFragmentArgs.fromBundle(requireArguments()).id
-        val charactersAdapter = CharactersAdapter()
-        val trailerAdapters  = TrailerAdapters(TrailerAdapters.TrailerListener { url -> showTrailer(url) })
+        val charactersAdapter =
+            CharactersAdapter(CharactersAdapter.CharactersListener { charId ->
+                showDetailCharacter(charId)
+            })
+        val trailerAdapters =
+            TrailerAdapter(TrailerAdapter.TrailerListener { url -> showTrailer(url) })
         val viewModelFactory = ViewModelFactory.getInstance()
 
         with(binding) {
@@ -55,30 +63,42 @@ class DetailFragment : Fragment() {
                 setDetailAnime(id)
                 detailAnime.observe(viewLifecycleOwner) { anime ->
                     binding.anime = anime
-                    anime.genres.let {
-                        for (genres in it.indices) {
-                            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.WRAP_CONTENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
-                            )
-                            params.setMargins(0, 0, 20, 0)
-                            val genreTextView = TextView(requireContext()).apply {
-                                setBackgroundResource(R.drawable.bg_genres)
-                                layoutParams = params
-                                setTextColor(Color.parseColor("#ffffff"))
-                                text = anime.genres[genres].name
+                    anime?.genres.let {
+                        if (it != null) {
+                            for (genres in it.indices) {
+                                val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                                )
+                                params.setMargins(0, 0, 20, 0)
+                                val genreTextView = TextView(requireContext()).apply {
+                                    setBackgroundResource(R.drawable.bg_genres)
+                                    layoutParams = params
+                                    setTextColor(Color.parseColor("#ffffff"))
+                                    if (anime != null) {
+                                        text = anime.genres[genres].name
+                                    }
+                                }
+                                binding.listGenres.addView(genreTextView)
                             }
-                            binding.listGenres.addView(genreTextView)
                         }
                     }
                 }
             }
+    }
 
+    private fun showDetailCharacter(id: Int) {
+        val mDialogView: CharactersDialogBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(requireContext()),
+            R.layout.characters_dialog,
+            null,
+            false
+        )
+        val voiceActorAdapter = VoiceActorAdapter()
     }
 
     private fun showTrailer(url: String?) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
         try {
             startActivity(intent)
         } catch (t: Throwable) {

@@ -1,6 +1,5 @@
 package com.amora.myseasonalanime.data.source.remote.response.characters
 
-import com.amora.myseasonalanime.data.source.remote.response.characters.images.ImagesChar
 import com.amora.myseasonalanime.data.source.remote.response.images.Images
 import com.squareup.moshi.Json
 

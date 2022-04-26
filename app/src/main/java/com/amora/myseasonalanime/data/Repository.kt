@@ -4,7 +4,8 @@ import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.RemoteDataSource
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.flow.Flow
 
@@ -35,10 +36,10 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return remoteDataSource.getMoreAnime()
     }
 
-    override suspend fun getAnimeId(id: Int): DetailAnimeResponse {
-        lateinit var animeDetailId: DetailAnimeResponse
+    override suspend fun getAnimeId(id: Int): DetailAnimeResponse? {
+        var animeDetailId: DetailAnimeResponse? = null
         remoteDataSource.getAnimeId(id, object : RemoteDataSource.GetAnimeIdCallback {
-            override fun onAnimeReceived(animeId: DetailAnimeResponse) {
+            override fun onAnimeReceived(animeId: DetailAnimeResponse?) {
                 animeDetailId = animeId
             }
         })
@@ -53,6 +54,16 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
         })
         return animeCharaItem
+    }
+
+    override suspend fun getDetailChara(id: Int): DetailAnimeCharaResponse? {
+        var detailCharaItem: DetailAnimeCharaResponse? = null
+        remoteDataSource.getDetailChara(id, object : RemoteDataSource.GetAnimeDetailCharaCallback {
+            override fun onAnimeReceived(animeDetailChara: DetailAnimeCharaResponse?) {
+                detailCharaItem = animeDetailChara
+            }
+        })
+        return detailCharaItem
     }
 
     override suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>? {

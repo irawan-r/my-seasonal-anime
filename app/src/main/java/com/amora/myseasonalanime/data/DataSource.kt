@@ -3,7 +3,8 @@ package com.amora.myseasonalanime.data
 import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.flow.Flow
 
@@ -15,9 +16,11 @@ interface DataSource {
 
     fun getMoreAnime(page: Int): Flow<PagingData<AnimeListResponse>>
 
-    suspend fun getAnimeId(id: Int): DetailAnimeResponse
+    suspend fun getAnimeId(id: Int): DetailAnimeResponse?
 
     suspend fun getAnimeChara(id: Int): List<CharaItem?>?
+
+    suspend fun getDetailChara(id: Int): DetailAnimeCharaResponse?
 
     suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>?
 }

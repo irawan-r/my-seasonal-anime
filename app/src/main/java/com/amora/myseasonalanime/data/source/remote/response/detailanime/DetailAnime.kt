@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.data.source.remote.response.detail
+package com.amora.myseasonalanime.data.source.remote.response.detailanime
 
 import com.amora.myseasonalanime.data.source.remote.response.images.Images
 import com.amora.myseasonalanime.data.source.remote.response.trailer.Trailer

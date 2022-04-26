@@ -7,18 +7,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.databinding.AnimeCharactersItemBinding
+import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
 
 
-class CharactersAdapter :
+class CharactersAdapter(
+    private val clickListener: CharactersAdapter.CharactersListener
+) :
     ListAdapter<CharaItem, CharactersAdapter.CharactersViewHolder>(CharDiffCallback) {
 
     class CharactersViewHolder(
         private var binding: AnimeCharactersItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(charaItem: CharaItem?) {
+        fun bind(clickListener: CharactersListener, charaItem: CharaItem?) {
             binding.animeChara = charaItem
             binding.executePendingBindings()
+            binding.root.setOnClickListener {
+                charaItem?.character.apply {
+                    clickListener.onClick(this)
+                }
+            }
         }
+    }
+
+    class CharactersListener(val clickListener: (id: Int) -> Unit) {
+        fun onClick(chara: CharaItem) = clickListener(chara)
     }
 
     object CharDiffCallback : DiffUtil.ItemCallback<CharaItem?>() {

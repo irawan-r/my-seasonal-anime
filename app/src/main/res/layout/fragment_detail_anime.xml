@@ -7,7 +7,7 @@
 
         <variable
             name="anime"
-            type="com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnime" />
+            type="com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnime" />
 
         <variable
             name="viewModel"

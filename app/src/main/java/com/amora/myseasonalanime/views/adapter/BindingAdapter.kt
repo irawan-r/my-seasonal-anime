@@ -5,10 +5,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.trailer.Trailer
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
-import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapters
+import com.amora.myseasonalanime.views.features.detail.characters.detail.VoiceActorAdapter
+import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -23,7 +24,7 @@ fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListRespons
     homeAdapter.submitList(data)
 }
 
-/* CharactersResponse Adapter in DetailFragment that has recyclerview
+/* CharactersResponse Adapter in DetailFragment's recyclerview
 * */
 @BindingAdapter("listDataChara")
 fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
@@ -31,10 +32,20 @@ fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
     charaAdapter.submitList(data)
 }
 
+/* TrailerResponse Adapter in DetailFragment's recyclerview
+* */
 @BindingAdapter("listTrailerAnime")
 fun trailerBindRecyclerView(recyclerView: RecyclerView, data: List<TrailerItem?>?) {
-    val charaAdapter = recyclerView.adapter as TrailerAdapters
+    val charaAdapter = recyclerView.adapter as TrailerAdapter
     charaAdapter.submitList(data)
+}
+
+/* DetailChara Adapter in DialogAlert
+* */
+@BindingAdapter("listDetailChara")
+fun detailCharaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
+    val detailCharaAdapter = recyclerView.adapter as VoiceActorAdapter
+    detailCharaAdapter.submitList(data)
 }
 
 /* Image Url

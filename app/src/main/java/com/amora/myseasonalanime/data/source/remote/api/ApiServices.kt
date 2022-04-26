@@ -2,7 +2,8 @@ package com.amora.myseasonalanime.data.source.remote.api
 
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharactersResponse
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,6 +22,9 @@ interface ApiServices {
 
     @GET("anime/{id}/characters")
     suspend fun getAnimeCharacters(@Path("id") id: Int): CharactersResponse
+
+    @GET("anime/characters/{id}")
+    suspend fun getDetailAnimeCharacters(@Path("id")id: Int): DetailAnimeCharaResponse
 
     @GET("anime/{id}/videos")
     suspend fun getAnimeTrailer(@Path("id") id : Int): TrailerResponse

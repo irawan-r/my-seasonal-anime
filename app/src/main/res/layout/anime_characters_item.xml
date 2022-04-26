@@ -44,7 +44,7 @@
                 android:textSize="14sp"
                 android:singleLine="true"
                 android:text="@{animeChara.character.name}"
-                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 tools:text="Iwatani, Naofumi"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

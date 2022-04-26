@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import com.amora.myseasonalanime.databinding.AnimeTrailerItemBinding
 
-class TrailerAdapters(private val clickListener: TrailerListener) :
-    ListAdapter<TrailerItem, TrailerAdapters.TrailerViewHolder>(TrailerDiffCallback) {
+class TrailerAdapter(private val clickListener: TrailerListener) :
+    ListAdapter<TrailerItem, TrailerAdapter.TrailerViewHolder>(TrailerDiffCallback) {
 
     object TrailerDiffCallback : DiffUtil.ItemCallback<TrailerItem>() {
         override fun areItemsTheSame(oldItem: TrailerItem, newItem: TrailerItem): Boolean {
@@ -19,7 +19,6 @@ class TrailerAdapters(private val clickListener: TrailerListener) :
         override fun areContentsTheSame(oldItem: TrailerItem, newItem: TrailerItem): Boolean {
             return oldItem == newItem
         }
-
     }
 
     class TrailerViewHolder(
