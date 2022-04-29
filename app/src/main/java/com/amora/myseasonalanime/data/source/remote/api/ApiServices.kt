@@ -5,6 +5,7 @@ import com.amora.myseasonalanime.data.source.remote.response.characters.Characte
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerResponse
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActorResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -23,10 +24,13 @@ interface ApiServices {
     @GET("anime/{id}/characters")
     suspend fun getAnimeCharacters(@Path("id") id: Int): CharactersResponse
 
-    @GET("anime/characters/{id}")
-    suspend fun getDetailAnimeCharacters(@Path("id")id: Int): DetailAnimeCharaResponse
+    @GET("characters/{id}")
+    suspend fun getDetailAnimeCharacters(@Path("id") id: Int): DetailAnimeCharaResponse
+
+    @GET("characters/{id}/voices")
+    suspend fun getVoiceActor(@Path("id") id: Int): VoiceActorResponse
 
     @GET("anime/{id}/videos")
-    suspend fun getAnimeTrailer(@Path("id") id : Int): TrailerResponse
+    suspend fun getAnimeTrailer(@Path("id") id: Int): TrailerResponse
 }
 

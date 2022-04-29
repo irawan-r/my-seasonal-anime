@@ -7,20 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnime
-import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _detailAnime = MutableLiveData<DetailAnime?>()
-    val detailAnime: LiveData<DetailAnime?> = _detailAnime
+    private val _detailAnime = MutableLiveData<DetailAnime>()
+    val detailAnime: LiveData<DetailAnime> = _detailAnime
 
     private val _charaAnime = MutableLiveData<List<CharaItem?>?>()
     val charaAnime: LiveData<List<CharaItem?>?> = _charaAnime
-
-    private val _detailChara = MutableLiveData<DetailCharaItem?>()
-    val detailCharaItem: LiveData<DetailCharaItem?> = _detailChara
 
     private val _trailerAnime = MutableLiveData<List<TrailerItem?>?>()
     val trailerAnime: LiveData<List<TrailerItem?>?> = _trailerAnime
@@ -28,9 +24,8 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     fun setDetailAnime(id: Int) {
         viewModelScope.launch {
             try {
-                _detailAnime.value = repository.getAnimeId(id)?.data
+                _detailAnime.value = repository.getAnimeId(id).data
                 _charaAnime.value = repository.getAnimeChara(id)
-                _detailChara.value = repository.getDetailChara(id)?.data
                 _trailerAnime.value = repository.getAnimeTrailer(id)
             } catch (e: Throwable) {
                 e.printStackTrace()

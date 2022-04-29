@@ -7,12 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.databinding.AnimeCharactersItemBinding
-import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
 
 
-class CharactersAdapter(
-    private val clickListener: CharactersAdapter.CharactersListener
-) :
+class CharactersAdapter(private val clickListener: CharactersListener) :
     ListAdapter<CharaItem, CharactersAdapter.CharactersViewHolder>(CharDiffCallback) {
 
     class CharactersViewHolder(
@@ -22,38 +19,41 @@ class CharactersAdapter(
             binding.animeChara = charaItem
             binding.executePendingBindings()
             binding.root.setOnClickListener {
-                charaItem?.character.apply {
-                    clickListener.onClick(this)
+                charaItem?.character?.malId.apply {
+                    this?.let { it -> clickListener.clickId(it) }
                 }
             }
         }
     }
 
     class CharactersListener(val clickListener: (id: Int) -> Unit) {
-        fun onClick(chara: CharaItem) = clickListener(chara)
+        fun clickId(id: Int) = clickListener(id)
     }
 
     object CharDiffCallback : DiffUtil.ItemCallback<CharaItem?>() {
 
         override fun areItemsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
-            return oldItem.character?.malId == newItem.character?.malId
+            return oldItem.character == newItem.character
         }
 
         override fun areContentsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
-            return oldItem.character?.images == newItem.character?.images
+            return oldItem == newItem
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CharactersAdapter.CharactersViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return CharactersViewHolder(
+        return CharactersAdapter.CharactersViewHolder(
             AnimeCharactersItemBinding.inflate(layoutInflater, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
         val chara = getItem(position)
-        holder.bind(chara)
+        holder.bind(clickListener, chara)
     }
 }

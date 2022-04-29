@@ -5,28 +5,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
-import com.amora.myseasonalanime.databinding.CharactersDialogBinding
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
+import com.amora.myseasonalanime.databinding.VaListItemBinding
 
 class VoiceActorAdapter :
-    ListAdapter<CharaItem, VoiceActorAdapter.DetailCharaViewHolder>(DetailCharaDiffCallback) {
+    ListAdapter<DataItem, VoiceActorAdapter.DetailCharaViewHolder>(DetailCharaDiffCallback) {
+
     class DetailCharaViewHolder(
-        private var binding: CharactersDialogBinding,
+        private var binding: VaListItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: CharaItem) {
-            binding.chara = data
+        fun bind(data: DataItem) {
+            binding.voiceAct = data
             binding.executePendingBindings()
         }
     }
 
-    object DetailCharaDiffCallback : DiffUtil.ItemCallback<CharaItem>() {
-        override fun areItemsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
-            return oldItem.voiceActors == newItem.voiceActors
+    object DetailCharaDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.person == newItem.person
         }
 
         override fun areContentsTheSame(
-            oldItem: CharaItem, newItem: CharaItem
+            oldItem: DataItem, newItem: DataItem,
         ): Boolean {
             return oldItem == newItem
         }
@@ -38,7 +38,7 @@ class VoiceActorAdapter :
     ): DetailCharaViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return DetailCharaViewHolder(
-            CharactersDialogBinding.inflate(layoutInflater, parent, false)
+            VaListItemBinding.inflate(layoutInflater, parent, false)
         )
     }
 

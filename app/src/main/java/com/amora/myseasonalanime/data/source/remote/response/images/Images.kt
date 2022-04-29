@@ -7,6 +7,9 @@ data class Images(
     @Json(name = "webp")
     val webp: Webp? = null,
 
+    @Json(name = "jpg")
+    val jpg: Jpg? = null,
+
     @Json(name = "large_image_url")
     val largeImageUrl: String? = null,
 

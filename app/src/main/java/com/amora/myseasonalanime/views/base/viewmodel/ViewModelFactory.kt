@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.views.features.detail.DetailViewModel
+import com.amora.myseasonalanime.views.features.detail.characters.detail.DetailCharaViewModel
 import com.amora.myseasonalanime.views.features.home.HomeViewModel
 import com.amora.myseasonalanime.views.features.more.MoreAnimeViewModel
 
@@ -28,6 +29,10 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(DetailCharaViewModel::class.java) -> {
+                DetailCharaViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(MoreAnimeViewModel::class.java) -> {

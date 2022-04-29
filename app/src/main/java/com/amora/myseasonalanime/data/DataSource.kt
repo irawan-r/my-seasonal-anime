@@ -6,6 +6,7 @@ import com.amora.myseasonalanime.data.source.remote.response.characters.CharaIte
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -16,11 +17,13 @@ interface DataSource {
 
     fun getMoreAnime(page: Int): Flow<PagingData<AnimeListResponse>>
 
-    suspend fun getAnimeId(id: Int): DetailAnimeResponse?
+    suspend fun getAnimeId(id: Int): DetailAnimeResponse
 
     suspend fun getAnimeChara(id: Int): List<CharaItem?>?
 
     suspend fun getDetailChara(id: Int): DetailAnimeCharaResponse?
+
+    suspend fun getVoiceActor(id: Int): List<DataItem?>?
 
     suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>?
 }

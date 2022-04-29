@@ -19,7 +19,11 @@
             app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_homeFragment_to_moreAnimeFragment"
-            app:destination="@id/moreAnimeFragment" />
+            app:destination="@id/moreAnimeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -32,16 +36,49 @@
         <action
             android:id="@+id/action_detailFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detailFragment_to_detailCharaFragment"
+            app:destination="@id/detailCharaFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_more_anime"
         android:id="@+id/moreAnimeFragment"
         android:name="com.amora.myseasonalanime.views.features.more.MoreAnimeFragment"
-        android:label="More" >
+        android:label="More"
+        tools:layout="@layout/fragment_more_anime">
         <action
             android:id="@+id/action_moreAnimeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailCharaFragment"
+        android:name="com.amora.myseasonalanime.views.features.detail.characters.detail.DetailCharaFragment"
+        android:label="Character Info"
+        tools:layout="@layout/fragment_detail_character">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailCharaFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

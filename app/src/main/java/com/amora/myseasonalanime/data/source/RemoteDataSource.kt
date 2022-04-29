@@ -6,10 +6,12 @@ import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
+import com.amora.myseasonalanime.data.source.remote.response.characters.VoiceActorsItem
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -67,6 +69,13 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
+    suspend fun getVoiceActor(id:Int, callback: GetVoiceActCallback) {
+        withContext(Dispatchers.IO) {
+            val voiceAct = apiConfig.api.getVoiceActor(id).data
+            callback.onAnimeReceived(voiceAct)
+        }
+    }
+
     suspend fun getTrailerAnime(id: Int, callback: GetTrailerAnimeCallback) {
         withContext(Dispatchers.IO) {
             val animeTrailer = apiConfig.api.getAnimeTrailer(id).data?.promo
@@ -79,7 +88,7 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
     }
 
     interface GetAnimeIdCallback {
-        fun onAnimeReceived(animeId: DetailAnimeResponse?)
+        fun onAnimeReceived(animeId: DetailAnimeResponse)
     }
 
     interface GetAnimeCharaCallback {
@@ -88,6 +97,10 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
 
     interface GetAnimeDetailCharaCallback {
         fun onAnimeReceived(animeDetailChara: DetailAnimeCharaResponse?)
+    }
+
+    interface GetVoiceActCallback {
+        fun onAnimeReceived(voiceAct: List<DataItem?>?)
     }
 
     interface GetTrailerAnimeCallback {

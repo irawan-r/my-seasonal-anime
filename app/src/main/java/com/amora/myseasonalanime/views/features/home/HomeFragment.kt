@@ -38,10 +38,9 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         // Send id to detail fragment, so the fragment can get Api with the id
+        val homeAdapter = HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
         binding.apply {
-            animeSeasonNowRv.adapter =
-                HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
-
+            animeSeasonNowRv.adapter = homeAdapter
             moreThisSeason.setOnClickListener { showMore() }
         }
     }
@@ -49,6 +48,7 @@ class HomeFragment : Fragment() {
     private fun setupLayout() {
         val viewModelFactory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+
         // Setup shimmer
         binding.apply {
             loadingThisSeason.visible()

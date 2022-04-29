@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="voiceAct"
-            type="com.amora.myseasonalanime.data.source.remote.response.characters.VoiceActorsItem" />
+            type="com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,13 +30,12 @@
                 app:cardElevation="5dp">
 
                 <ImageView
-                    imageUrl="@{voiceAct.person.images.imageUrl}"
+                    app:imageUrl="@{voiceAct.person.images.jpg.imageUrl}"
                     android:id="@+id/poster_va"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/poster"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{}"
                     tools:src="@color/purple_500" />
 
             </com.google.android.material.card.MaterialCardView>

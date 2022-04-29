@@ -7,6 +7,7 @@ import com.amora.myseasonalanime.data.source.remote.response.characters.CharaIte
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
 import kotlinx.coroutines.flow.Flow
 
 /** Get the RemoteDataSource and passing into DataSource
@@ -36,10 +37,10 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return remoteDataSource.getMoreAnime()
     }
 
-    override suspend fun getAnimeId(id: Int): DetailAnimeResponse? {
-        var animeDetailId: DetailAnimeResponse? = null
+    override suspend fun getAnimeId(id: Int): DetailAnimeResponse {
+        lateinit var animeDetailId: DetailAnimeResponse
         remoteDataSource.getAnimeId(id, object : RemoteDataSource.GetAnimeIdCallback {
-            override fun onAnimeReceived(animeId: DetailAnimeResponse?) {
+            override fun onAnimeReceived(animeId: DetailAnimeResponse) {
                 animeDetailId = animeId
             }
         })
@@ -64,6 +65,16 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
         })
         return detailCharaItem
+    }
+
+    override suspend fun getVoiceActor(id: Int): List<DataItem?>? {
+        var voiceActorItem: List<DataItem?>? = null
+        remoteDataSource.getVoiceActor(id, object : RemoteDataSource.GetVoiceActCallback {
+            override fun onAnimeReceived(voiceAct: List<DataItem?>?) {
+                voiceActorItem = voiceAct
+            }
+        })
+        return voiceActorItem
     }
 
     override suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>? {

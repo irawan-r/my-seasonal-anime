@@ -5,8 +5,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
+import com.amora.myseasonalanime.data.source.remote.response.characters.VoiceActorsItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
 import com.amora.myseasonalanime.views.features.detail.characters.detail.VoiceActorAdapter
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
@@ -42,8 +43,8 @@ fun trailerBindRecyclerView(recyclerView: RecyclerView, data: List<TrailerItem?>
 
 /* DetailChara Adapter in DialogAlert
 * */
-@BindingAdapter("listDetailChara")
-fun detailCharaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
+@BindingAdapter("listVoiceActor")
+fun detailCharaBindRecyclerView(recyclerView: RecyclerView, data: List<DataItem?>?) {
     val detailCharaAdapter = recyclerView.adapter as VoiceActorAdapter
     detailCharaAdapter.submitList(data)
 }
