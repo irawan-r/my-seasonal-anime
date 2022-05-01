@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import com.amora.myseasonalanime.databinding.AnimeListItemBinding
 
 class HomeAdapter(private val clickListener: AnimeListener) :

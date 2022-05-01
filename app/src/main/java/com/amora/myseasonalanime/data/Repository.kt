@@ -2,7 +2,7 @@ package com.amora.myseasonalanime.data
 
 import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.RemoteDataSource
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
@@ -25,7 +25,7 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
 
     override suspend fun getAnimeAiring(page: Int): List<AnimeListResponse?>? {
         var animeAiring: List<AnimeListResponse?>? = null
-        remoteDataSource.getAnimeAiring(page, object : RemoteDataSource.GetAnimeCallback {
+        remoteDataSource.getAnimeAiring(page, object : RemoteDataSource.GetAiringCallback {
             override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
                 animeAiring = animeList
             }
@@ -33,8 +33,22 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return animeAiring
     }
 
-    override fun getMoreAnime(page: Int): Flow<PagingData<AnimeListResponse>> {
-        return remoteDataSource.getMoreAnime()
+    override suspend fun getUpcomingSeason(page: Int): List<AnimeListResponse?>? {
+        var animeUpcoming: List<AnimeListResponse?>? = null
+        remoteDataSource.getUpComingSeason(page, object: RemoteDataSource.GetUpComingCallback {
+            override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
+                animeUpcoming = animeList
+            }
+        })
+        return animeUpcoming
+    }
+
+    override fun getMoreAiring(page: Int): Flow<PagingData<AnimeListResponse>> {
+        return remoteDataSource.getMoreAiring()
+    }
+
+    override fun getMoreUpcoming(page: Int): Flow<PagingData<AnimeListResponse>> {
+        return remoteDataSource.getMoreUpComing()
     }
 
     override suspend fun getAnimeId(id: Int): DetailAnimeResponse {

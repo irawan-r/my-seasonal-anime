@@ -13,6 +13,7 @@ class DetailCharaFragment : Fragment() {
 
     private lateinit var viewModel: DetailCharaViewModel
     private lateinit var binding: FragmentDetailCharacterBinding
+    private lateinit var adapter: VoiceActorAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +33,7 @@ class DetailCharaFragment : Fragment() {
 
     private fun setupLayout() {
         val id = DetailCharaFragmentArgs.fromBundle(requireArguments()).id
-        val voiceActorAdapter = VoiceActorAdapter()
+        adapter = VoiceActorAdapter()
         val viewModelFactory = ViewModelFactory.getInstance()
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailCharaViewModel::class.java].apply {
@@ -40,8 +41,16 @@ class DetailCharaFragment : Fragment() {
                 detailCharaItem.observe(viewLifecycleOwner) { detailChar ->
                     binding.charaDetail = detailChar
                 }
+
+                /*voiceActor.observe(viewLifecycleOwner) { voiceActor ->
+                    if (voiceActor?.isNotEmpty() == true) {
+                        binding.retryButton.gone()
+                    } else {
+                        binding.retryButton.visible()
+                    }
+                }*/
             }
 
-        binding.rvActor.adapter = voiceActorAdapter
+        binding.rvActor.adapter = adapter
     }
 }

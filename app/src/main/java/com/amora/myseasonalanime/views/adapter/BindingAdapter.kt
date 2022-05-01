@@ -3,9 +3,8 @@ package com.amora.myseasonalanime.views.adapter
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.characters.VoiceActorsItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter

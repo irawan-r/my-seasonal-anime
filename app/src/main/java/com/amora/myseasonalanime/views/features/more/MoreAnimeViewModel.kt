@@ -6,15 +6,20 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.data.source.STARTING_PAGE_INDEX
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import kotlinx.coroutines.flow.Flow
 
 class MoreAnimeViewModel(
     private val repository: Repository,
 ) : ViewModel() {
 
-    fun loadData(): Flow<PagingData<AnimeListResponse>> {
-        return repository.getMoreAnime(STARTING_PAGE_INDEX)
+    fun airingLoadMore(): Flow<PagingData<AnimeListResponse>> {
+        return repository.getMoreAiring(STARTING_PAGE_INDEX)
+            .cachedIn(viewModelScope)
+    }
+
+    fun upcomingLoadMore(): Flow<PagingData<AnimeListResponse>> {
+        return repository.getMoreUpcoming(STARTING_PAGE_INDEX)
             .cachedIn(viewModelScope)
     }
 }

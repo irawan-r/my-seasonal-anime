@@ -3,13 +3,13 @@ package com.amora.myseasonalanime.data.source
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.amora.myseasonalanime.data.source.paging.AiringPagingSource
+import com.amora.myseasonalanime.data.source.paging.UpcomingPagingSource
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.characters.VoiceActorsItem
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
-import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailCharaItem
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +21,7 @@ import kotlinx.coroutines.withContext
  */
 
 const val NETWORK_PAGE_SIZE = 25
+const val STARTING_PAGE_INDEX = 1
 
 class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
 
@@ -33,18 +34,33 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
             }
     }
 
-    suspend fun getAnimeAiring(page: Int, callback: GetAnimeCallback) {
+    suspend fun getAnimeAiring(page: Int, callback: GetAiringCallback) {
         withContext(Dispatchers.IO) {
             val anime = apiConfig.api.getAiringAnime(page).data
             callback.onAnimeReceived(anime)
         }
     }
 
-    fun getMoreAnime(): Flow<PagingData<AnimeListResponse>> {
+    suspend fun getUpComingSeason(page: Int, callback: GetUpComingCallback) {
+        withContext(Dispatchers.IO) {
+            val anime = apiConfig.api.getUpComingSeason(page).data
+            callback.onAnimeReceived(anime)
+        }
+    }
+
+    fun getMoreAiring(): Flow<PagingData<AnimeListResponse>> {
         val services = apiConfig.api
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = { AnimePagingSource(services) }
+            pagingSourceFactory = { AiringPagingSource(services) }
+        ).flow
+    }
+
+    fun getMoreUpComing(): Flow<PagingData<AnimeListResponse>> {
+        val services = apiConfig.api
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            pagingSourceFactory = { UpcomingPagingSource(services) }
         ).flow
     }
 
@@ -69,7 +85,7 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    suspend fun getVoiceActor(id:Int, callback: GetVoiceActCallback) {
+    suspend fun getVoiceActor(id: Int, callback: GetVoiceActCallback) {
         withContext(Dispatchers.IO) {
             val voiceAct = apiConfig.api.getVoiceActor(id).data
             callback.onAnimeReceived(voiceAct)
@@ -83,7 +99,11 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    interface GetAnimeCallback {
+    interface GetAiringCallback {
+        fun onAnimeReceived(animeList: List<AnimeListResponse?>?)
+    }
+
+    interface GetUpComingCallback {
         fun onAnimeReceived(animeList: List<AnimeListResponse?>?)
     }
 

@@ -299,6 +299,28 @@
                 app:layout_constraintTop_toBottomOf="@id/trailer_title"
                 tools:listitem="@layout/anime_trailer_item" />
 
+            <!--<Button
+                android:visibility="gone"
+                android:id="@+id/retry_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retry_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/characters_item_rv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/characters_item_rv" />-->
+
+            <!--<Button
+                android:visibility="gone"
+                android:id="@+id/retry_btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retry_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/trailer_rv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/trailer_rv"
+                app:layout_constraintTop_toTopOf="@+id/trailer_rv" />-->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

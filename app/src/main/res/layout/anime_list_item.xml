@@ -7,7 +7,7 @@
 
         <variable
             name="animeDetail"
-            type="com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse" />
+            type="com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse" />
 
     </data>
 
@@ -53,7 +53,7 @@
                 android:singleLine="true"
                 android:text="@{animeDetail.title}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                tools:text="@string/anime_title" />
+                tools:text="Naruto" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

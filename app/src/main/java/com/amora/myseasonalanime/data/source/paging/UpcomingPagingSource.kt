@@ -1,22 +1,21 @@
-package com.amora.myseasonalanime.data.source
+package com.amora.myseasonalanime.data.source.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.amora.myseasonalanime.data.source.STARTING_PAGE_INDEX
 import com.amora.myseasonalanime.data.source.remote.api.ApiServices
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import retrofit2.HttpException
 import java.io.IOException
 
-const val STARTING_PAGE_INDEX = 1
-
-class AnimePagingSource(
+class UpcomingPagingSource(
     private val service: ApiServices
 ) : PagingSource<Int, AnimeListResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AnimeListResponse> {
         val pageIndex = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = service.getAiringAnime(pageIndex)
+            val response = service.getUpComingSeason(pageIndex)
             val repos = response.data
             val nextKey = if (repos.isEmpty()) null else pageIndex + 1
             LoadResult.Page(

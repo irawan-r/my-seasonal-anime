@@ -5,13 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.animenow.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import com.amora.myseasonalanime.databinding.AnimeMoreListItemBinding
 
 class MoreAnimeAdapter(private val clickListener: AnimeListener) :
     PagingDataAdapter<AnimeListResponse, MoreAnimeAdapter.MoreAnimeViewHolder>(DiffCallback) {
-
-    private var listData = ArrayList<AnimeListResponse>()
 
     class MoreAnimeViewHolder(private var binding: AnimeMoreListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -61,6 +59,4 @@ class MoreAnimeAdapter(private val clickListener: AnimeListener) :
         val anime = getItem(position)
         holder.bind(clickListener, anime)
     }
-
-    override fun getItemCount(): Int = listData.size
 }

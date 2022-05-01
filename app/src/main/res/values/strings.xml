@@ -2,8 +2,9 @@
     <string name="app_name">MySeasonalAnime</string>
     <string name="va_title">Voice Actors</string>
     <string name="poster">Poster</string>
+    <string name="anime_title">Anime Title</string>
     <string name="score">Score</string>
-    <string name="this_season">This Season</string>
+    <string name="this_season">Airing</string>
     <string name="more">More</string>
     <string name="backdrop_image">Backdrop Image</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eaque earum error minima qui quidem sunt, tempore veritatis vero vitae? Delectus, eveniet facere facilis laborum modi natus necessitatibus nihil odit provident repellendus repudiandae sequi temporibus?</string>
@@ -12,6 +13,7 @@
     <string name="play">Play</string>
     <string name="trailer">Trailer</string>
     <string name="genres">Genres</string>
+    <string name="no_results">No results 😓</string>
     <string name="not_connected_internet">Not connected to internet</string>
     <string name="tap_to_reload">Tap to reload</string>
     <string name="popularity">Popularity</string>
@@ -21,4 +23,6 @@
     <string name="about_character">About</string>
     <string name="close_btn">Close</string>
     <string name="voice_actor">Voice Actor</string>
+    <string name="retry_btn">Retry</string>
+    <string name="upcoming_season_title">Upcoming</string>
 </resources>

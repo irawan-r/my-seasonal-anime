@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import com.amora.myseasonalanime.views.features.more.loadstate.ReposLoadStateAdapter
@@ -31,16 +32,9 @@ class MoreAnimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupAdapter()
         setupLayout()
-        setupView()
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-    }
-
-    private fun setupView() {
-        lifecycleScope.launch {
-            this@MoreAnimeFragment.viewModel.loadData().collectLatest(adapter::submitData)
-        }
     }
 
     private fun setupAdapter() {
@@ -53,7 +47,26 @@ class MoreAnimeFragment : Fragment() {
 
     private fun setupLayout() {
         val viewModelFactory = ViewModelFactory.getInstance()
-        viewModel = ViewModelProvider(this, viewModelFactory)[MoreAnimeViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[MoreAnimeViewModel::class.java]
+
+        lifecycleScope.launch {
+            this@MoreAnimeFragment.viewModel.airingLoadMore().collectLatest(adapter::submitData)
+        }
+
+        lifecycleScope.launch {
+            adapter.loadStateFlow.collect { loadState ->
+                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                //show empty list
+                binding.emptyList.isVisible = isListEmpty
+                //only show list if refresh succeeds
+                binding.moreAnimeRv.isVisible = !isListEmpty
+                //show loading paperplane for initial load or refresh
+                binding.loadingPaperplane.isVisible = loadState.source.refresh is LoadState.Loading
+                // Show the retry state if initial load or refresh fails.
+                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+            }
+        }
     }
 
     private fun showDetail(id: Int) {

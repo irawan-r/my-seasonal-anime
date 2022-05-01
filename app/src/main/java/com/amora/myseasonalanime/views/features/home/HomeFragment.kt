@@ -38,10 +38,15 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         // Send id to detail fragment, so the fragment can get Api with the id
-        val homeAdapter = HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
+        val airingAdapter = HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
+        val upComingAdapter = HomeAdapter(HomeAdapter.AnimeListener { id -> showDetail(id) })
+
         binding.apply {
-            animeSeasonNowRv.adapter = homeAdapter
+            animeSeasonNowRv.adapter = airingAdapter
+            animeUpcomingSeason.adapter = upComingAdapter
+
             moreThisSeason.setOnClickListener { showMore() }
+            moreUpcomingSeason.setOnClickListener { showMore() }
         }
     }
 
@@ -52,7 +57,10 @@ class HomeFragment : Fragment() {
         // Setup shimmer
         binding.apply {
             loadingThisSeason.visible()
+            loadingUpcomingSeason.visible()
+
             thisSeasonTitle.gone()
+            upcomingSeasonTitle.gone()
         }
 
         viewModel.apply {
@@ -60,6 +68,13 @@ class HomeFragment : Fragment() {
                 if (anime?.isNotEmpty() == true) {
                     binding.loadingThisSeason.gone()
                     binding.thisSeasonTitle.visible()
+                }
+            }
+
+            upComingSeason.observe(viewLifecycleOwner) { anime ->
+                if (anime?.isNotEmpty() == true) {
+                    binding.loadingUpcomingSeason.gone()
+                    binding.upcomingSeasonTitle.visible()
                 }
             }
         }
