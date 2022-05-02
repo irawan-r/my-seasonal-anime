@@ -13,11 +13,17 @@ import retrofit2.http.Query
 
 interface ApiServices {
 
-    @GET("seasons/now")
-    suspend fun getAiringAnime(@Query("page") page: Int): AiringResponse
+    @GET("seasons/{type}")
+    suspend fun getAiringAnime(
+        @Path("type") type: String,
+        @Query("page") page: Int
+    ): AiringResponse
 
-    @GET("seasons/upcoming")
-    suspend fun getUpComingSeason(@Query("page") page: Int): UpcomingResponse
+    @GET("seasons/{type}")
+    suspend fun getUpComingSeason(
+        @Path("type") type: String,
+        @Query("page") page: Int
+    ): UpcomingResponse
 
     @GET("anime/{id}")
     suspend fun getAnimeId(@Path("id") id: Int): DetailAnimeResponse

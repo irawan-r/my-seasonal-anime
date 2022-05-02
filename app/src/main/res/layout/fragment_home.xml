@@ -25,9 +25,7 @@
                 android:id="@+id/this_season_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_margin="15dp"
                 android:text="@string/this_season"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textSize="28sp"
@@ -62,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
+                android:paddingVertical="7.5dp"
                 android:paddingHorizontal="7.5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +72,7 @@
                 android:id="@+id/upcoming_season_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="15dp"
                 android:text="@string/upcoming_season_title"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
@@ -108,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
+                android:paddingVertical="7.5dp"
                 android:paddingHorizontal="7.5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +120,7 @@
                 android:id="@+id/loading_this_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
                 <include layout="@layout/rv_loading_placeholder" />
@@ -128,9 +130,9 @@
                 android:id="@+id/loading_upcoming_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loading_this_season">
+                app:layout_constraintTop_toBottomOf="@+id/loading_this_season">
                 <include layout="@layout/rv_loading_placeholder" />
             </com.facebook.shimmer.ShimmerFrameLayout>
 

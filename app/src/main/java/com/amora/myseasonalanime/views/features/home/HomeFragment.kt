@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
+import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
@@ -45,8 +46,8 @@ class HomeFragment : Fragment() {
             animeSeasonNowRv.adapter = airingAdapter
             animeUpcomingSeason.adapter = upComingAdapter
 
-            moreThisSeason.setOnClickListener { showMore() }
-            moreUpcomingSeason.setOnClickListener { showMore() }
+            moreThisSeason.setOnClickListener { showMore(More.AIRING) }
+            moreUpcomingSeason.setOnClickListener { showMore(More.UPCOMING) }
         }
     }
 
@@ -56,25 +57,42 @@ class HomeFragment : Fragment() {
 
         // Setup shimmer
         binding.apply {
-            loadingThisSeason.visible()
-            loadingUpcomingSeason.visible()
+            loadingThisSeason.startShimmer()
+            loadingUpcomingSeason.startShimmer()
 
             thisSeasonTitle.gone()
             upcomingSeasonTitle.gone()
+
+            moreUpcomingSeason.gone()
+            moreThisSeason.gone()
         }
 
         viewModel.apply {
             animeSeasonsNow.observe(viewLifecycleOwner) { anime ->
-                if (anime?.isNotEmpty() == true) {
-                    binding.loadingThisSeason.gone()
-                    binding.thisSeasonTitle.visible()
+                if (anime!!.isNotEmpty()) {
+                    binding.apply {
+                        loadingThisSeason.apply {
+                            gone()
+                            stopShimmer()
+                        }
+                        thisSeasonTitle.visible()
+                        moreThisSeason.visible()
+                    }
+
                 }
             }
 
             upComingSeason.observe(viewLifecycleOwner) { anime ->
-                if (anime?.isNotEmpty() == true) {
-                    binding.loadingUpcomingSeason.gone()
-                    binding.upcomingSeasonTitle.visible()
+                if (anime!!.isNotEmpty()) {
+                    binding.apply {
+                        loadingUpcomingSeason.apply {
+                            gone()
+                            stopShimmer()
+                        }
+                        upcomingSeasonTitle.visible()
+                        moreUpcomingSeason.visible()
+                    }
+
                 }
             }
         }
@@ -85,9 +103,9 @@ class HomeFragment : Fragment() {
             .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(id))
     }
 
-    private fun showMore() {
+    private fun showMore(more: More) {
         this.findNavController()
-            .navigate(HomeFragmentDirections.actionHomeFragmentToMoreAnimeFragment())
+            .navigate(HomeFragmentDirections.actionHomeFragmentToMoreAnimeFragment(more.type))
     }
 }
 

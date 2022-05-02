@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
+import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import com.amora.myseasonalanime.views.features.more.loadstate.ReposLoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
@@ -47,12 +48,16 @@ class MoreAnimeFragment : Fragment() {
     }
 
     private fun setupLayout() {
+        val type = MoreAnimeFragmentArgs.fromBundle(requireArguments()).type
         val viewModelFactory = ViewModelFactory.getInstance()
         viewModel =
             ViewModelProvider(this, viewModelFactory)[MoreAnimeViewModel::class.java]
 
         lifecycleScope.launch {
-            this@MoreAnimeFragment.viewModel.airingLoadMore().collectLatest(adapter::submitData)
+            when (type) {
+                More.AIRING.type -> this@MoreAnimeFragment.viewModel.airingLoadMore().collectLatest(adapter::submitData)
+                More.UPCOMING.type -> this@MoreAnimeFragment.viewModel.upcomingLoadMore().collectLatest(adapter::submitData)
+            }
         }
 
         lifecycleScope.launch {

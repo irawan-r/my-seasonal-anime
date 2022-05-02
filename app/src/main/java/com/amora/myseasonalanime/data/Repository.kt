@@ -23,9 +23,9 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getAnimeAiring(page: Int): List<AnimeListResponse?>? {
+    override suspend fun getAnimeAiring(type: String, page: Int): List<AnimeListResponse?>? {
         var animeAiring: List<AnimeListResponse?>? = null
-        remoteDataSource.getAnimeAiring(page, object : RemoteDataSource.GetAiringCallback {
+        remoteDataSource.getAnimeAiring(page, type, object : RemoteDataSource.GetAiringCallback {
             override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
                 animeAiring = animeList
             }
@@ -33,9 +33,9 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return animeAiring
     }
 
-    override suspend fun getUpcomingSeason(page: Int): List<AnimeListResponse?>? {
+    override suspend fun getUpcomingSeason(type: String, page: Int): List<AnimeListResponse?>? {
         var animeUpcoming: List<AnimeListResponse?>? = null
-        remoteDataSource.getUpComingSeason(page, object: RemoteDataSource.GetUpComingCallback {
+        remoteDataSource.getUpComingSeason(page, type, object: RemoteDataSource.GetUpComingCallback {
             override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
                 animeUpcoming = animeList
             }
@@ -43,11 +43,11 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return animeUpcoming
     }
 
-    override fun getMoreAiring(page: Int): Flow<PagingData<AnimeListResponse>> {
+    override fun getMoreAiring(type: String, page: Int): Flow<PagingData<AnimeListResponse>> {
         return remoteDataSource.getMoreAiring()
     }
 
-    override fun getMoreUpcoming(page: Int): Flow<PagingData<AnimeListResponse>> {
+    override fun getMoreUpcoming(type: String, page: Int): Flow<PagingData<AnimeListResponse>> {
         return remoteDataSource.getMoreUpComing()
     }
 

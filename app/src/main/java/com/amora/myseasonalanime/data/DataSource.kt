@@ -13,13 +13,13 @@ import kotlinx.coroutines.flow.Flow
  *  The function is simply to receive object and pass it into data class (model)
  */
 interface DataSource {
-    suspend fun getAnimeAiring(page: Int): List<AnimeListResponse?>?
+    suspend fun getAnimeAiring(type: String,page: Int): List<AnimeListResponse?>?
 
-    suspend fun getUpcomingSeason(page: Int): List<AnimeListResponse?>?
+    suspend fun getUpcomingSeason(type: String, page: Int): List<AnimeListResponse?>?
 
-    fun getMoreAiring(page: Int): Flow<PagingData<AnimeListResponse>>
+    fun getMoreAiring(type: String, page: Int): Flow<PagingData<AnimeListResponse>>
 
-    fun getMoreUpcoming(page: Int): Flow<PagingData<AnimeListResponse>>
+    fun getMoreUpcoming(type: String,page: Int): Flow<PagingData<AnimeListResponse>>
 
     suspend fun getAnimeId(id: Int): DetailAnimeResponse
 

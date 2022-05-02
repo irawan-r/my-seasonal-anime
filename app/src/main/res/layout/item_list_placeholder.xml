@@ -8,13 +8,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="7.5dp"
-        android:layout_marginTop="12dp"
+        android:layout_margin="7.5dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp">
 
         <ImageView
-
             android:layout_width="160dp"
             android:layout_height="260dp"
             android:background="#DDDDDD"
