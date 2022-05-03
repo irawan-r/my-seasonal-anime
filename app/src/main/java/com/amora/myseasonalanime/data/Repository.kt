@@ -2,12 +2,12 @@ package com.amora.myseasonalanime.data
 
 import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.RemoteDataSource
-import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
-import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
+import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
-import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActors
 import kotlinx.coroutines.flow.Flow
 
 /** Get the RemoteDataSource and passing into DataSource
@@ -23,31 +23,21 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getAnimeAiring(type: String, page: Int): List<AnimeListResponse?>? {
-        var animeAiring: List<AnimeListResponse?>? = null
-        remoteDataSource.getAnimeAiring(page, type, object : RemoteDataSource.GetAiringCallback {
-            override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
+    override suspend fun getAnime(type: String, page: Int): List<Anime?>? {
+        var animeAiring: List<Anime?>? = null
+        remoteDataSource.getAnime(page, type, object : RemoteDataSource.GetAnimeCallback {
+            override fun onAnimeReceived(animeList: List<Anime?>?) {
                 animeAiring = animeList
             }
         })
         return animeAiring
     }
 
-    override suspend fun getUpcomingSeason(type: String, page: Int): List<AnimeListResponse?>? {
-        var animeUpcoming: List<AnimeListResponse?>? = null
-        remoteDataSource.getUpComingSeason(page, type, object: RemoteDataSource.GetUpComingCallback {
-            override fun onAnimeReceived(animeList: List<AnimeListResponse?>?) {
-                animeUpcoming = animeList
-            }
-        })
-        return animeUpcoming
-    }
-
-    override fun getMoreAiring(type: String, page: Int): Flow<PagingData<AnimeListResponse>> {
+    override fun getMoreAiring(type: String, page: Int): Flow<PagingData<Anime>> {
         return remoteDataSource.getMoreAiring()
     }
 
-    override fun getMoreUpcoming(type: String, page: Int): Flow<PagingData<AnimeListResponse>> {
+    override fun getMoreUpcoming(type: String, page: Int): Flow<PagingData<Anime>> {
         return remoteDataSource.getMoreUpComing()
     }
 
@@ -61,14 +51,14 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return animeDetailId
     }
 
-    override suspend fun getAnimeChara(id: Int): List<CharaItem?>? {
-        var animeCharaItem: List<CharaItem?>? = null
+    override suspend fun getAnimeChara(id: Int): List<CharaItems?>? {
+        var animeCharaItems: List<CharaItems?>? = null
         remoteDataSource.getAnimeChara(id, object : RemoteDataSource.GetAnimeCharaCallback {
-            override fun onAnimeReceived(animeChara: List<CharaItem?>?) {
-                animeCharaItem = animeChara
+            override fun onAnimeReceived(animeChara: List<CharaItems?>?) {
+                animeCharaItems = animeChara
             }
         })
-        return animeCharaItem
+        return animeCharaItems
     }
 
     override suspend fun getDetailChara(id: Int): DetailAnimeCharaResponse? {
@@ -81,14 +71,14 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return detailCharaItem
     }
 
-    override suspend fun getVoiceActor(id: Int): List<DataItem?>? {
-        var voiceActorItem: List<DataItem?>? = null
+    override suspend fun getVoiceActor(id: Int): List<VoiceActors?>? {
+        var voiceActorsItem: List<VoiceActors?>? = null
         remoteDataSource.getVoiceActor(id, object : RemoteDataSource.GetVoiceActCallback {
-            override fun onAnimeReceived(voiceAct: List<DataItem?>?) {
-                voiceActorItem = voiceAct
+            override fun onAnimeReceived(voiceAct: List<VoiceActors?>?) {
+                voiceActorsItem = voiceAct
             }
         })
-        return voiceActorItem
+        return voiceActorsItem
     }
 
     override suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>? {

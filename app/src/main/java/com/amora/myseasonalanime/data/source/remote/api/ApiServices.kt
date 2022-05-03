@@ -1,7 +1,6 @@
 package com.amora.myseasonalanime.data.source.remote.api
 
-import com.amora.myseasonalanime.data.source.remote.response.anime.airing.AiringResponse
-import com.amora.myseasonalanime.data.source.remote.response.anime.upcoming.UpcomingResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharactersResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
@@ -14,16 +13,10 @@ import retrofit2.http.Query
 interface ApiServices {
 
     @GET("seasons/{type}")
-    suspend fun getAiringAnime(
+    suspend fun getAnime(
         @Path("type") type: String,
         @Query("page") page: Int
-    ): AiringResponse
-
-    @GET("seasons/{type}")
-    suspend fun getUpComingSeason(
-        @Path("type") type: String,
-        @Query("page") page: Int
-    ): UpcomingResponse
+    ): AnimeListResponse
 
     @GET("anime/{id}")
     suspend fun getAnimeId(@Path("id") id: Int): DetailAnimeResponse

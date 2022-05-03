@@ -13,15 +13,15 @@ class ReposLoadStatesViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
-        binding.loadmoreRetry.setOnClickListener { retry.invoke() }
+        binding.retryButton.setOnClickListener { retry.invoke() }
     }
 
     fun bind(loadState: LoadState) {
         if (loadState is LoadState.Error) {
             binding.errorMsg.text = loadState.error.localizedMessage
         }
-        binding.loadmoreProgress.isVisible = loadState is LoadState.Loading
-        binding.loadmoreRetry.isVisible = loadState is LoadState.Error
+        binding.progressBar.isVisible = loadState is LoadState.Loading
+        binding.retryButton.isVisible = loadState is LoadState.Error
         binding.errorMsg.isVisible = loadState is LoadState.Error
     }
 

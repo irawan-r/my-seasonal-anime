@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.databinding.FragmentDetailCharacterBinding
+import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 
 class DetailCharaFragment : Fragment() {
@@ -35,6 +36,7 @@ class DetailCharaFragment : Fragment() {
         val id = DetailCharaFragmentArgs.fromBundle(requireArguments()).id
         adapter = VoiceActorAdapter()
         val viewModelFactory = ViewModelFactory.getInstance()
+
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailCharaViewModel::class.java].apply {
                 setDetailChar(id)
@@ -42,13 +44,6 @@ class DetailCharaFragment : Fragment() {
                     binding.charaDetail = detailChar
                 }
 
-                /*voiceActor.observe(viewLifecycleOwner) { voiceActor ->
-                    if (voiceActor?.isNotEmpty() == true) {
-                        binding.retryButton.gone()
-                    } else {
-                        binding.retryButton.visible()
-                    }
-                }*/
             }
 
         binding.rvActor.adapter = adapter

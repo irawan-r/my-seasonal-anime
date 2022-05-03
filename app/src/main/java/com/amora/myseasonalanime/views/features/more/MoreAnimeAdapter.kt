@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
 import com.amora.myseasonalanime.databinding.AnimeMoreListItemBinding
 
 class MoreAnimeAdapter(private val clickListener: AnimeListener) :
-    PagingDataAdapter<AnimeListResponse, MoreAnimeAdapter.MoreAnimeViewHolder>(DiffCallback) {
+    PagingDataAdapter<Anime, MoreAnimeAdapter.MoreAnimeViewHolder>(DiffCallback) {
 
     class MoreAnimeViewHolder(private var binding: AnimeMoreListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: AnimeListener, data: AnimeListResponse?) {
+        fun bind(clickListener: AnimeListener, data: Anime?) {
             binding.animeDetail = data
             binding.executePendingBindings()
             binding.root.setOnClickListener {
@@ -28,17 +28,17 @@ class MoreAnimeAdapter(private val clickListener: AnimeListener) :
         fun onClick(animeId: Int) = clickListener(animeId)
     }
 
-    object DiffCallback : DiffUtil.ItemCallback<AnimeListResponse>() {
+    object DiffCallback : DiffUtil.ItemCallback<Anime>() {
         override fun areItemsTheSame(
-            oldItem: AnimeListResponse,
-            newItem: AnimeListResponse,
+            oldItem: Anime,
+            newItem: Anime,
         ): Boolean {
             return oldItem.malId == newItem.malId
         }
 
         override fun areContentsTheSame(
-            oldItem: AnimeListResponse,
-            newItem: AnimeListResponse,
+            oldItem: Anime,
+            newItem: Anime,
         ): Boolean {
             return oldItem == newItem
         }

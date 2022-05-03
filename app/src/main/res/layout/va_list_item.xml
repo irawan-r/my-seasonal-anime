@@ -6,7 +6,7 @@
     <data>
         <variable
             name="voiceAct"
-            type="com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem" />
+            type="com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActors" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

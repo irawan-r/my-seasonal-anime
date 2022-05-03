@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -45,6 +46,9 @@ class MoreAnimeFragment : Fragment() {
             header = ReposLoadStateAdapter { adapter.retry() },
             footer = ReposLoadStateAdapter { adapter.retry() }
         )
+        binding.retryButton.setOnClickListener {
+            adapter.retry()
+        }
     }
 
     private fun setupLayout() {
@@ -55,14 +59,17 @@ class MoreAnimeFragment : Fragment() {
 
         lifecycleScope.launch {
             when (type) {
-                More.AIRING.type -> this@MoreAnimeFragment.viewModel.airingLoadMore().collectLatest(adapter::submitData)
-                More.UPCOMING.type -> this@MoreAnimeFragment.viewModel.upcomingLoadMore().collectLatest(adapter::submitData)
+                More.AIRING.type -> this@MoreAnimeFragment.viewModel.airingLoadMore()
+                    .collectLatest(adapter::submitData)
+                More.UPCOMING.type -> this@MoreAnimeFragment.viewModel.upcomingLoadMore()
+                    .collectLatest(adapter::submitData)
             }
         }
 
         lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadState ->
-                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                val isListEmpty =
+                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
                 //show empty list
                 binding.emptyList.isVisible = isListEmpty
                 //only show list if refresh succeeds
@@ -71,6 +78,18 @@ class MoreAnimeFragment : Fragment() {
                 binding.loadingPaperplane.isVisible = loadState.source.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
                 binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+                errorState?.let {
+                    Toast.makeText(requireContext(),
+                        "\uD83D\uDE28 Wooops ${it.error}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

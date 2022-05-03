@@ -4,20 +4,20 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.amora.myseasonalanime.data.source.STARTING_PAGE_INDEX
 import com.amora.myseasonalanime.data.source.remote.api.ApiServices
-import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
+import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
 import com.amora.myseasonalanime.utils.enum.More
 import retrofit2.HttpException
 import java.io.IOException
 
 class AiringPagingSource(
     private val service: ApiServices
-) : PagingSource<Int, AnimeListResponse>() {
+) : PagingSource<Int, Anime>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AnimeListResponse> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Anime> {
         val pageIndex = params.key ?: STARTING_PAGE_INDEX
         return try {
             val airing = More.AIRING.type
-            val response = service.getAiringAnime(airing, pageIndex)
+            val response = service.getAnime(airing, pageIndex)
             val repos = response.data
             val nextKey = if (repos.isEmpty()) null else pageIndex + 1
             LoadResult.Page(
@@ -32,7 +32,7 @@ class AiringPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, AnimeListResponse>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Anime>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)

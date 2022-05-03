@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
+import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.databinding.AnimeCharactersItemBinding
 
 
 class CharactersAdapter(private val clickListener: CharactersListener) :
-    ListAdapter<CharaItem, CharactersAdapter.CharactersViewHolder>(CharDiffCallback) {
+    ListAdapter<CharaItems, CharactersAdapter.CharactersViewHolder>(CharDiffCallback) {
 
     class CharactersViewHolder(
         private var binding: AnimeCharactersItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: CharactersListener, charaItem: CharaItem?) {
-            binding.animeChara = charaItem
+        fun bind(clickListener: CharactersListener, charaItems: CharaItems?) {
+            binding.animeChara = charaItems
             binding.executePendingBindings()
             binding.root.setOnClickListener {
-                charaItem?.character?.malId.apply {
+                charaItems?.character?.malId.apply {
                     this?.let { it -> clickListener.clickId(it) }
                 }
             }
@@ -30,14 +30,14 @@ class CharactersAdapter(private val clickListener: CharactersListener) :
         fun clickId(id: Int) = clickListener(id)
     }
 
-    object CharDiffCallback : DiffUtil.ItemCallback<CharaItem?>() {
+    object CharDiffCallback : DiffUtil.ItemCallback<CharaItems?>() {
 
-        override fun areItemsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
-            return oldItem.character == newItem.character
+        override fun areItemsTheSame(oldItems: CharaItems, newItems: CharaItems): Boolean {
+            return oldItems.character == newItems.character
         }
 
-        override fun areContentsTheSame(oldItem: CharaItem, newItem: CharaItem): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItems: CharaItems, newItems: CharaItems): Boolean {
+            return oldItems == newItems
         }
 
     }

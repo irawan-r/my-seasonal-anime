@@ -40,11 +40,17 @@
             app:exitAnim="@anim/to_transparent"
             app:popEnterAnim="@anim/from_transparent"
             app:popExitAnim="@anim/to_transparent"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            />
         <action
             android:id="@+id/action_detailFragment_to_detailCharaFragment"
             app:destination="@id/detailCharaFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent" />
+        <action
+            android:id="@+id/action_detailFragment_to_moreAnimeFragment"
+            app:destination="@id/moreAnimeFragment"
             app:enterAnim="@anim/from_transparent"
             app:exitAnim="@anim/to_transparent"
             app:popEnterAnim="@anim/from_transparent"
@@ -65,6 +71,13 @@
             app:exitAnim="@anim/to_transparent"
             app:popEnterAnim="@anim/from_transparent"
             app:popExitAnim="@anim/to_transparent" />
+        <action
+            android:id="@+id/action_moreAnimeFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/detailCharaFragment"

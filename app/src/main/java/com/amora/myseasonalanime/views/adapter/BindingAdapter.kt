@@ -3,10 +3,9 @@ package com.amora.myseasonalanime.views.adapter
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
-import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
+import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
-import com.amora.myseasonalanime.data.source.remote.response.voiceactor.DataItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActors
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
 import com.amora.myseasonalanime.views.features.detail.characters.detail.VoiceActorAdapter
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
@@ -19,7 +18,10 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 /* HomeFragment Adapter RecyclerView
 * */
 @BindingAdapter("listDataHome")
-fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListResponse?>?) {
+fun homeBindRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<com.amora.myseasonalanime.data.source.remote.response.anime.Anime?>?,
+) {
     val homeAdapter = recyclerView.adapter as HomeAdapter
     homeAdapter.submitList(data)
 }
@@ -27,7 +29,7 @@ fun homeBindRecyclerView(recyclerView: RecyclerView, data: List<AnimeListRespons
 /* CharactersResponse Adapter in DetailFragment's recyclerview
 * */
 @BindingAdapter("listDataChara")
-fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItem?>?) {
+fun charaBindRecyclerView(recyclerView: RecyclerView, data: List<CharaItems?>?) {
     val charaAdapter = recyclerView.adapter as CharactersAdapter
     charaAdapter.submitList(data)
 }
@@ -43,7 +45,7 @@ fun trailerBindRecyclerView(recyclerView: RecyclerView, data: List<TrailerItem?>
 /* DetailChara Adapter in DialogAlert
 * */
 @BindingAdapter("listVoiceActor")
-fun detailCharaBindRecyclerView(recyclerView: RecyclerView, data: List<DataItem?>?) {
+fun detailCharaBindRecyclerView(recyclerView: RecyclerView, data: List<VoiceActors?>?) {
     val detailCharaAdapter = recyclerView.adapter as VoiceActorAdapter
     detailCharaAdapter.submitList(data)
 }
