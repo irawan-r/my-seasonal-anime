@@ -24,9 +24,6 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
-        <action
-            android:id="@+id/action_homeFragment_to_popularAnimeFragment"
-            app:destination="@id/popularAnimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -101,19 +98,19 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.amora.myseasonalanime.views.features.feed.FeedFragment"
-        android:label="FeedFragment"
+        android:label="Your Favorite"
         tools:layout="@layout/fragment_feed_anime">
         <action
-            android:id="@+id/action_feedFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_feedFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/popularAnimeFragment"
         android:name="com.amora.myseasonalanime.views.features.popular.PopularAnimeFragment"
-        android:label="PopularAnimeFragment"
+        android:label="Popular Anime"
         tools:layout="@layout/fragment_popular_anime">
         <action
-            android:id="@+id/action_popularAnimeFragment_to_feedFragment"
-            app:destination="@id/feedFragment" />
+            android:id="@+id/action_popularAnimeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>
