@@ -54,8 +54,6 @@ class DetailFragment : Fragment() {
                 detailAnime.observe(viewLifecycleOwner) { anime ->
                     binding.anime = anime
 
-                    /*There is a bug here, after goes to detail character, the genres showing twice
-                    * */
                     anime.genres.let {
                         for (genres in it.indices) {
                             val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
@@ -73,22 +71,6 @@ class DetailFragment : Fragment() {
                         }
                     }
                 }
-
-                /*charaAnime.observe(viewLifecycleOwner) { chara ->
-                    if (chara?.isNotEmpty() == true) {
-                        binding.retryBtn1.gone()
-                    } else {
-                        binding.retryBtn1.visible()
-                    }
-                }*/
-
-                /*trailerAnime.observe(viewLifecycleOwner) { trailer ->
-                    if (trailer?.isNotEmpty() == true) {
-                        binding.retryBtn2.gone()
-                    } else {
-                        binding.retryBtn2.visible()
-                    }
-                }*/
 
                 with(binding) {
                     charactersItemRv.adapter = charactersAdapter

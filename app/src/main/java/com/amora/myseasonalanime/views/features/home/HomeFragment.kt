@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
 import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.utils.gone
+import com.amora.myseasonalanime.utils.inVisible
 import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 
@@ -69,10 +70,10 @@ class HomeFragment : Fragment() {
 
         viewModel.apply {
             animeSeasonsNow.observe(viewLifecycleOwner) { anime ->
-                if (anime!!.isNotEmpty()) {
+                if (anime?.isNotEmpty() == true) {
                     binding.apply {
                         loadingThisSeason.apply {
-                            gone()
+                            inVisible()
                             stopShimmer()
                         }
                         thisSeasonTitle.visible()
@@ -83,10 +84,10 @@ class HomeFragment : Fragment() {
             }
 
             upComingSeason.observe(viewLifecycleOwner) { anime ->
-                if (anime!!.isNotEmpty()) {
+                if (anime?.isNotEmpty() == true) {
                     binding.apply {
                         loadingUpcomingSeason.apply {
-                            gone()
+                            inVisible()
                             stopShimmer()
                         }
                         upcomingSeasonTitle.visible()

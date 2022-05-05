@@ -3,17 +3,17 @@
     <group>
 
         <item
-            android:id="@+id/popular_anime"
+            android:id="@+id/popularAnimeFragment"
             android:icon="@drawable/ic_baseline_local_fire_department_24"
             android:title="@string/top_anime" />
 
         <item
-            android:id="@+id/new_anime"
+            android:id="@+id/homeFragment"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/new_anime" />
 
         <item
-            android:id="@+id/search"
+            android:id="@+id/feedFragment"
             android:icon="@drawable/ic_baseline_favorite_24"
             android:title="@string/feed_anime" />
 

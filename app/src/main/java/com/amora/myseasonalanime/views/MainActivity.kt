@@ -7,8 +7,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.amora.myseasonalanime.R
 import com.amora.myseasonalanime.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-//        val navView: BottomNavigationView = binding.navView
+        val navView: BottomNavigationView = binding.navView
         setSupportActionBar(findViewById(R.id.main_toolbar))
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.popularAnimeFragment, R.id.homeFragment, R.id.feedFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
+        navView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

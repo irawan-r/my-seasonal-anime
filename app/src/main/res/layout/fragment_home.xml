@@ -18,7 +18,6 @@
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingBottom="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -118,17 +117,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/upcoming_season_title"
                 tools:listitem="@layout/anime_list_item" />
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/nav_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:menu="@menu/bottom_nav_menu"/>
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/loading_this_season"
