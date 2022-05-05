@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/spring_menu"
+        android:title="@string/spring" />
+    <item
+        android:id="@+id/summer_menu"
+        android:title="@string/summer" />
+    <item
+        android:id="@+id/fall_menu"
+        android:title="@string/fall" />
+    <item
+        android:id="@+id/winter_menu"
+        android:title="@string/winter" />
+
+</menu>

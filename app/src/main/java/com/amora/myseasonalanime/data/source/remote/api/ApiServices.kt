@@ -12,6 +12,18 @@ import retrofit2.http.Query
 
 interface ApiServices {
 
+    @GET("anime")
+    suspend fun searchAnime(
+        @Query("page") page: Int
+    ): AnimeListResponse
+
+    @GET("seasons/{year}/{seasons}")
+    suspend fun getAnimeSeasons(
+        @Path("year") year: Int,
+        @Path("seasons") seasons: String,
+        @Query("page") page: Int
+    ): AnimeListResponse
+
     @GET("seasons/{type}")
     suspend fun getAnime(
         @Path("type") type: String,

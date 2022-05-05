@@ -25,4 +25,13 @@
     <string name="voice_actor">Voice Actor</string>
     <string name="retry_btn">Retry</string>
     <string name="upcoming_season_title">Upcoming</string>
+    <string name="season">Season</string>
+    <string name="spring">Spring &#127793;</string>
+    <string name="summer">Summer &#127774;</string>
+    <string name="fall">Fall &#127810;</string>
+    <string name="winter">Winter &#10052;</string>
+    <string name="search">Search</string>
+    <string name="top_anime">Popular</string>
+    <string name="new_anime">New</string>
+    <string name="feed_anime">Feed</string>
 </resources>
