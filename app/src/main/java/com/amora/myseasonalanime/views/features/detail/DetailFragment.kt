@@ -18,6 +18,7 @@ import com.amora.myseasonalanime.utils.appToast
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class DetailFragment : Fragment() {
 
@@ -75,6 +76,11 @@ class DetailFragment : Fragment() {
                 with(binding) {
                     charactersItemRv.adapter = charactersAdapter
                     trailerRv.adapter = trailerAdapters
+
+                    /*fab.setOnClickListener { view ->
+                        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+                    }*/
                 }
             }
     }

@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:paddingBottom="?attr/actionBarSize"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,8 +62,8 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingVertical="7.5dp"
                 android:paddingHorizontal="7.5dp"
+                android:paddingVertical="7.5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +74,8 @@
                 android:id="@+id/upcoming_season_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
                 android:text="@string/upcoming_season_title"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textSize="28sp"
@@ -94,13 +95,13 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
-                    app:drawableStartCompat="@drawable/ic_baseline_expand_more_24"
                     android:id="@+id/more_upcoming_season"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="@string/more"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    app:drawableStartCompat="@drawable/ic_baseline_expand_more_24" />
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -110,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
-                android:paddingVertical="7.5dp"
                 android:paddingHorizontal="7.5dp"
+                android:paddingVertical="7.5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +126,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <include layout="@layout/rv_loading_placeholder" />
             </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -135,6 +137,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loading_this_season">
+
                 <include layout="@layout/rv_loading_placeholder" />
             </com.facebook.shimmer.ShimmerFrameLayout>
 

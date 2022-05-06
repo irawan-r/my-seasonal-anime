@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="?attr/actionBarSize">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/seaons_anime_rv"
