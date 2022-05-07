@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#AAADC4</color>
     <color name="grey_20">#33AAADC4</color>
+    <color name="backgroundNight">#1F1F1F</color>
+    <color name="backgroundToolbarNight">#303030</color>
 </resources>
