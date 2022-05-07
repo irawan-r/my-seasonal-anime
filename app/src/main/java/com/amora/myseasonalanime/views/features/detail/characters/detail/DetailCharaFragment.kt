@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.databinding.FragmentDetailCharacterBinding
+import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 
@@ -42,6 +43,9 @@ class DetailCharaFragment : Fragment() {
                 setDetailChar(id)
                 detailCharaItem.observe(viewLifecycleOwner) { detailChar ->
                     binding.charaDetail = detailChar
+                    if (detailChar?.name?.isNotEmpty() == true) {
+                        binding.progressBar.gone()
+                    }
                 }
 
             }

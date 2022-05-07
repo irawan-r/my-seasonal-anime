@@ -15,6 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.R
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
 import com.amora.myseasonalanime.utils.appToast
+import com.amora.myseasonalanime.utils.gone
+import com.amora.myseasonalanime.utils.inVisible
+import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
@@ -30,7 +33,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentDetailAnimeBinding.inflate(inflater, container, false)
+        binding = FragmentDetailAnimeBinding.inflate(inflater)
         return binding.root
     }
 
@@ -54,7 +57,9 @@ class DetailFragment : Fragment() {
                 setDetailAnime(id)
                 detailAnime.observe(viewLifecycleOwner) { anime ->
                     binding.anime = anime
-
+                    if (anime.title?.isNotEmpty() == true) {
+                        binding.progressBar.gone()
+                    }
                     anime.genres.let {
                         for (genres in it.indices) {
                             val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
