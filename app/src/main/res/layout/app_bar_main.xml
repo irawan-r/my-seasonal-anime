@@ -14,8 +14,7 @@
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:colorBackground"
-            android:theme="@style/Widget.Material3.ActionBar.Solid"
+            android:theme="@style/Theme.MySeasonalAnime.AppBarOverlay"
             app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
     </com.google.android.material.appbar.AppBarLayout>
 
