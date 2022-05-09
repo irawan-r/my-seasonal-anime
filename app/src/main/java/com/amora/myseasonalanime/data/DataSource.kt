@@ -15,9 +15,9 @@ import kotlinx.coroutines.flow.Flow
 interface DataSource {
     suspend fun getAnime(type: String, page: Int): List<Anime?>?
 
-    fun getMoreAiring(type: String, page: Int): Flow<PagingData<Anime>>
+    fun getTopAnime(filter: String, page: Int): Flow<PagingData<Anime>>
 
-    fun getMoreUpcoming(type: String,page: Int): Flow<PagingData<Anime>>
+    fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>>
 
     suspend fun getAnimeId(id: Int): DetailAnimeResponse
 

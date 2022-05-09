@@ -30,6 +30,13 @@ interface ApiServices {
         @Query("page") page: Int
     ): AnimeListResponse
 
+    @GET("top/anime")
+    suspend fun getTopAnime(
+//        @Query("type") type: String,
+        @Query("filter") filter: String,
+        @Query("page") page: Int
+    ): AnimeListResponse
+
     @GET("anime/{id}")
     suspend fun getAnimeId(@Path("id") id: Int): DetailAnimeResponse
 

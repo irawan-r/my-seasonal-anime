@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.views.features.more.loadstate
+package com.amora.myseasonalanime.data.source.paging.pagingAdapter
 
 import android.view.ViewGroup
 import androidx.paging.LoadState

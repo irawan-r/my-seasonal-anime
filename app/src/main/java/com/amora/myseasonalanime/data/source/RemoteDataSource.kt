@@ -3,9 +3,10 @@ package com.amora.myseasonalanime.data.source
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.amora.myseasonalanime.data.source.paging.AiringPagingSource
-import com.amora.myseasonalanime.data.source.paging.UpcomingPagingSource
+import com.amora.myseasonalanime.data.source.paging.MorePagingSource
+import com.amora.myseasonalanime.data.source.paging.TopAnimePagingSource
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
+import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
@@ -19,12 +20,12 @@ import kotlinx.coroutines.withContext
  *  The first DetailCharaItem Source (Remote) that handle the processing retrofit so that will be used in Repository
  */
 
-const val NETWORK_PAGE_SIZE = 25
-const val STARTING_PAGE_INDEX = 1
 
 class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
 
     companion object {
+        const val NETWORK_PAGE_SIZE = 25
+
         @Volatile
         private var instance: RemoteDataSource? = null
         fun getInstance(api: ApiConfig): RemoteDataSource =
@@ -40,19 +41,23 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    fun getMoreAiring(): Flow<PagingData<com.amora.myseasonalanime.data.source.remote.response.anime.Anime>> {
+    fun getTopAnime(filter: String, page: Int): Flow<PagingData<Anime>> {
         val services = apiConfig.api
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = { AiringPagingSource(services) }
+            pagingSourceFactory = {
+                TopAnimePagingSource(services, filter, page)
+            }
         ).flow
     }
 
-    fun getMoreUpComing(): Flow<PagingData<com.amora.myseasonalanime.data.source.remote.response.anime.Anime>> {
+    fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {
         val services = apiConfig.api
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = { UpcomingPagingSource(services) }
+            pagingSourceFactory = {
+                MorePagingSource(services, type, page)
+            }
         ).flow
     }
 
@@ -92,7 +97,7 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
     }
 
     interface GetAnimeCallback {
-        fun onAnimeReceived(animeList: List<com.amora.myseasonalanime.data.source.remote.response.anime.Anime?>?)
+        fun onAnimeReceived(animeList: List<Anime?>?)
     }
 
     interface GetAnimeIdCallback {

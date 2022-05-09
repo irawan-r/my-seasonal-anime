@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.utils.enum.Misc
 import com.amora.myseasonalanime.utils.enum.More
 import kotlinx.coroutines.launch
 
-const val DEFAULT_PAGE = 1
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
 
@@ -24,12 +24,14 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
 
     private fun loadThisSeason() {
+        val page = Misc.STARTING_PAGE_INDEX.item
+        val type = More.AIRING.type
 
         viewModelScope.launch {
             try {
-                _animeSeasonsNow.value = repository.getAnime(More.AIRING.type, DEFAULT_PAGE)
+                _animeSeasonsNow.value = repository.getAnime(type, page)
                 _upComingSeason.value =
-                    repository.getAnime(More.UPCOMING.type, DEFAULT_PAGE)
+                    repository.getAnime(More.UPCOMING.type, page)
             } catch (e: Throwable) {
                 e.printStackTrace()
             }

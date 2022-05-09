@@ -11,10 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadStateAdapter
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
+import com.amora.myseasonalanime.utils.enum.Misc
 import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
-import com.amora.myseasonalanime.views.features.more.loadstate.ReposLoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -37,7 +38,6 @@ class MoreAnimeFragment : Fragment() {
         setupLayout()
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
     }
 
     private fun setupAdapter() {
@@ -53,15 +53,16 @@ class MoreAnimeFragment : Fragment() {
 
     private fun setupLayout() {
         val type = MoreAnimeFragmentArgs.fromBundle(requireArguments()).type
+        val page = Misc.STARTING_PAGE_INDEX.item
         val viewModelFactory = ViewModelFactory.getInstance()
         viewModel =
             ViewModelProvider(this, viewModelFactory)[MoreAnimeViewModel::class.java]
 
         lifecycleScope.launch {
             when (type) {
-                More.AIRING.type -> this@MoreAnimeFragment.viewModel.airingLoadMore()
+                AIRING -> this@MoreAnimeFragment.viewModel.animeLoadMore(More.AIRING.type, page)
                     .collectLatest(adapter::submitData)
-                More.UPCOMING.type -> this@MoreAnimeFragment.viewModel.upcomingLoadMore()
+                UPCOMING -> this@MoreAnimeFragment.viewModel.animeLoadMore(More.UPCOMING.type, page)
                     .collectLatest(adapter::submitData)
             }
         }
@@ -97,5 +98,10 @@ class MoreAnimeFragment : Fragment() {
     private fun showDetail(id: Int) {
         this.findNavController()
             .navigate(MoreAnimeFragmentDirections.actionMoreAnimeFragmentToDetailFragment(id))
+    }
+
+    companion object {
+        const val AIRING = "now"
+        const val UPCOMING = "upcoming"
     }
 }

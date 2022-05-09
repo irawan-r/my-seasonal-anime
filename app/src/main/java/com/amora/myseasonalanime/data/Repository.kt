@@ -33,12 +33,12 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         return animeAiring
     }
 
-    override fun getMoreAiring(type: String, page: Int): Flow<PagingData<Anime>> {
-        return remoteDataSource.getMoreAiring()
+    override fun getTopAnime(filter: String, page: Int): Flow<PagingData<Anime>> {
+        return remoteDataSource.getTopAnime(filter, page)
     }
 
-    override fun getMoreUpcoming(type: String, page: Int): Flow<PagingData<Anime>> {
-        return remoteDataSource.getMoreUpComing()
+    override fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {
+        return remoteDataSource.getMoreAnime(type, page)
     }
 
     override suspend fun getAnimeId(id: Int): DetailAnimeResponse {
