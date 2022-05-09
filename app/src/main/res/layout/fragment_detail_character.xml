@@ -61,22 +61,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="237dp"
                 android:layout_marginVertical="8dp"
-                app:listVoiceActor="@{viewModel.voiceActors}"
                 android:clipToPadding="false"
                 android:orientation="vertical"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:scrollbars="vertical"
-                android:scrollbarStyle="insideOverlay"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/voice_actor"
+                app:listVoiceActor="@{viewModel.voiceActors}"
                 tools:listitem="@layout/va_list_item" />
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_marginTop="16dp"
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,9 +137,9 @@
 
             <ProgressBar
                 android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/ProgressBar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
