@@ -52,9 +52,8 @@ class PopularAnimeFragment : Fragment() {
 
         lifecycleScope.launchWhenStarted {
             binding.retryButton.gone()
-
+            binding.loadingPaperplane.gone()
             viewModel.topAnime(Filter.AIRING.filter, page).collectLatest(adapter::submitData)
-
         }
 
         adapter = PopularAnimeAdapter(PopularAnimeAdapter.AnimeListener { id -> showDetail(id) })
@@ -98,9 +97,7 @@ class PopularAnimeFragment : Fragment() {
                 Filter.AIRING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.AIRING.filter,
                     page).collectLatest(adapter::submitData)
             }
-        }
 
-        lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadState ->
                 val isListEmpty =
                     loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
