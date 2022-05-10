@@ -54,6 +54,7 @@ class PopularAnimeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[PopularAnimeViewModel::class.java]
 
         adapter = PopularAnimeAdapter(PopularAnimeAdapter.AnimeListener { id -> showDetail(id) })
+        
         binding.popularAnimeList.adapter = adapter.withLoadStateHeaderAndFooter(
             header = ReposLoadStateAdapter { adapter.retry() },
             footer = ReposLoadStateAdapter { adapter.retry() }

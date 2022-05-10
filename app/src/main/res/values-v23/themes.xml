@@ -29,19 +29,4 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_baseline_filter_list_24</item>
-    </style>
-
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <!-- Customize color of Toolbar -->
-        <item name="colorControlNormal">@color/black</item>
-    </style>
-
-    <style name="ProgressBar" parent="Widget.Material3.CircularProgressIndicator">
-        <item name="android:indeterminateTint">@color/purple_500</item>
-    </style>
-
-
 </resources>
