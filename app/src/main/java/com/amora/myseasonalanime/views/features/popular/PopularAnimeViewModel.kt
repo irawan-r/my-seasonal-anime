@@ -12,11 +12,6 @@ import kotlinx.coroutines.flow.Flow
 
 class PopularAnimeViewModel(private val repository: Repository) : ViewModel() {
 
-    init {
-        val type = Filter.AIRING.filter
-        val page = Misc.STARTING_PAGE_INDEX.item
-        topAnime(type, page)
-    }
 
     fun topAnime(filter: String, page: Int): Flow<PagingData<Anime>> {
         return repository.getTopAnime(filter, page)

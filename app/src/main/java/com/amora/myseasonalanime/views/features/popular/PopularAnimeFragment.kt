@@ -40,6 +40,12 @@ class PopularAnimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         setupAdapter()
+
+        // Initialize first list when fragment created
+        lifecycleScope.launch {
+            viewModel.topAnime(Filter.AIRING.filter, page).collectLatest(adapter::submitData)
+        }
+
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
@@ -48,23 +54,21 @@ class PopularAnimeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[PopularAnimeViewModel::class.java]
 
         adapter = PopularAnimeAdapter(PopularAnimeAdapter.AnimeListener { id -> showDetail(id) })
-        binding.moreAnimeRv.adapter = adapter.withLoadStateHeaderAndFooter(
+        binding.popularAnimeList.adapter = adapter.withLoadStateHeaderAndFooter(
             header = ReposLoadStateAdapter { adapter.retry() },
             footer = ReposLoadStateAdapter { adapter.retry() }
         )
 
         setTitle(type)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.topAnime(Filter.AIRING.filter, page).collectLatest(adapter::submitData)
-
+        lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadState ->
                 val isListEmpty =
                     loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
                 //show empty list
                 binding.emptyList.isVisible = isListEmpty
                 //only show list if refresh succeeds
-                binding.moreAnimeRv.isVisible = !isListEmpty
+                binding.popularAnimeList.isVisible = !isListEmpty
                 //show loading paperplane for initial load or refresh
                 binding.loadingPaperplane.isVisible = loadState.source.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
@@ -107,7 +111,7 @@ class PopularAnimeFragment : Fragment() {
     }
 
     private fun refreshList(type: Filter) {
-
+        setTitle(type)
         lifecycleScope.launch {
             when (type) {
                 Filter.UPCOMING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.UPCOMING.filter,

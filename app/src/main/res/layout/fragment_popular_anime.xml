@@ -9,7 +9,7 @@
         android:paddingBottom="?attr/actionBarSize">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/more_anime_rv"
+            android:id="@+id/popular_anime_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
