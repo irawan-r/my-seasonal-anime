@@ -12,10 +12,20 @@
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
         <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
-        <item name="android:statusBarColor">@color/purple_500</item>
     </style>
 
-    <style name="Theme.MySeasonalAnime.NoActionBar">
+    <style name="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:navigationBarColor">
+            @android:color/transparent
+        </item>
+        <!-- Optional: set to transparent if your app is drawing behind the status bar. -->
+        <item name="android:statusBarColor">
+            @android:color/transparent
+        </item>
+        <!-- Optional: set the status bar light and content dark. -->
+        <item name="android:windowLightStatusBar">
+            true
+        </item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

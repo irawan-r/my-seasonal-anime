@@ -2,6 +2,10 @@ package com.amora.myseasonalanime.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,14 +25,29 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        val windowsInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView)
+
+        windowsInsetsController?.isAppearanceLightNavigationBars = true
 
         val navView: BottomNavigationView = binding.navView
         setSupportActionBar(findViewById(R.id.main_toolbar))
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            view.updatePadding(insets.left, insets.top, insets.right, insets.bottom)
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         // Custom bottom navigation based on destination
         navController.addOnDestinationChangedListener { _, destination, _ ->
