@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 
 class PopularAnimeViewModel(private val repository: Repository) : ViewModel() {
 
-
     fun topAnime(filter: String, page: Int): Flow<PagingData<Anime>> {
         return repository.getTopAnime(filter, page)
             .cachedIn(viewModelScope)
