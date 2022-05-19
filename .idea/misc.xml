@@ -27,6 +27,7 @@
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/anime_item_view.xml" value="0.22" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/anime_list_item.xml" value="0.25" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/anime_more_list_item.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/anime_search_list_item.xml" value="0.1761436511329628" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/anime_trailer_item.xml" value="0.21458333333333332" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/anime_video_item.xml" value="0.18" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/app_bar_detail.xml" value="0.13253012048192772" />
@@ -41,9 +42,9 @@
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_detail_character.xml" value="0.2" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_feed_anime.xml" value="0.1761436511329628" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_home.xml" value="0.18" />
-        <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_more_anime.xml" value="0.1" />
+        <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_more_anime.xml" value="0.18" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_popular_anime.xml" value="0.1761436511329628" />
-        <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_search_anime.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_search_anime.xml" value="0.22" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_seasonal_now.xml" value="0.21458333333333332" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_seasons_anime.xml" value="0.21458333333333332" />
         <entry key="..\:/Users/Roy/AndroidStudioProjects/MySeasonalAnime/app/src/main/res/layout/fragment_second.xml" value="0.1761436511329628" />

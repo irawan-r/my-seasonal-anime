@@ -7,6 +7,7 @@ import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.Det
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerResponse
 import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActorResponse
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -14,27 +15,28 @@ interface ApiServices {
 
     @GET("anime")
     suspend fun searchAnime(
-        @Query("page") page: Int
+        @Query("q") query: String,
+        @Query("page") page: Int,
     ): AnimeListResponse
 
     @GET("seasons/{year}/{seasons}")
     suspend fun getAnimeSeasons(
         @Path("year") year: Int,
         @Path("seasons") seasons: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
     ): AnimeListResponse
 
     @GET("seasons/{type}")
     suspend fun getAnime(
         @Path("type") type: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
     ): AnimeListResponse
 
     @GET("top/anime")
     suspend fun getTopAnime(
 //        @Query("type") type: String,
         @Query("filter") filter: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
     ): AnimeListResponse
 
     @GET("anime/{id}")

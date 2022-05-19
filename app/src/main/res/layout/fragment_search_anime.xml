@@ -8,16 +8,40 @@
         android:layout_height="match_parent"
         android:paddingBottom="?attr/actionBarSize">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/search_anime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Search anime"
+                android:hint="@string/anime_search"
+                android:imeOptions="actionSearch"
+                android:inputType="none"
+                android:selectAllOnFocus="true"
+                tools:text="Naruto" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/seaons_anime_rv"
+            android:id="@+id/search_anime_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp"
             android:scrollbarStyle="insideOverlay"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_input"
             app:spanCount="2"
             tools:listitem="@layout/anime_more_list_item" />
 

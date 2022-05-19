@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.popularAnimeFragment ||
                 destination.id == R.id.homeFragment ||
-                destination.id == R.id.feedFragment
+                destination.id == R.id.searchAnimeFragment
             ) {
                 navView.visible()
             } else {
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         // Setting of what inside the bottom navigation
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.popularAnimeFragment, R.id.homeFragment, R.id.feedFragment))
+            R.id.popularAnimeFragment, R.id.homeFragment, R.id.searchAnimeFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

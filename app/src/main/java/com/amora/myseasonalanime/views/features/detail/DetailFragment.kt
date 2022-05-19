@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
@@ -18,14 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.R
 import com.amora.myseasonalanime.databinding.FragmentDetailAnimeBinding
+import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.appToast
 import com.amora.myseasonalanime.utils.gone
-import com.amora.myseasonalanime.utils.inVisible
-import com.amora.myseasonalanime.utils.visible
-import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import com.amora.myseasonalanime.views.features.detail.characters.CharactersAdapter
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
-import com.google.android.material.snackbar.Snackbar
 
 class DetailFragment : Fragment() {
 
@@ -54,7 +49,7 @@ class DetailFragment : Fragment() {
             CharactersAdapter(CharactersAdapter.CharactersListener { charId -> showDetailChar(charId) })
         val trailerAdapters =
             TrailerAdapter(TrailerAdapter.TrailerListener { url -> showTrailer(url) })
-        val viewModelFactory = ViewModelFactory.getInstance()
+        val viewModelFactory = Injection.provideViewModelFactory(requireContext(), this)
 
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].apply {

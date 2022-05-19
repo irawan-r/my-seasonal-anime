@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
     private const val BASE_URL = "https://api.jikan.moe/v4/"
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory())
+    private val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
         .build()
 
     private val okHttpClient = OkHttpClient.Builder()

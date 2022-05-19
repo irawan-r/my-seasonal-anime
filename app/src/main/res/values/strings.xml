@@ -33,7 +33,7 @@
     <string name="search">Search</string>
     <string name="top_anime">Popular</string>
     <string name="new_anime">New</string>
-    <string name="feed_anime">Feed</string>
+    <string name="search_anime">Search</string>
     <string name="title_activity_main2">MainActivity2</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -46,4 +46,5 @@
     <string name="airing">Airing</string>
     <string name="upcoming">Upcoming</string>
     <string name="favorite">Favorite</string>
+    <string name="anime_search">Anime Search</string>
 </resources>

@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
+import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.inVisible
 import com.amora.myseasonalanime.utils.visible
-import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 
 class HomeFragment : Fragment() {
 
@@ -53,7 +53,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupLayout() {
-        val viewModelFactory = ViewModelFactory.getInstance()
+        val viewModelFactory =
+            Injection.provideViewModelFactory(context = requireContext(), owner = this)
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
         // Setup shimmer

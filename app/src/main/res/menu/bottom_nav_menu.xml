@@ -13,9 +13,9 @@
             android:title="@string/new_anime" />
 
         <item
-            android:id="@+id/feedFragment"
+            android:id="@+id/searchAnimeFragment"
             android:icon="@drawable/ic_baseline_favorite_24"
-            android:title="@string/feed_anime" />
+            android:title="@string/search_anime" />
 
     </group>
 </menu>

@@ -13,9 +13,9 @@ import androidx.paging.LoadState
 import com.amora.myseasonalanime.R
 import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadStateAdapter
 import com.amora.myseasonalanime.databinding.FragmentPopularAnimeBinding
+import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.Filter
 import com.amora.myseasonalanime.utils.enum.Misc
-import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,18 +43,18 @@ class PopularAnimeFragment : Fragment() {
 
         // Initialize first list when fragment created
         lifecycleScope.launch {
-            viewModel.topAnime(Filter.AIRING.filter, page).collectLatest(adapter::submitData)
+            viewModel.topAnime(Filter.AIRING.filter).collectLatest(adapter::submitData)
         }
 
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun setupAdapter() {
-        val viewModelFactory = ViewModelFactory.getInstance()
+        val viewModelFactory = Injection.provideViewModelFactory(requireContext(), this)
         viewModel = ViewModelProvider(this, viewModelFactory)[PopularAnimeViewModel::class.java]
 
         adapter = PopularAnimeAdapter(PopularAnimeAdapter.AnimeListener { id -> showDetail(id) })
-        
+
         binding.popularAnimeList.adapter = adapter.withLoadStateHeaderAndFooter(
             header = ReposLoadStateAdapter { adapter.retry() },
             footer = ReposLoadStateAdapter { adapter.retry() }
@@ -69,13 +69,14 @@ class PopularAnimeFragment : Fragment() {
                 //show empty list
                 binding.emptyList.isVisible = isListEmpty
                 //only show list if refresh succeeds
-                binding.popularAnimeList.isVisible = !isListEmpty
+                binding.popularAnimeList.isVisible =
+                    loadState.refresh is LoadState.NotLoading
                 //show loading paperplane for initial load or refresh
                 binding.loadingPaperplane.isVisible = loadState.source.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
                 binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                // Toast on any error, regardless of whether it came from SearchAnimeMediator or PagingSource
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
@@ -115,14 +116,10 @@ class PopularAnimeFragment : Fragment() {
         setTitle(type)
         lifecycleScope.launch {
             when (type) {
-                Filter.UPCOMING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.UPCOMING.filter,
-                    page).collectLatest(adapter::submitData)
-                Filter.BYPOPULARITY -> this@PopularAnimeFragment.viewModel.topAnime(Filter.BYPOPULARITY.filter,
-                    page).collectLatest(adapter::submitData)
-                Filter.FAVORITE -> this@PopularAnimeFragment.viewModel.topAnime(Filter.FAVORITE.filter,
-                    page).collectLatest(adapter::submitData)
-                Filter.AIRING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.AIRING.filter,
-                    page).collectLatest(adapter::submitData)
+                Filter.UPCOMING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.UPCOMING.filter, ).collectLatest(adapter::submitData)
+                Filter.BYPOPULARITY -> this@PopularAnimeFragment.viewModel.topAnime(Filter.BYPOPULARITY.filter, ).collectLatest(adapter::submitData)
+                Filter.FAVORITE -> this@PopularAnimeFragment.viewModel.topAnime(Filter.FAVORITE.filter, ).collectLatest(adapter::submitData)
+                Filter.AIRING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.AIRING.filter, ).collectLatest(adapter::submitData)
             }
         }
     }

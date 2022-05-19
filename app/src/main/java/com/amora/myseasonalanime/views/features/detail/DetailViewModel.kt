@@ -1,16 +1,16 @@
 package com.amora.myseasonalanime.views.features.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.amora.myseasonalanime.data.Repository
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnime
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val repository: Repository) : ViewModel() {
+class DetailViewModel(
+    private val repository: Repository,
+    private val savedStateHandle: SavedStateHandle,
+) : ViewModel() {
 
     private val _detailAnime = MutableLiveData<DetailAnime>()
     val detailAnime: LiveData<DetailAnime> = _detailAnime

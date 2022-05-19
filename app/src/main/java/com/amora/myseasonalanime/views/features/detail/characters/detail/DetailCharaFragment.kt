@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.amora.myseasonalanime.databinding.FragmentDetailCharacterBinding
+import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.gone
-import com.amora.myseasonalanime.utils.visible
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 
 class DetailCharaFragment : Fragment() {
 
@@ -39,7 +36,7 @@ class DetailCharaFragment : Fragment() {
     private fun setupLayout() {
         val id = DetailCharaFragmentArgs.fromBundle(requireArguments()).id
         adapter = VoiceActorAdapter()
-        val viewModelFactory = ViewModelFactory.getInstance()
+        val viewModelFactory = Injection.provideViewModelFactory(requireContext(), this)
 
         viewModel =
             ViewModelProvider(this, viewModelFactory)[DetailCharaViewModel::class.java].apply {

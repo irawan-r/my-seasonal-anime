@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadStateAdapter
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
+import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.Misc
 import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
@@ -54,7 +55,7 @@ class MoreAnimeFragment : Fragment() {
     private fun setupLayout() {
         val type = MoreAnimeFragmentArgs.fromBundle(requireArguments()).type
         val page = Misc.STARTING_PAGE_INDEX.item
-        val viewModelFactory = ViewModelFactory.getInstance()
+        val viewModelFactory = Injection.provideViewModelFactory(context = requireContext(), owner = this)
         viewModel =
             ViewModelProvider(this, viewModelFactory)[MoreAnimeViewModel::class.java]
 
@@ -80,7 +81,7 @@ class MoreAnimeFragment : Fragment() {
                 // Show the retry state if initial load or refresh fails.
                 binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                // Toast on any error, regardless of whether it came from SearchAnimeMediator or PagingSource
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error

@@ -13,9 +13,11 @@ import kotlinx.coroutines.flow.Flow
  *  The function is simply to receive object and pass it into trailerItems class (model)
  */
 interface DataSource {
+    fun searchAnime(query: String): Flow<PagingData<Anime>>
+
     suspend fun getAnime(type: String, page: Int): List<Anime?>?
 
-    fun getTopAnime(filter: String, page: Int): Flow<PagingData<Anime>>
+    fun getTopAnime(filter: String): Flow<PagingData<Anime>>
 
     fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>>
 

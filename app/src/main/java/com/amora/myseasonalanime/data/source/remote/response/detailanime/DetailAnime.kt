@@ -1,10 +1,17 @@
 package com.amora.myseasonalanime.data.source.remote.response.detailanime
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.amora.myseasonalanime.data.source.remote.response.images.Images
 import com.amora.myseasonalanime.data.source.remote.response.trailer.Trailer
 import com.squareup.moshi.Json
 
+@Entity(tableName = "detail_anime")
 data class DetailAnime(
+
+    @PrimaryKey
+    @Json(name = "mal_id")
+    val malId: Int? = null,
 
     @Json(name = "title_japanese")
     val titleJapanese: String? = null,
@@ -77,9 +84,6 @@ data class DetailAnime(
 
     @Json(name = "studios")
     val studios: List<Studios?>? = null,
-
-    @Json(name = "mal_id")
-    val malId: Int? = null,
 
     @Json(name = "synopsis")
     val synopsis: String? = null,
