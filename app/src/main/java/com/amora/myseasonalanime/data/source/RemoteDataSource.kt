@@ -10,7 +10,8 @@ import com.amora.myseasonalanime.data.source.paging.AnimeRemoteMediator
 import com.amora.myseasonalanime.data.source.paging.MorePagingSource
 import com.amora.myseasonalanime.data.source.paging.SearchAnimeMediator
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
@@ -42,13 +43,23 @@ class RemoteDataSource private constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getSearchAnime(query: String): Flow<PagingData<Anime>> {
+    fun getSearchAnime(query: String): Flow<PagingData<AnimeSearch>> {
         val dbQuery = "%${query.replace(' ', '%')}%"
         Log.d("Anime Search", "New query: $query")
-        val pagingSourceFactory = { database.animeDao().animeByName(dbQuery) }
+        val pagingSourceFactory = { database.animeDao().searchAnime(dbQuery) }
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
             remoteMediator = SearchAnimeMediator(query, database, apiConfig.api),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getPopularAnime(filter: String): Flow<PagingData<Anime>> {
+        val pagingSourceFactory = { database.animeDao().getPagingAnime() }
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            remoteMediator = AnimeRemoteMediator(database, apiConfig.api, filter),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
@@ -58,16 +69,6 @@ class RemoteDataSource private constructor(
             val anime = apiConfig.api.getAnime(type, page).data
             callback.onAnimeReceived(anime)
         }
-    }
-
-    @OptIn(ExperimentalPagingApi::class)
-    fun getTopAnime(filter: String): Flow<PagingData<Anime>> {
-        val pagingSourceFactory = { database.animeDao().getPagingAnime() }
-        return Pager(
-            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            remoteMediator = AnimeRemoteMediator(database, apiConfig.api, filter),
-            pagingSourceFactory = pagingSourceFactory
-        ).flow
     }
 
     fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {

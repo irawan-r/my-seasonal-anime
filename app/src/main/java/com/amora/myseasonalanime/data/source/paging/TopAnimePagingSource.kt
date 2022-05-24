@@ -3,7 +3,7 @@ package com.amora.myseasonalanime.data.source.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.amora.myseasonalanime.data.source.remote.api.ApiServices
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
 import com.amora.myseasonalanime.utils.enum.Misc
 import retrofit2.HttpException
 import java.io.IOException

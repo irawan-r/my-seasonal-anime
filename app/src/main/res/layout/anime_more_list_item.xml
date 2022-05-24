@@ -7,7 +7,7 @@
 
         <variable
             name="animeDetail"
-            type="com.amora.myseasonalanime.data.source.remote.response.anime.Anime" />
+            type="com.amora.myseasonalanime.data.model.popular.Anime" />
 
     </data>
 

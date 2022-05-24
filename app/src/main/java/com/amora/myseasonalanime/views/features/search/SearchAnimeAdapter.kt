@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
 import com.amora.myseasonalanime.databinding.AnimeSearchListItemBinding
 
 class SearchAnimeAdapter(private val clickListener: AnimeListener) :
@@ -13,7 +13,7 @@ class SearchAnimeAdapter(private val clickListener: AnimeListener) :
 
     class SearchAnimeViewHolder(private var binding: AnimeSearchListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: AnimeListener, data: Anime?) {
+        fun bind(clickListener: AnimeListener, data: AnimeSearch?) {
             binding.animeDetail = data
             binding.executePendingBindings()
             binding.root.setOnClickListener {

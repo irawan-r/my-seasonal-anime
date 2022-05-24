@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.amora.myseasonalanime.data.Repository
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -80,7 +80,7 @@ class SearchViewModel(
 }
 
 sealed class UiModel {
-    data class RepoItem(val repo: Anime) : UiModel()
+    data class RepoItem(val repo: AnimeSearch) : UiModel()
 }
 
 sealed class UiAction {

@@ -15,7 +15,6 @@ import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadState
 import com.amora.myseasonalanime.databinding.FragmentPopularAnimeBinding
 import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.Filter
-import com.amora.myseasonalanime.utils.enum.Misc
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,6 @@ class PopularAnimeFragment : Fragment() {
     private lateinit var adapter: PopularAnimeAdapter
 
     private val type = Filter.AIRING
-    private val page = Misc.STARTING_PAGE_INDEX.item
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -116,10 +114,14 @@ class PopularAnimeFragment : Fragment() {
         setTitle(type)
         lifecycleScope.launch {
             when (type) {
-                Filter.UPCOMING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.UPCOMING.filter, ).collectLatest(adapter::submitData)
-                Filter.BYPOPULARITY -> this@PopularAnimeFragment.viewModel.topAnime(Filter.BYPOPULARITY.filter, ).collectLatest(adapter::submitData)
-                Filter.FAVORITE -> this@PopularAnimeFragment.viewModel.topAnime(Filter.FAVORITE.filter, ).collectLatest(adapter::submitData)
-                Filter.AIRING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.AIRING.filter, ).collectLatest(adapter::submitData)
+                Filter.UPCOMING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.UPCOMING.filter)
+                    .collectLatest(adapter::submitData)
+                Filter.BYPOPULARITY -> this@PopularAnimeFragment.viewModel.topAnime(Filter.BYPOPULARITY.filter)
+                    .collectLatest(adapter::submitData)
+                Filter.FAVORITE -> this@PopularAnimeFragment.viewModel.topAnime(Filter.FAVORITE.filter)
+                    .collectLatest(adapter::submitData)
+                Filter.AIRING -> this@PopularAnimeFragment.viewModel.topAnime(Filter.AIRING.filter)
+                    .collectLatest(adapter::submitData)
             }
         }
     }

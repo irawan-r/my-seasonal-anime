@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.amora.myseasonalanime.data.Repository
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
 import kotlinx.coroutines.flow.Flow
 
 class MoreAnimeViewModel(

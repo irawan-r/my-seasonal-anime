@@ -1,5 +1,6 @@
-package com.amora.myseasonalanime.data.source.remote.response.anime
+package com.amora.myseasonalanime.data.model.popular
 
+import com.amora.myseasonalanime.data.model.pagination.Pagination
 import com.squareup.moshi.Json
 
 data class AnimeListResponse(

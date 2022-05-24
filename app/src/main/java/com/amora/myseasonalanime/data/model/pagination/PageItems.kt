@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.data.source.remote.response.anime
+package com.amora.myseasonalanime.data.model.pagination
 
 import com.squareup.moshi.Json
 

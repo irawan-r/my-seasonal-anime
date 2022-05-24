@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.amora.myseasonalanime.data.Repository
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
 import kotlinx.coroutines.flow.*
 
 class PopularAnimeViewModel(
@@ -13,7 +13,7 @@ class PopularAnimeViewModel(
 ) : ViewModel() {
 
     fun topAnime(filter: String): Flow<PagingData<Anime>> {
-        return repository.getTopAnime(filter)
+        return repository.getPopularAnime(filter)
             .cachedIn(viewModelScope)
     }
 }

@@ -2,7 +2,8 @@ package com.amora.myseasonalanime.data
 
 import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.RemoteDataSource
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
@@ -25,7 +26,7 @@ class Repository private constructor(
             }
     }
 
-    override fun searchAnime(query: String): Flow<PagingData<Anime>> {
+    override fun searchAnime(query: String): Flow<PagingData<AnimeSearch>> {
         return remoteDataSource.getSearchAnime(query)
     }
 
@@ -39,8 +40,8 @@ class Repository private constructor(
         return animeAiring
     }
 
-    override fun getTopAnime(filter: String): Flow<PagingData<Anime>> {
-        return remoteDataSource.getTopAnime(filter)
+    override fun getPopularAnime(filter: String): Flow<PagingData<Anime>> {
+        return remoteDataSource.getPopularAnime(filter)
     }
 
     override fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {

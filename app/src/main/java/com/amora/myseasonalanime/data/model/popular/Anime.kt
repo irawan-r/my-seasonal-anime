@@ -1,4 +1,4 @@
-package com.amora.myseasonalanime.data.source.remote.response.anime
+package com.amora.myseasonalanime.data.model.popular
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,13 +1,13 @@
 package com.amora.myseasonalanime.data.source.remote.api
 
-import com.amora.myseasonalanime.data.source.remote.response.anime.AnimeListResponse
+import com.amora.myseasonalanime.data.model.popular.AnimeListResponse
+import com.amora.myseasonalanime.data.model.search.AnimeSearchResponse
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharactersResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
 import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerResponse
 import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActorResponse
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -16,6 +16,13 @@ interface ApiServices {
     @GET("anime")
     suspend fun searchAnime(
         @Query("q") query: String,
+        @Query("page") page: Int,
+    ): AnimeSearchResponse
+
+    @GET("top/anime")
+    suspend fun getTopAnime(
+//        @Query("type") type: String,
+        @Query("filter") filter: String,
         @Query("page") page: Int,
     ): AnimeListResponse
 
@@ -29,13 +36,6 @@ interface ApiServices {
     @GET("seasons/{type}")
     suspend fun getAnime(
         @Path("type") type: String,
-        @Query("page") page: Int,
-    ): AnimeListResponse
-
-    @GET("top/anime")
-    suspend fun getTopAnime(
-//        @Query("type") type: String,
-        @Query("filter") filter: String,
         @Query("page") page: Int,
     ): AnimeListResponse
 

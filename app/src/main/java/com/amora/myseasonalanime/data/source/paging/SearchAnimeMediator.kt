@@ -7,8 +7,8 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.amora.myseasonalanime.data.db.RemoteKeys
 import com.amora.myseasonalanime.data.db.RepoDatabase
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
 import com.amora.myseasonalanime.data.source.remote.api.ApiServices
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -19,11 +19,11 @@ class SearchAnimeMediator(
     private val query: String,
     private val repoDatabase: RepoDatabase,
     private val services: ApiServices,
-) : RemoteMediator<Int, Anime>() {
+) : RemoteMediator<Int, AnimeSearch>() {
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, Anime>,
+        state: PagingState<Int, AnimeSearch>,
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -61,7 +61,7 @@ class SearchAnimeMediator(
                 // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
                     repoDatabase.remoteKeysDao().clearRemoteKeys()
-                    repoDatabase.animeDao().clearPopularAnime()
+                    repoDatabase.animeDao().clearSearchAnime()
                 }
                 val prevKey = if (page == GITHUB_STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
@@ -73,7 +73,7 @@ class SearchAnimeMediator(
                     }
                 }
                 repoDatabase.remoteKeysDao().insertAll(keys)
-                repoDatabase.animeDao().upsertPopularAnime(repos)
+                repoDatabase.animeDao().upsertSearchAnime(repos)
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
@@ -83,24 +83,32 @@ class SearchAnimeMediator(
         }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Anime>): RemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, AnimeSearch>): RemoteKeys? {
         // Get the last page that was retrieved, that contained items.
         // From that last page, get last item
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { repo ->
                 // Get the remote keys of the last item retrieved
-                repo.malId.let { it?.let { id -> repoDatabase.remoteKeysDao().remoteKeysRepoId(id) } }
+                repo.malId.let {
+                    it?.let { id ->
+                        repoDatabase.remoteKeysDao().remoteKeysRepoId(id)
+                    }
+                }
             }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Anime>): RemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, AnimeSearch>): RemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { repo ->
-                repo.malId.let { it?.let { id -> repoDatabase.remoteKeysDao().remoteKeysRepoId(id) } }
+                repo.malId.let {
+                    it?.let { id ->
+                        repoDatabase.remoteKeysDao().remoteKeysRepoId(id)
+                    }
+                }
             }
     }
 
-    private suspend fun getRemoteKeysClosestToCurrentPosition(state: PagingState<Int, Anime>): RemoteKeys? {
+    private suspend fun getRemoteKeysClosestToCurrentPosition(state: PagingState<Int, AnimeSearch>): RemoteKeys? {
         // The paging library is trying to load data after the anchor position
         // Get the item closest to the anchor position
         return state.anchorPosition?.let { position ->

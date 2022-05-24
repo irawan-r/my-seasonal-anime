@@ -5,10 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
 
 @Database(
-    entities = [Anime::class, RemoteKeys::class],
+    entities = [
+        Anime::class,
+        RemoteKeys::class,
+        AnimeSearch::class
+    ],
     version = 1
 )
 @TypeConverters(Converter::class)

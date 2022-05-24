@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
 import com.amora.myseasonalanime.databinding.AnimeMoreListItemBinding
 
 class PopularAnimeAdapter(private val clickListener: AnimeListener) :

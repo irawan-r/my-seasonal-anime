@@ -8,7 +8,7 @@ import androidx.room.withTransaction
 import com.amora.myseasonalanime.data.db.RemoteKeys
 import com.amora.myseasonalanime.data.db.RepoDatabase
 import com.amora.myseasonalanime.data.source.remote.api.ApiServices
-import com.amora.myseasonalanime.data.source.remote.response.anime.Anime
+import com.amora.myseasonalanime.data.model.popular.Anime
 import retrofit2.HttpException
 import java.io.IOException
 

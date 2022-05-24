@@ -2,11 +2,11 @@ package com.amora.myseasonalanime.views.adapter
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.provider.MediaStore.Images.Media.getBitmap
 import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.amora.myseasonalanime.data.model.popular.Anime
 import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
 import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActors
@@ -15,9 +15,6 @@ import com.amora.myseasonalanime.views.features.detail.characters.detail.VoiceAc
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.annotation.GlideModule
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -28,7 +25,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 @BindingAdapter("listDataHome")
 fun homeBindRecyclerView(
     recyclerView: RecyclerView,
-    data: List<com.amora.myseasonalanime.data.source.remote.response.anime.Anime?>?,
+    data: List<Anime?>?,
 ) {
     val homeAdapter = recyclerView.adapter as HomeAdapter
     homeAdapter.submitList(data)
