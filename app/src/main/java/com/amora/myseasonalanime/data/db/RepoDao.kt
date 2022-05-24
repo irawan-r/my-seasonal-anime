@@ -24,9 +24,6 @@ interface RepoDao {
     @Query("SELECT * FROM Anime")
     fun getPagingAnime(): PagingSource<Int, Anime>
 
-/*    @Query("SELECT * FROM Anime")
-    fun getAnimePopularAnime(filter: String): List<Anime?>?*/
-
     @Query("DELETE FROM Anime")
     suspend fun clearPopularAnime()
 

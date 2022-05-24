@@ -7,8 +7,7 @@ import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceAct
 import kotlinx.coroutines.launch
 
 class DetailCharaViewModel(
-    private val repository: Repository,
-    private val savedStateHandle: SavedStateHandle,
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _voiceActor = MutableLiveData<List<VoiceActors?>?>()

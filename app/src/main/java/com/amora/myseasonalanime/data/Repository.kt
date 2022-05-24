@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 /** Get the RemoteDataSource and passing into DataSource
  */
 class Repository private constructor(
-    private val remoteDataSource: RemoteDataSource,
+    private val remoteDataSource: RemoteDataSource
 ) : DataSource {
 
     companion object {
@@ -30,6 +30,10 @@ class Repository private constructor(
         return remoteDataSource.getSearchAnime(query)
     }
 
+    override fun getPopularAnime(filter: String): Flow<PagingData<Anime>> {
+        return remoteDataSource.getPopularAnime(filter)
+    }
+
     override suspend fun getAnime(type: String, page: Int): List<Anime?>? {
         var animeAiring: List<Anime?>? = null
         remoteDataSource.getAnime(type, page, object : RemoteDataSource.GetAnimeCallback {
@@ -38,10 +42,6 @@ class Repository private constructor(
             }
         })
         return animeAiring
-    }
-
-    override fun getPopularAnime(filter: String): Flow<PagingData<Anime>> {
-        return remoteDataSource.getPopularAnime(filter)
     }
 
     override fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {

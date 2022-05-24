@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
-import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadStateAdapter
+import com.amora.myseasonalanime.data.source.paging.load.ReposLoadStateAdapter
 import com.amora.myseasonalanime.databinding.FragmentSearchAnimeBinding
 import com.amora.myseasonalanime.di.Injection
 import kotlinx.coroutines.flow.*
@@ -30,7 +30,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentSearchAnimeBinding.inflate(inflater)
         return binding.root
     }

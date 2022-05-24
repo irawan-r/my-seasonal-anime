@@ -7,8 +7,8 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.amora.myseasonalanime.data.db.RemoteKeys
 import com.amora.myseasonalanime.data.db.RepoDatabase
-import com.amora.myseasonalanime.data.source.remote.api.ApiServices
 import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.data.source.remote.api.ApiServices
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -18,7 +18,7 @@ private const val GITHUB_STARTING_PAGE_INDEX = 1
 class AnimeRemoteMediator(
     private val repoDatabase: RepoDatabase,
     private val services: ApiServices,
-    private val type: String,
+    private val type: String
 ) : RemoteMediator<Int, Anime>() {
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Anime>): MediatorResult {

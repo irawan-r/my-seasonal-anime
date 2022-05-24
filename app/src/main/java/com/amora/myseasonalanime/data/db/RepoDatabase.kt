@@ -14,7 +14,8 @@ import com.amora.myseasonalanime.data.model.search.AnimeSearch
         RemoteKeys::class,
         AnimeSearch::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(Converter::class)
 abstract class RepoDatabase : RoomDatabase() {

@@ -14,17 +14,17 @@ import com.amora.myseasonalanime.views.features.search.SearchViewModel
 
 class ViewModelFactory(
     private val repository: Repository,
-    owner: SavedStateRegistryOwner,
+    owner: SavedStateRegistryOwner
 ) : AbstractSavedStateViewModelFactory(owner, null) {
 
-    companion object {
+    /*companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
         fun getInstance(repository: Repository, owner: SavedStateRegistryOwner): ViewModelFactory =
             instance ?: synchronized(this) {
                 instance ?: ViewModelFactory(repository, owner)
             }
-    }
+    }*/
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(
@@ -34,19 +34,19 @@ class ViewModelFactory(
     ): T {
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(repository, handle) as T
+                HomeViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                DetailViewModel(repository, handle) as T
+                DetailViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(DetailCharaViewModel::class.java) -> {
-                DetailCharaViewModel(repository, handle) as T
+                DetailCharaViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(MoreAnimeViewModel::class.java) -> {
-                MoreAnimeViewModel(repository, handle) as T
+                MoreAnimeViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(PopularAnimeViewModel::class.java) -> {

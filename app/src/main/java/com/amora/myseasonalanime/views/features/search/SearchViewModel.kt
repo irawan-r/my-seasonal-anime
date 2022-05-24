@@ -43,7 +43,7 @@ class SearchViewModel(
             .onStart { emit(UiAction.Scroll(currentQuery = lastQueryScrolled)) }
 
         pagingDataFlow = searches
-            .flatMapLatest { searchAnime(query = it.query) }
+            .flatMapLatest { searchAnime(it.query) }
             .cachedIn(viewModelScope)
 
         state = combine(

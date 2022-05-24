@@ -67,9 +67,11 @@ class SearchAnimeMediator(
                 val nextKey = if (endOfPaginationReached) null else page + 1
                 val keys = repos.map {
                     it.malId?.let { id ->
-                        RemoteKeys(repoId = id,
+                        RemoteKeys(
+                            repoId = id,
                             prevKey = prevKey,
-                            nextKey = nextKey)
+                            nextKey = nextKey
+                        )
                     }
                 }
                 repoDatabase.remoteKeysDao().insertAll(keys)

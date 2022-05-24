@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.amora.myseasonalanime.R
-import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadStateAdapter
+import com.amora.myseasonalanime.data.source.paging.load.ReposLoadStateAdapter
 import com.amora.myseasonalanime.databinding.FragmentPopularAnimeBinding
 import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.Filter

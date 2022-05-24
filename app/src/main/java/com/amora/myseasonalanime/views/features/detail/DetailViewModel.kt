@@ -8,8 +8,7 @@ import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
-    private val repository: Repository,
-    private val savedStateHandle: SavedStateHandle,
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _detailAnime = MutableLiveData<DetailAnime>()

@@ -11,12 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.amora.myseasonalanime.data.source.paging.pagingAdapter.ReposLoadStateAdapter
+import com.amora.myseasonalanime.data.source.paging.load.ReposLoadStateAdapter
 import com.amora.myseasonalanime.databinding.FragmentMoreAnimeBinding
 import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.Misc
 import com.amora.myseasonalanime.utils.enum.More
-import com.amora.myseasonalanime.views.base.viewmodel.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

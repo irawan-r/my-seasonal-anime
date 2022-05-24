@@ -9,8 +9,7 @@ import kotlinx.coroutines.launch
 
 
 class HomeViewModel(
-    private val repository: Repository,
-    private val savedStateHandle: SavedStateHandle,
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _animeSeasonsNow = MutableLiveData<List<Anime?>?>()

@@ -24,5 +24,5 @@ data class Anime(
     val images: Images,
 
     @Json(name = "score")
-    val score: Double? = 0.0,
+    val score: Double? = 0.0
 )

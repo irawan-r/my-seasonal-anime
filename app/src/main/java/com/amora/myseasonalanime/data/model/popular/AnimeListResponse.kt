@@ -9,6 +9,6 @@ data class AnimeListResponse(
     val pagination: Pagination? = null,
 
     @Json(name = "data")
-    val data: List<Anime>,
+    val data: List<Anime>
 )
 
