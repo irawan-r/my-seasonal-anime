@@ -85,6 +85,13 @@ class SearchAnimeMediator(
         }
     }
 
+    /*fun getRefreshKey(state: PagingState<Int, AnimeSearch>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
+    }*/
+
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, AnimeSearch>): RemoteKeys? {
         // Get the last page that was retrieved, that contained items.
         // From that last page, get last item
@@ -118,5 +125,9 @@ class SearchAnimeMediator(
                 repoDatabase.remoteKeysDao().remoteKeysRepoId(repoId)
             }
         }
+        /*return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }*/
     }
 }

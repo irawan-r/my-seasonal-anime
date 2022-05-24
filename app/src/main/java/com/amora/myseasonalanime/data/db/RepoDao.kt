@@ -18,7 +18,7 @@ interface RepoDao {
     suspend fun upsertSearchAnime(repos: List<AnimeSearch>)
 
     @Query("SELECT * FROM AnimeSearch WHERE " +
-            "title LIKE :queryString ")
+            "title LIKE :queryString OR synopsis LIKE :queryString")
     fun searchAnime(queryString: String): PagingSource<Int, AnimeSearch>
 
     @Query("SELECT * FROM Anime")

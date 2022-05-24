@@ -25,4 +25,7 @@ data class AnimeSearch(
 
     @Json(name = "score")
     val score: Double? = 0.0,
+
+    @Json(name = "synopsis")
+    val synopsis: String? = null,
 )
