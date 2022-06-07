@@ -166,15 +166,16 @@ class SearchFragment : Fragment() {
                 val isListEmpty =
                     loadState.refresh is LoadState.NotLoading && repoAdapter.itemCount == 0
                 //show empty list
-                binding.emptyList.isVisible = isListEmpty
+                emptyList.isVisible = isListEmpty &&
+                        loadState.mediator?.refresh is LoadState.Error
                 //only show list if refresh succeeds
-                binding.searchAnimeRv.isVisible =
+                searchAnimeRv.isVisible =
                     loadState.source.refresh is LoadState.NotLoading ||
                             loadState.mediator?.refresh is LoadState.NotLoading
                 //show loading paperplane for initial load or refresh
-                binding.loadingPaperplane.isVisible = loadState.source.refresh is LoadState.Loading
+                loadingPaperplane.isVisible = loadState.source.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
-                binding.retryButton.isVisible =
+                retryButton.isVisible =
                     loadState.source.refresh is LoadState.Error && repoAdapter.itemCount == 0
 
                 // Toast on any error, regardless of whether it came from SearchAnimeMediator or PagingSource

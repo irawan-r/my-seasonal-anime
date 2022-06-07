@@ -16,10 +16,10 @@ import java.io.IOException
 private const val GITHUB_STARTING_PAGE_INDEX = 1
 
 @OptIn(ExperimentalPagingApi::class)
-class AnimeRemoteMediator(
+class PopularAnimeRemoteMediator(
     private val repoDatabase: RepoDatabase,
     private val services: ApiServices,
-    private val type: String
+    private val type: String,
 ) : RemoteMediator<Int, Anime>() {
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Anime>): MediatorResult {
@@ -63,7 +63,6 @@ class AnimeRemoteMediator(
                     repoDatabase.remoteKeysDao().clearRemoteKeys()
                     repoDatabase.animeDao().clearPopularAnime()
                 }
-
                 val prevKey = if (page == GITHUB_STARTING_PAGE_INDEX) null else page + 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
                 Log.d("nextKey", "$nextKey")
@@ -71,8 +70,8 @@ class AnimeRemoteMediator(
                     it.malId?.let { malId ->
                         RemoteKeys(
                             repoId = malId,
-                            prevKey = prevKey?.minus(1),
-                            nextKey = nextKey?.plus(1)
+                            prevKey = prevKey,
+                            nextKey = nextKey
                         )
                     }
                 }
@@ -96,10 +95,9 @@ class AnimeRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Anime>): RemoteKeys? {
-        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
-            ?.let { repo ->
-                repo.malId?.let { repoDatabase.remoteKeysDao().remoteKeysRepoId(it) }
-            }
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { repo ->
+            repo.malId?.let { repoDatabase.remoteKeysDao().remoteKeysRepoId(it) }
+        }
     }
 
     private suspend fun getRemoteKeysClosestToCurrentPosition(state: PagingState<Int, Anime>): RemoteKeys? {

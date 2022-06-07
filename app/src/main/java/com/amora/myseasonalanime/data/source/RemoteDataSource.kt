@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.db.RepoDatabase
-import com.amora.myseasonalanime.data.source.paging.AnimeRemoteMediator
+import com.amora.myseasonalanime.data.source.paging.PopularAnimeRemoteMediator
 import com.amora.myseasonalanime.data.source.paging.MorePagingSource
 import com.amora.myseasonalanime.data.source.paging.SearchAnimeMediator
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
@@ -49,6 +49,7 @@ class RemoteDataSource private constructor(
         val pagingSourceFactory = { database.animeDao().searchAnime(dbQuery) }
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            1,
             remoteMediator = SearchAnimeMediator(query, database, apiConfig.api),
             pagingSourceFactory = pagingSourceFactory
         ).flow
@@ -59,7 +60,8 @@ class RemoteDataSource private constructor(
         val pagingSourceFactory = { database.animeDao().getPagingAnime() }
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            remoteMediator = AnimeRemoteMediator(database, apiConfig.api, filter),
+            1,
+            remoteMediator = PopularAnimeRemoteMediator(database, apiConfig.api, filter),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }

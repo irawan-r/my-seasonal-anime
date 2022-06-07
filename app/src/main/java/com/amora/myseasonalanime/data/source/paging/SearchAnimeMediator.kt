@@ -1,5 +1,6 @@
 package com.amora.myseasonalanime.data.source.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -51,7 +52,7 @@ class SearchAnimeMediator(
                 nextKey
             }
         }
-
+        Log.d("page", "$page")
         try {
             val apiResponse = services.searchAnime(query, page)
             val repos = apiResponse.data
@@ -65,6 +66,12 @@ class SearchAnimeMediator(
                 }
                 val prevKey = if (page == GITHUB_STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
+
+                // Clear! not null both $next and $prev
+                // next = 3, but the page = 2, interesting
+                 Log.d("next", "$nextKey")
+                 Log.d("prev", "$prevKey")
+
                 val keys = repos.map {
                     it.malId?.let { id ->
                         RemoteKeys(

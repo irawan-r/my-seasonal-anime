@@ -53,4 +53,6 @@ class SearchAnimeAdapter(private val clickListener: AnimeListener) :
             AnimeSearchListItemBinding.inflate(layoutInflater, parent, false)
         )
     }
+
+
 }

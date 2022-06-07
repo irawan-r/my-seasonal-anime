@@ -15,6 +15,8 @@ import com.amora.myseasonalanime.views.features.detail.characters.detail.VoiceAc
 import com.amora.myseasonalanime.views.features.detail.trailer.TrailerAdapter
 import com.amora.myseasonalanime.views.features.home.HomeAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -62,18 +64,21 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     Glide.with(imgView.context)
         .asBitmap()
         .load(imgUrl)
-        .centerCrop()
-        .into(object : CustomTarget<Bitmap>(){
+        .transition(BitmapTransitionOptions.withCrossFade(1000))
+        .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop())
+        .into(object : CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 imgView.setImageBitmap(resource)
                 Log.d("TAG", "Image ready")
             }
+
             override fun onLoadCleared(placeholder: Drawable?) {
                 // this is called when imageView is cleared on lifecycle call or for
                 // some other reason.
                 // if you are referencing the bitmap somewhere else too other than this imageView
                 // clear it here as you can no longer have the bitmap
                 Log.d("TAG", "onCleared: Image was")
+
             }
         })
 }
