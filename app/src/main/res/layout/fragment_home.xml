@@ -8,12 +8,14 @@
         <variable
             name="viewModel"
             type="com.amora.myseasonalanime.views.features.home.HomeViewModel" />
+
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:paddingBottom="?attr/actionBarSize"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,45 +26,117 @@
                 android:id="@+id/this_season_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="15dp"
                 android:text="@string/this_season"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--<TextView
-                android:id="@+id/more_this_season"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/more"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_marginEnd="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
                 app:layout_constraintBottom_toBottomOf="@id/this_season_title"
-                app:layout_constraintEnd_toEndOf="parent" />-->
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/more_this_season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/more"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    app:drawableStartCompat="@drawable/ic_baseline_expand_more_24" />
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/anime_view_item"
-                listDataHome="@{viewModel.thisSeason}"
+                android:id="@+id/anime_season_now_rv"
+                listDataHome="@{viewModel.animeSeasonsNow}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="vertical"
-                app:spanCount="2"
-                android:paddingTop="8dp"
-                android:paddingHorizontal="15dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:orientation="horizontal"
+                android:paddingHorizontal="7.5dp"
+                android:paddingVertical="7.5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/this_season_title"
+                tools:listitem="@layout/anime_list_item" />
+
+            <TextView
+                android:id="@+id/upcoming_season_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/upcoming_season_title"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anime_season_now_rv" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/upcoming_season_title"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/more_upcoming_season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/more"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    app:drawableStartCompat="@drawable/ic_baseline_expand_more_24" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/anime_upcoming_season"
+                listDataHome="@{viewModel.upComingSeason}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="7.5dp"
+                android:paddingVertical="7.5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcoming_season_title"
                 tools:listitem="@layout/anime_list_item" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/loading_this_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
+                <include layout="@layout/rv_loading_placeholder" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/loading_upcoming_season"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loading_this_season">
 
                 <include layout="@layout/rv_loading_placeholder" />
             </com.facebook.shimmer.ShimmerFrameLayout>

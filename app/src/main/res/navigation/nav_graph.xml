@@ -13,6 +13,13 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent" />
+        <action
+            android:id="@+id/action_homeFragment_to_moreAnimeFragment"
+            app:destination="@id/moreAnimeFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
@@ -21,12 +28,89 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.amora.myseasonalanime.views.features.detail.DetailFragment"
-        android:label="DetailFragment"
+        android:label="Anime Details"
         tools:layout="@layout/fragment_detail_anime">
+        <argument
+            android:name="id"
+            app:argType="integer" />
         <action
             android:id="@+id/action_detailFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent" />
+        <action
+            android:id="@+id/action_detailFragment_to_detailCharaFragment"
+            app:destination="@id/detailCharaFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent" />
+        <action
+            android:id="@+id/action_detailFragment_to_moreAnimeFragment"
+            app:destination="@id/moreAnimeFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreAnimeFragment"
+        android:name="com.amora.myseasonalanime.views.features.more.MoreAnimeFragment"
+        android:label="More"
+        tools:layout="@layout/fragment_more_anime">
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_moreAnimeFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent" />
+        <action
+            android:id="@+id/action_moreAnimeFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailCharaFragment"
+        android:name="com.amora.myseasonalanime.views.features.detail.characters.detail.DetailCharaFragment"
+        android:label="Character Info"
+        tools:layout="@layout/fragment_detail_character">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailCharaFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/from_transparent"
+            app:exitAnim="@anim/to_transparent"
+            app:popEnterAnim="@anim/from_transparent"
+            app:popExitAnim="@anim/to_transparent"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchAnimeFragment"
+        android:name="com.amora.myseasonalanime.views.features.search.SearchFragment"
+        android:label="Search Anime"
+        tools:layout="@layout/fragment_feed_anime">
+        <action
+            android:id="@+id/action_feedFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/popularAnimeFragment"
+        android:name="com.amora.myseasonalanime.views.features.popular.PopularAnimeFragment"
+        android:label="Popular Anime"
+        tools:layout="@layout/fragment_popular_anime">
+        <action
+            android:id="@+id/action_popularAnimeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

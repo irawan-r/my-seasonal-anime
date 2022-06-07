@@ -11,22 +11,21 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
     private const val BASE_URL = "https://api.jikan.moe/v4/"
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-    val api: ApiServices
+    private val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .build()
+    private val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .connectTimeout(120, TimeUnit.SECONDS)
+        .readTimeout(120, TimeUnit.SECONDS)
+        .build()
 
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .build()
+    private val retrofit = Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .baseUrl(BASE_URL)
+        .client(okHttpClient)
+        .build()
 
-         api = retrofit.create(ApiServices::class.java)
-    }
+    val api: ApiServices by lazy { retrofit.create(ApiServices::class.java) }
 }

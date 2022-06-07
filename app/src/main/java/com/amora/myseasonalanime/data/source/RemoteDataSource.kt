@@ -1,31 +1,86 @@
 package com.amora.myseasonalanime.data.source
 
+import android.util.Log
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.amora.myseasonalanime.data.db.RepoDatabase
+import com.amora.myseasonalanime.data.source.paging.PopularAnimeRemoteMediator
+import com.amora.myseasonalanime.data.source.paging.MorePagingSource
+import com.amora.myseasonalanime.data.source.paging.SearchAnimeMediator
 import com.amora.myseasonalanime.data.source.remote.api.ApiConfig
-import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
+import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
+import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
+import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
+import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActors
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 /**
- *  The first Data Source (Remote) that handle the processing retrofit so that will be used in Repository
+ *  The first DetailCharaItem Source (Remote) that handle the processing retrofit so that will be used in Repository
  */
-class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
+
+
+class RemoteDataSource private constructor(
+    private val apiConfig: ApiConfig,
+    private val database: RepoDatabase,
+) {
 
     companion object {
+        const val NETWORK_PAGE_SIZE = 25
+
         @Volatile
         private var instance: RemoteDataSource? = null
-        fun getInstance(api: ApiConfig): RemoteDataSource =
+        fun getInstance(api: ApiConfig, database: RepoDatabase): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(api)
+                instance ?: RemoteDataSource(api, database)
             }
     }
 
-    suspend fun getSeasonNow(callback: GetAnimeCallback) {
+    @OptIn(ExperimentalPagingApi::class)
+    fun getSearchAnime(query: String): Flow<PagingData<AnimeSearch>> {
+        val dbQuery = "%${query.replace(' ', '%')}%"
+        Log.d("Anime Search", "New query: $query")
+        val pagingSourceFactory = { database.animeDao().searchAnime(dbQuery) }
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            1,
+            remoteMediator = SearchAnimeMediator(query, database, apiConfig.api),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getPopularAnime(filter: String): Flow<PagingData<Anime>> {
+        val pagingSourceFactory = { database.animeDao().getPagingAnime() }
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            1,
+            remoteMediator = PopularAnimeRemoteMediator(database, apiConfig.api, filter),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+    suspend fun getAnime(type: String, page: Int, callback: GetAnimeCallback) {
         withContext(Dispatchers.IO) {
-            val anime = apiConfig.api.getSeasonNow().data
+            val anime = apiConfig.api.getAnime(type, page).data
             callback.onAnimeReceived(anime)
         }
+    }
+
+    fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {
+        val services = apiConfig.api
+        return Pager(
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
+            pagingSourceFactory = {
+                MorePagingSource(services, type, page)
+            }
+        ).flow
     }
 
     suspend fun getAnimeId(id: Int, callback: GetAnimeIdCallback) {
@@ -42,29 +97,48 @@ class RemoteDataSource private constructor(private val apiConfig: ApiConfig) {
         }
     }
 
-    suspend fun getAnimeTrailer(id: Int, callback: GetAnimeTrailerCallback) {
+    suspend fun getDetailChara(id: Int, callback: GetAnimeDetailCharaCallback) {
         withContext(Dispatchers.IO) {
-            val animeTrailer = apiConfig.api.getAnimeId(id).trailer
+            val detailChara = apiConfig.api.getDetailAnimeCharacters(id)
+            callback.onAnimeReceived(detailChara)
+        }
+    }
+
+    suspend fun getVoiceActor(id: Int, callback: GetVoiceActCallback) {
+        withContext(Dispatchers.IO) {
+            val voiceAct = apiConfig.api.getVoiceActor(id).data
+            callback.onAnimeReceived(voiceAct)
+        }
+    }
+
+    suspend fun getTrailerAnime(id: Int, callback: GetTrailerAnimeCallback) {
+        withContext(Dispatchers.IO) {
+            val animeTrailer = apiConfig.api.getAnimeTrailer(id).data?.promo
             callback.onAnimeReceived(animeTrailer)
         }
     }
 
-
-    /* Callback to get from the ApiServices
-    * */
     interface GetAnimeCallback {
-        fun onAnimeReceived(animeList: List<DetailItem>)
+        fun onAnimeReceived(animeList: List<Anime?>?)
     }
 
     interface GetAnimeIdCallback {
-        fun onAnimeReceived(animeId: DetailItem)
-    }
-
-    interface GetAnimeTrailerCallback {
-        fun onAnimeReceived(animeTrailer: Trailer)
+        fun onAnimeReceived(animeId: DetailAnimeResponse)
     }
 
     interface GetAnimeCharaCallback {
-        fun onAnimeReceived(animeChara: List<CharaItem>)
+        fun onAnimeReceived(animeChara: List<CharaItems?>?)
+    }
+
+    interface GetAnimeDetailCharaCallback {
+        fun onAnimeReceived(animeDetailChara: DetailAnimeCharaResponse?)
+    }
+
+    interface GetVoiceActCallback {
+        fun onAnimeReceived(voiceAct: List<VoiceActors?>?)
+    }
+
+    interface GetTrailerAnimeCallback {
+        fun onAnimeReceived(animeTrailer: List<TrailerItem?>?)
     }
 }

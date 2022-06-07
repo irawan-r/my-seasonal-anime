@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">MySeasonalAnime</string>
-    <string name="anime_title">Anime Title</string>
+    <string name="va_title">Voice Actors</string>
     <string name="poster">Poster</string>
+    <string name="anime_title">Anime Title</string>
     <string name="score">Score</string>
-    <string name="this_season">This Season</string>
+    <string name="this_season">Airing</string>
     <string name="more">More</string>
     <string name="backdrop_image">Backdrop Image</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eaque earum error minima qui quidem sunt, tempore veritatis vero vitae? Delectus, eveniet facere facilis laborum modi natus necessitatibus nihil odit provident repellendus repudiandae sequi temporibus?</string>
@@ -11,4 +12,39 @@
     <string name="synopsis_title">Synopsis</string>
     <string name="play">Play</string>
     <string name="trailer">Trailer</string>
+    <string name="genres">Genres</string>
+    <string name="no_results">No results 😓</string>
+    <string name="not_connected_internet">Not connected to internet</string>
+    <string name="tap_to_reload">Tap to reload</string>
+    <string name="popularity">Popularity</string>
+    <string name="members">Members</string>
+    <string name="character_picture">character_picture</string>
+    <string name="character_info">Character Info</string>
+    <string name="about_character">About</string>
+    <string name="close_btn">Close</string>
+    <string name="voice_actor">Voice Actor</string>
+    <string name="retry_btn">Retry</string>
+    <string name="upcoming_season_title">Upcoming</string>
+    <string name="season">Season</string>
+    <string name="spring">Spring &#127793;</string>
+    <string name="summer">Summer &#127774;</string>
+    <string name="fall">Fall &#127810;</string>
+    <string name="winter">Winter &#10052;</string>
+    <string name="search">Search</string>
+    <string name="top_anime">Popular</string>
+    <string name="new_anime">New</string>
+    <string name="search_anime">Search</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="airing">Airing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="favorite">Favorite</string>
+    <string name="anime_search">Anime Search</string>
 </resources>

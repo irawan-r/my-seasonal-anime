@@ -1,22 +1,36 @@
 package com.amora.myseasonalanime.views.features.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.amora.myseasonalanime.data.Repository
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
+import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.utils.enum.Misc
+import com.amora.myseasonalanime.utils.enum.More
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _thisSeason = MutableLiveData<List<DetailItem>>()
-    val thisSeason: LiveData<List<DetailItem>> = _thisSeason
+class HomeViewModel(
+    private val repository: Repository
+) : ViewModel() {
+
+    private val _animeSeasonsNow = MutableLiveData<List<Anime?>?>()
+    val animeSeasonsNow: LiveData<List<Anime?>?> = _animeSeasonsNow
+
+    private val _upComingSeason = MutableLiveData<List<Anime?>?>()
+    val upComingSeason: LiveData<List<Anime?>?> = _upComingSeason
 
     init {
+        getAiringAnime()
+    }
+
+    private fun getAiringAnime() {
+        val page = Misc.STARTING_PAGE_INDEX.item
+        val airing = More.AIRING.type
+        val upcoming = More.UPCOMING.type
+
         viewModelScope.launch {
             try {
-                _thisSeason.value = repository.getSeasonNow()
+                _animeSeasonsNow.value = repository.getAnime(airing, page)
+                _upComingSeason.value = repository.getAnime(upcoming, page)
             } catch (e: Throwable) {
                 e.printStackTrace()
             }

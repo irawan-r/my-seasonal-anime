@@ -1,13 +1,21 @@
 package com.amora.myseasonalanime.data
 
+import androidx.paging.PagingData
 import com.amora.myseasonalanime.data.source.RemoteDataSource
-import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.DetailItem
-import com.amora.myseasonalanime.data.source.remote.response.detail.Trailer
+import com.amora.myseasonalanime.data.model.popular.Anime
+import com.amora.myseasonalanime.data.model.search.AnimeSearch
+import com.amora.myseasonalanime.data.source.remote.response.characters.CharaItems
+import com.amora.myseasonalanime.data.source.remote.response.detailanime.DetailAnimeResponse
+import com.amora.myseasonalanime.data.source.remote.response.detailcharacter.DetailAnimeCharaResponse
+import com.amora.myseasonalanime.data.source.remote.response.trailer.TrailerItem
+import com.amora.myseasonalanime.data.source.remote.response.voiceactor.VoiceActors
+import kotlinx.coroutines.flow.Flow
 
 /** Get the RemoteDataSource and passing into DataSource
  */
-class Repository private constructor(private val remoteDataSource: RemoteDataSource) : DataSource {
+class Repository private constructor(
+    private val remoteDataSource: RemoteDataSource
+) : DataSource {
 
     companion object {
         @Volatile
@@ -18,45 +26,75 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
             }
     }
 
-    override suspend fun getSeasonNow(): List<DetailItem> {
-        lateinit var seasonNow: List<DetailItem>
-        remoteDataSource.getSeasonNow(object : RemoteDataSource.GetAnimeCallback {
-            override fun onAnimeReceived(animeList: List<DetailItem>) {
-                seasonNow = animeList
-            }
-        })
-        return seasonNow
+    override fun searchAnime(query: String): Flow<PagingData<AnimeSearch>> {
+        return remoteDataSource.getSearchAnime(query)
     }
 
-    override suspend fun getAnimeId(id: Int): DetailItem {
-        lateinit var animeDetailId: DetailItem
+    override fun getPopularAnime(filter: String): Flow<PagingData<Anime>> {
+        return remoteDataSource.getPopularAnime(filter)
+    }
+
+    override suspend fun getAnime(type: String, page: Int): List<Anime?>? {
+        var animeAiring: List<Anime?>? = null
+        remoteDataSource.getAnime(type, page, object : RemoteDataSource.GetAnimeCallback {
+            override fun onAnimeReceived(animeList: List<Anime?>?) {
+                animeAiring = animeList
+            }
+        })
+        return animeAiring
+    }
+
+    override fun getMoreAnime(type: String, page: Int): Flow<PagingData<Anime>> {
+        return remoteDataSource.getMoreAnime(type, page)
+    }
+
+    override suspend fun getAnimeId(id: Int): DetailAnimeResponse {
+        lateinit var animeDetailId: DetailAnimeResponse
         remoteDataSource.getAnimeId(id, object : RemoteDataSource.GetAnimeIdCallback {
-            override fun onAnimeReceived(animeId: DetailItem) {
+            override fun onAnimeReceived(animeId: DetailAnimeResponse) {
                 animeDetailId = animeId
             }
         })
         return animeDetailId
     }
 
-
-    override suspend fun getAnimeChara(id: Int): List<CharaItem> {
-        lateinit var animeCharaItem: List<CharaItem>
+    override suspend fun getAnimeChara(id: Int): List<CharaItems?>? {
+        var animeCharaItems: List<CharaItems?>? = null
         remoteDataSource.getAnimeChara(id, object : RemoteDataSource.GetAnimeCharaCallback {
-            override fun onAnimeReceived(animeChara: List<CharaItem>) {
-                animeCharaItem = animeChara
+            override fun onAnimeReceived(animeChara: List<CharaItems?>?) {
+                animeCharaItems = animeChara
             }
         })
-        return animeCharaItem
+        return animeCharaItems
     }
 
-    override suspend fun getTrailer(id: Int): Trailer {
-        lateinit var animeTrailerList: Trailer
-        remoteDataSource.getAnimeTrailer(id, object : RemoteDataSource.GetAnimeTrailerCallback {
-            override fun onAnimeReceived(animeTrailer: Trailer) {
-                animeTrailerList = animeTrailer
+    override suspend fun getDetailChara(id: Int): DetailAnimeCharaResponse? {
+        var detailCharaItem: DetailAnimeCharaResponse? = null
+        remoteDataSource.getDetailChara(id, object : RemoteDataSource.GetAnimeDetailCharaCallback {
+            override fun onAnimeReceived(animeDetailChara: DetailAnimeCharaResponse?) {
+                detailCharaItem = animeDetailChara
             }
         })
-        return animeTrailerList
+        return detailCharaItem
     }
 
+    override suspend fun getVoiceActor(id: Int): List<VoiceActors?>? {
+        var voiceActorsItem: List<VoiceActors?>? = null
+        remoteDataSource.getVoiceActor(id, object : RemoteDataSource.GetVoiceActCallback {
+            override fun onAnimeReceived(voiceAct: List<VoiceActors?>?) {
+                voiceActorsItem = voiceAct
+            }
+        })
+        return voiceActorsItem
+    }
+
+    override suspend fun getAnimeTrailer(id: Int): List<TrailerItem?>? {
+        var animeTrailerItem: List<TrailerItem?>? = null
+        remoteDataSource.getTrailerAnime(id, object : RemoteDataSource.GetTrailerAnimeCallback {
+            override fun onAnimeReceived(animeTrailer: List<TrailerItem?>?) {
+                animeTrailerItem = animeTrailer
+            }
+        })
+        return animeTrailerItem
+    }
 }
