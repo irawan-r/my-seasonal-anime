@@ -1,7 +1,12 @@
 package com.amora.myseasonalanime.views.features.home
 
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,6 +17,7 @@ import com.amora.myseasonalanime.utils.enum.More
 import com.amora.myseasonalanime.utils.gone
 import com.amora.myseasonalanime.utils.inVisible
 import com.amora.myseasonalanime.utils.visible
+import com.amora.myseasonalanime.views.MainActivity
 
 class HomeFragment : Fragment() {
 
@@ -40,6 +46,8 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_menu, menu)
+        menu.findItem(R.id.about_options).icon = resources.getDrawable(R.drawable.ic_baseline_filter_list_24)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
