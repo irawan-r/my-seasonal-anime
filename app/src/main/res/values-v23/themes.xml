@@ -11,7 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
-        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+<!--        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>-->
     </style>
 
     <style name="Theme.MaterialComponents.DayNight.NoActionBar">

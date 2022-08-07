@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MySeasonalAnime</string>
+    <string name="app_name">MyAnime</string>
     <string name="va_title">Voice Actors</string>
     <string name="poster">Poster</string>
     <string name="anime_title">Anime Title</string>
@@ -47,4 +47,9 @@
     <string name="upcoming">Upcoming</string>
     <string name="favorite">Favorite</string>
     <string name="anime_search">Anime Search</string>
+
+    <string name="complete">Complete</string>
+    <string name="email">irawanr56@yahoo.com</string>
+    <string name="title">Createdby</string>
+    <string name="name">Roy Irawan</string>
 </resources>

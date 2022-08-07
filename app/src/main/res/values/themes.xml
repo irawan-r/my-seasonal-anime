@@ -1,4 +1,5 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.MySeasonalAnime" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -11,7 +12,11 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
-        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+<!--        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>-->
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -30,9 +35,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_baseline_filter_list_24</item>
-    </style>
+<!--    <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">-->
+<!--        <item name="android:src">@drawable/ic_baseline_filter_list_24</item>-->
+<!--    </style>-->
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <!-- Customize color of Toolbar -->

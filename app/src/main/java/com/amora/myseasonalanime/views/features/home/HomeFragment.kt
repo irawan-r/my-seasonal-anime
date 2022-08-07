@@ -1,12 +1,11 @@
 package com.amora.myseasonalanime.views.features.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.amora.myseasonalanime.R
 import com.amora.myseasonalanime.databinding.FragmentHomeBinding
 import com.amora.myseasonalanime.di.Injection
 import com.amora.myseasonalanime.utils.enum.More
@@ -29,6 +28,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         // Preparing the layout
         setupAdapter()
         setupLayout()
@@ -36,6 +36,21 @@ class HomeFragment : Fragment() {
         // Set the lifecycleOwner so DataBinding can observe LiveData on SeasonNow Anime
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.about_options -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToAboutFragment()
+                findNavController().navigate(action)
+                return true
+            }
+        }
+        return false
     }
 
     private fun setupAdapter() {
