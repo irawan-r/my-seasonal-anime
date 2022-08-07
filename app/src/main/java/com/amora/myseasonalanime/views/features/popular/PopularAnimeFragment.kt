@@ -94,7 +94,6 @@ class PopularAnimeFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.popular_menu, menu)
         setTitle(Filter.AIRING)
     }

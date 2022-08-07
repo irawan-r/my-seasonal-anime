@@ -2,6 +2,8 @@ package com.amora.myseasonalanime.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -51,19 +53,30 @@ class MainActivity : AppCompatActivity() {
 
         // Custom bottom navigation based on destination
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.popularAnimeFragment ||
-                destination.id == R.id.homeFragment ||
-                destination.id == R.id.searchAnimeFragment
-            ) {
-                navView.visible()
-            } else {
-                navView.gone()
+            val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
+            when (destination.id) {
+                R.id.homeFragment, R.id.searchAnimeFragment -> {
+                    toolbar.overflowIcon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_more_vert_24)
+                    navView.visible()
+                }
+                R.id.popularAnimeFragment -> {
+                    navView.visible()
+                    toolbar.overflowIcon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_filter_list_24)
+                }
+                else -> {
+                    navView.gone()
+                }
             }
         }
 
         // Setting of what inside the bottom navigation
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.popularAnimeFragment, R.id.homeFragment, R.id.searchAnimeFragment))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.popularAnimeFragment, R.id.homeFragment, R.id.searchAnimeFragment
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
